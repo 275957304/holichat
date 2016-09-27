@@ -1,0 +1,15 @@
+.header{top:0;height:45px;line-height:45px;color:#fff;background-color:#35383e;position:fixed;width: 100%;}
+.header h1 {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 400;
+}
+.weui_tab_bd{
+    box-sizing: border-box;
+    height: 100%;
+    padding-top: 45px;
+    padding-bottom: 55px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+.img{display: block; width: 100%;}
