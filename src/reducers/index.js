@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux'
-import app from './app'
+//引作用户信息
+import user from './user'
 
 //合并reducers
 const rootReducer = combineReducers({
-    app
+    user
 })
 export default rootReducer

@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { Tool } from '../../utils/tool'
 import * as CounterActions from '../../actions/'  //actions
 import './app.css'
 import Header from './Header'
@@ -9,14 +10,32 @@ import Footer from './Footer'
 
 
 class App extends Component {
-    componentWillMount() {
-       console.log("这里来判断用户是否登录");
+    constructor(props) {
+        super(props)
     }
+    componentWillMount() {
+        this.checkSession()
+    }
+    checkSession(){
+        const {user,isLogin,dispatch} = this.props;
+        console.log(user)
+
+        //if(!user.isLogin){
+        //    console.log(this.props.location);
+        //    console.log(this.props.history);
+            //没有登录
+            //记录当前页面path
+            //跳转到SignIn Page处理登录 登录完成够会跳回当前页面
+            //dispatch(CommonActions.setNextUrl(path))
+            //browserHistory.push('/signin');
+            //dispatch()
+            //this.props.history.replaceState(null, '/signin');
+        //}
+    }
+
     render() {
-        // 通过调用 connect() 注入:
-        const { getMessage, a , b } = this.props;
-        console.log(getMessage)
-        //var tab = this.props.location.query.tab || 'home';
+        const { user, dispatch } = this.props;
+        console.log(user)
         return (
             <div>
                 <Header/>
@@ -33,12 +52,12 @@ class App extends Component {
 // }
 //export default connect(indexSelector)(App);
 
+
+
+
 function mapStateToProps(state) {
   return {
-    addNumber : state.setApp
+    user : state.user
   }
 }
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(CounterActions, dispatch)
-}
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps,CounterActions)(App)

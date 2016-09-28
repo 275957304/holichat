@@ -1,3 +1,51 @@
+export const LOGIN_REQUEST = 'LOGIN_REQUEST';
+export const LOGIN_NOT = 'LOGIN_NOT';
+//登录
+import API from '../utils/apis'
+import { Tool } from '../utils/tool'
+const uid = Tool.getItem('uid');
+const session = Tool.getItem('uid');
+const device = Tool.getItem('device');
+
+
+
+
+export function login_request(){
+    return{
+        type:LOGIN_REQUEST,
+        user : '需要登录'
+    }
+}
+
+export function isLogin(){
+    return (dispatch, getState) => {
+        fetch(API.check_session + `target_uid=${uid}&save_session=${session}&device=${device}`)
+        .then(response => response.json())
+        //.then(json => console.log(json))
+        .then(function(json){
+            if(json.ret != '0'){
+                dispatch(login_request())
+            }
+        })
+    }
+}
+
+
+// function fetch_login (user) {
+//     return dispatch => {
+//         dispatch(login_request( user));
+//         return fetch(API.check_session + `username=${user.username}&password=${user.password}`)
+//         .then( response => response.json())
+//         .then(json => console.log(json))
+//         //.then( json => dispatch( login_receive( user, json )))
+//     }
+// }
+
+
+
+
+
+
 export const INCREMENT_COUNTER = 'INCREMENT_COUNTER'
 export const DECREMENT_COUNTER = 'DECREMENT_COUNTER'
 //导出加一的方法

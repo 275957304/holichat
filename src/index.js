@@ -6,11 +6,9 @@ import {Router, Route, IndexRoute, browserHistory, hashHistory} from 'react-rout
 //rootStore
 import configureStore from './store/configureStore'
 const store = configureStore();
-//import 'normalize.css' //重置浏览器默认样式
- //微信底层样式
+import 'normalize.css' //重置浏览器默认样式
+//微信底层样式
 import 'weui/dist/style/weui.min.css';
-
-
 
 // 引入单个页面
 import App from './components/App/'
@@ -24,16 +22,15 @@ import SignIn from './components/SignIn/'
 //     console.log(store.getState());
 // });
 
-
-// 登录验证
-const loginRequireAuth = function (next, replace, callback) {
-    console.log('加载App组件');
-    // const isLoggedIn = !!getCookie('uid')
-    // if (!isLoggedIn && next.location.pathname != '/login') {
-    //     replace('/login')
-    // }
-    // callback()
+const loginRequireAuth = function () {
+    console.log("开始加载")
 }
+
+// 此处用于添加根路径
+// const history = useBasename(createHashHistory)({
+//   queryKey: '_key',
+//   basename: '',
+// });
 
 render(
 	<Provider store={store}>

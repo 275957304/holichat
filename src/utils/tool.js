@@ -1,4 +1,5 @@
 import bs64 from 'weui';  //其它一些工具
+import API from './apis'
 const Tool = {
 	setItem:function(a,b){
 		if(window.localStorage){
@@ -21,6 +22,16 @@ const Tool = {
 		var b, c;
 		window.localStorage ? window.localStorage.removeItem("hlq_" + a) : (b = new Date, b.setTime(b.getTime() - 1), c = H.getItem(a), null != c && (document.cookie = "hlq_" + a + "=" + c + ";expires=" + b.toGMTString()))
 	},
+	isLogin : function(){
+		fetch(API.check_session + `target_uid=${this.getItem('uid')}&save_session=${this.getItem('session')}&device=${this.getItem('device')}`)
+        .then( response => response.json())
+        .then(function(json){
+			console.log(json)
+
+			return json
+		})
+	}
+
 };
 
 export {Tool, bs64}
