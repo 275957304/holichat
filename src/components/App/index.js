@@ -1,63 +1,70 @@
 import React, {Component, PropTypes} from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { Tool } from '../../utils/tool'
+import { pushState } from 'redux-router';
 import * as CounterActions from '../../actions/'  //actions
-import './app.css'
-import Header from './Header'
-import Footer from './Footer'
-//https://github.com/zjy01/react_and_redux_and_router_example/tree/master/views/react
+import './theme/index.css'
 
+import Footer from './Footer'
+import Toast from '../Common/toast/'
 
 class App extends Component {
     constructor(props) {
         super(props)
     }
-    componentWillMount() {
-        this.checkSession()
-    }
-    checkSession(){
-        const {user,isLogin,dispatch} = this.props;
-        console.log(user)
+	componentWillMount () {
+		//检查登录
+		this.checkAuth(this.props.userInfo.loginState);
+	}
+	componentWillReceiveProps (nextProps) {
+		let redirectAfterLogin = this.props.location.pathname;
+		// const { dispatch, selectedReddit } = nextProps
+		//console.log('WillReceiveProps:' + nextProps.userInfo.loginState)
+		//this.checkAuth(nextProps.userInfo.loginState);
+		if(!nextProps.userInfo.loginState){
+			//检查登录
+			this.context.router.push('/signin?next=${redirectAfterLogin}')
+		}
+	}
 
-        //if(!user.isLogin){
-        //    console.log(this.props.location);
-        //    console.log(this.props.history);
-            //没有登录
-            //记录当前页面path
-            //跳转到SignIn Page处理登录 登录完成够会跳回当前页面
-            //dispatch(CommonActions.setNextUrl(path))
-            //browserHistory.push('/signin');
-            //dispatch()
-            //this.props.history.replaceState(null, '/signin');
-        //}
-    }
+	checkAuth (loginState) {
+		if (!loginState){
+			const { actions, dispatch } = this.props
+			//this.props.dispatch(loginCheck())
+			actions.loginCheck()
+		}
+	}
 
     render() {
-        const { user, dispatch } = this.props;
-        console.log(user)
+        const { userInfo, status , actions } = this.props;
+		const currentPath = this.props.routes[1].path || 'index' ;
+		//console.log(this.props.location.pathname)
         return (
-            <div>
-                <Header/>
-                    <div className="weui_tab_bd">
-                        {this.props.children}
-                    </div>
-                <Footer/>
+            <div className="wx_app">
+				<div className="weui_tab_bd">
+					{this.props.children}
+				</div>
+				{status.msg === true ? <Toast txt={status.msgTxt} />: null}
+                <Footer tab={currentPath} />
             </div>
         )
     }
 }
-// App.propTypes = {
-//     isLogin: React.PropTypes.bool.isRequired
-// }
-//export default connect(indexSelector)(App);
 
+//<Toast show={status.msg} txt={status.msgTxt} />
 
+App.contextTypes = {
+  router: PropTypes.object.isRequired
+};
 
+const mapStateToProps = (state) => ({
+    userInfo: state.user,
+	status : state.status
+});
 
-function mapStateToProps(state) {
-  return {
-    user : state.user
-  }
-}
-export default connect(mapStateToProps,CounterActions)(App)
+//将action的所有方法绑定到props上
+const mapDispatchToProps = (dispatch) => ({
+	actions: bindActionCreators(CounterActions, dispatch)
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(App)

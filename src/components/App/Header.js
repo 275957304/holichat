@@ -1,6 +1,18 @@
 import React, {Component, PropTypes} from 'react'
 
 class Header extends Component {
+	constructor(props) {
+        super(props)
+		this.state = {
+			show: true
+		}
+    }
+	componentWillMount () {
+		console.log(this.props.site)
+	}
+	componentWillReceiveProps (nextProps){
+		
+	}
     render() {
         return (
             <header className="header">
@@ -8,6 +20,10 @@ class Header extends Component {
             </header>
         );
     }
+}
+
+Header.contextTypes = {
+    router: React.PropTypes.object.isRequired
 }
 
 export default Header

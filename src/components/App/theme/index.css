@@ -1,0 +1,22 @@
+body{font-size: 14px;}
+ul,li{list-style: none; }
+img{
+	max-width: 100%; height: auto;
+}
+.img_rounded{
+	border-radius: 6px;
+}
+.gary_bj{
+	background-color:#eee;
+}
+.white_bj{
+	background-color:#fff;
+}
+.weui_tab_bd{
+    box-sizing: border-box;
+    height: 100%;
+    padding-top: 42px;
+    padding-bottom: 55px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}

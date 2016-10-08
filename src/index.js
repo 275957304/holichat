@@ -3,12 +3,15 @@ import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 // 引入React-Router模块
 import {Router, Route, IndexRoute, browserHistory, hashHistory} from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
+//const history = syncHistoryWithStore(hashHistory, store);
 //rootStore
 import configureStore from './store/configureStore'
 const store = configureStore();
 import 'normalize.css' //重置浏览器默认样式
 //微信底层样式
 import 'weui/dist/style/weui.min.css';
+//import './font/iconfont.css'; //字体图标
 
 // 引入单个页面
 import App from './components/App/'
@@ -32,6 +35,8 @@ const loginRequireAuth = function () {
 //   basename: '',
 // });
 
+//console.log(syncHistoryWithStore)
+
 render(
 	<Provider store={store}>
 		<Router history={hashHistory}>
@@ -40,13 +45,9 @@ render(
                 <Route path="home" component={Home}/>
                 <Route path="messages" component={Messages}/>
                 <Route path="user" component={User}/>
-                <Route path="signin" component={SignIn}/>
             </Route>
+            <Route path="signin" component={SignIn}/>
         </Router>
 	</Provider>,
-	document.getElementById('app'),
-    ()=>console.log('完成')
+	document.getElementById('app')
 )
-
-//import { apis } from './utils/apis'  //这个是底层URL地址
-//console.log(apis.sys_info);

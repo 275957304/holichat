@@ -5,7 +5,10 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin'); //css单独打�
 var publicPath = "build/"; //编译到当前目录
 
 module.exports = {
-	entry:path.resolve(__dirname,'src/index.js'),
+	entry: [
+      'webpack/hot/only-dev-server',
+      "./src/index.js"
+    ],
 	output: {
         //'path': path.join(__dirname, 'build'), //编译到当前目录
         //'publicPath': 'build', // 网站运行时的访问路径
@@ -16,21 +19,22 @@ module.exports = {
     },
     module: {
         loaders: [
-			{
-				test:/\.jsx?$/,
-				loader: 'babel',
-				exclude:/(node_modules)/,
-				query:{
-					presets:['react','es2015']
-				}
-			},
+			//{test:/\.jsx?$/,loader: 'babel',exclude:/(node_modules)/,query:{presets:['es2015','stage-0','react']}},
+			{test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' },
 			{test: /\.css$/, loader:ExtractTextPlugin.extract("style", "css") },
+			{test: /\.scss$/, loader: "style!css!sass"},
             {test: /\.html$/, loader: "html" },
+			{test: /\.(eot|woff|woff2|svg|ttf)([\?]?.*)$/, loader: "file-loader" },
             {test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192&name=./img/[hash].[ext]'}
         ]
     },
 
     plugins:[
+		/*
+		new webpack.ProvidePlugin({	//加载zepto
+            $: 'zepto'
+        }),
+		*/
 		new HtmlwebpackPlugin({
 			//favicon:'./src/img/favicon.ico', //favicon路径
 			template:'./src/template/index.html',	//html模板路径
@@ -43,7 +47,7 @@ module.exports = {
 				collapseWhitespace:true	//删除空白符与换行符
 			}
 		}),
-
+		new webpack.HotModuleReplacementPlugin(), //热加载
 		new ExtractTextPlugin("css/[name].css"),	//单独使用style标签加载css并设置其路径
 		new webpack.optimize.CommonsChunkPlugin('vendors', 'js/vendors.js'),
 		/*
@@ -54,13 +58,14 @@ module.exports = {
 		    except: ['$super', '$', 'exports', 'require']	//排除关键字
 		}),
 
-		new webpack.ProvidePlugin({	//加载jq
-            $: 'jquery'
-        }),
+		
 		*/
 	],
-
-    resolve: {
-        extensions: ['', '.js', '.jsx'], //后缀名自动补全
-    }
+	resolve: {
+		alias: {
+			'react': path.join(__dirname, 'node_modules', 'react')
+		},
+		extensions: ['', '.js', '.jsx']
+	}
+ 
 };

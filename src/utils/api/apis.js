@@ -20,23 +20,5 @@ const API = {
 }
 //export default apis;
 //https://github.com/rangle/react-redux-example/blob/master/src/api/server/index.js
-//https://github.com/RyanCCollins/react-redux-simple-starter/blob/master/app/src/utils/network.js
 
 export default API
-
-/*
-import 'whatwg-fetch';
-export const BASE_URL = '/api';
-
-export function post(path, data) {
-  return fetch(BASE_URL + path, {
-    method: 'post',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  })
-  .then(response => response.json());
-}
-*/

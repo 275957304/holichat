@@ -9,8 +9,8 @@ import reducer from '../reducers'
 const createStoreWithMiddleware = compose(
     applyMiddleware(
         thunk
-    ),
-    window.devToolsExtension ? window.devToolsExtension() : f => f
+    )
+    //window.devToolsExtension ? window.devToolsExtension() : f => f
 )(createStore)
 
 //console.log('createStoreWithMiddleware' + createStoreWithMiddleware);
