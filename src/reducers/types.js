@@ -1,0 +1,6 @@
+//用户登录
+export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS'
+export const LOGIN_USER_ERROR = 'LOGIN_USER_ERROR'
+
+//广告
+export const GET_COMMUNITY_BANNER = 'GET_COMMUNITY_BANNER'

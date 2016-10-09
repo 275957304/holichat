@@ -1,16 +1,13 @@
-import { combineReducers } from 'redux'
-import { routerStateReducer } from 'redux-router'
-//import { routerReducer } from 'react-router-redux';
+import { combineReducers } from 'redux';
+import { routerStateReducer } from 'redux-router';
 
-//引作用户信息
-import user from './user'
-import status from './status'
 
-//合并reducers
+import user from './modules/user/reducer';
+import quanzi from './modules/quanzi/reducer';
+
 const rootReducer = combineReducers({
     user,
-	status,
-	//routing: routerReducer,
+    quanzi,
     router: routerStateReducer
 })
 export default rootReducer

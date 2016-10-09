@@ -34,8 +34,6 @@ export default function configureStore(initialState) {
 思路是用高阶函数对 store 做了一些封装, 插入了一些 Action 的操作
 */
 
-
-
 /*
 import {createStore,applyMiddleware} from 'redux'
 import thunk from 'redux-thunk'

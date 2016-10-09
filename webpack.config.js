@@ -22,7 +22,7 @@ module.exports = {
 			//{test:/\.jsx?$/,loader: 'babel',exclude:/(node_modules)/,query:{presets:['es2015','stage-0','react']}},
 			{test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' },
 			{test: /\.css$/, loader:ExtractTextPlugin.extract("style", "css") },
-			{test: /\.scss$/, loader: "style!css!sass"},
+			//{test: /\.less?$/,loaders : ['style-loader','css-loader','less-loader?{"sourceMap":true}'], include: __dirname},
             {test: /\.html$/, loader: "html" },
 			{test: /\.(eot|woff|woff2|svg|ttf)([\?]?.*)$/, loader: "file-loader" },
             {test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192&name=./img/[hash].[ext]'}
@@ -58,7 +58,7 @@ module.exports = {
 		    except: ['$super', '$', 'exports', 'require']	//排除关键字
 		}),
 
-		
+
 		*/
 	],
 	resolve: {
@@ -67,5 +67,5 @@ module.exports = {
 		},
 		extensions: ['', '.js', '.jsx']
 	}
- 
+
 };
