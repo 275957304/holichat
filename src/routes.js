@@ -6,6 +6,7 @@ import {
 	App,
 	Index,
 	Home,
+	Event,
 	Messages,
 	User,
 	SignIn,
@@ -19,6 +20,8 @@ const routes = (
         <Route path="/" component={App}>
 			<IndexRoute component={Index} />
 			<Route path="home" component={Home}/>
+			<Route path="home/event/" component={Event}/>
+
 			<Route path="messages" component={Messages}/>
 			<Route path="user" component={User}/>
         </Route>

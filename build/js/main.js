@@ -138,13 +138,13 @@ webpackJsonp([0,1],[
 
 	var _routes2 = _interopRequireDefault(_routes);
 
-	var _configureStore = __webpack_require__(312);
+	var _configureStore = __webpack_require__(316);
 
 	var _configureStore2 = _interopRequireDefault(_configureStore);
 
-	__webpack_require__(330);
+	__webpack_require__(335);
 
-	__webpack_require__(332);
+	__webpack_require__(337);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23134,6 +23134,7 @@ webpackJsonp([0,1],[
 									{ path: '/', component: _containers.App },
 									_react2.default.createElement(_reactRouter.IndexRoute, { component: _containers.Index }),
 									_react2.default.createElement(_reactRouter.Route, { path: 'home', component: _containers.Home }),
+									_react2.default.createElement(_reactRouter.Route, { path: 'home/event/', component: _containers.Event }),
 									_react2.default.createElement(_reactRouter.Route, { path: 'messages', component: _containers.Messages }),
 									_react2.default.createElement(_reactRouter.Route, { path: 'user', component: _containers.User })
 					),
@@ -29867,7 +29868,7 @@ webpackJsonp([0,1],[
 	  }
 	});
 
-	var _Index = __webpack_require__(283);
+	var _Index = __webpack_require__(284);
 
 	Object.defineProperty(exports, 'Index', {
 	  enumerable: true,
@@ -29876,7 +29877,7 @@ webpackJsonp([0,1],[
 	  }
 	});
 
-	var _Home = __webpack_require__(298);
+	var _Home = __webpack_require__(300);
 
 	Object.defineProperty(exports, 'Home', {
 	  enumerable: true,
@@ -29885,7 +29886,16 @@ webpackJsonp([0,1],[
 	  }
 	});
 
-	var _Messages = __webpack_require__(304);
+	var _Event = __webpack_require__(307);
+
+	Object.defineProperty(exports, 'Event', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_Event).default;
+	  }
+	});
+
+	var _Messages = __webpack_require__(308);
 
 	Object.defineProperty(exports, 'Messages', {
 	  enumerable: true,
@@ -29894,7 +29904,7 @@ webpackJsonp([0,1],[
 	  }
 	});
 
-	var _User = __webpack_require__(305);
+	var _User = __webpack_require__(309);
 
 	Object.defineProperty(exports, 'User', {
 	  enumerable: true,
@@ -29903,7 +29913,7 @@ webpackJsonp([0,1],[
 	  }
 	});
 
-	var _SignIn = __webpack_require__(306);
+	var _SignIn = __webpack_require__(310);
 
 	Object.defineProperty(exports, 'SignIn', {
 	  enumerable: true,
@@ -29912,7 +29922,7 @@ webpackJsonp([0,1],[
 	  }
 	});
 
-	var _Page = __webpack_require__(311);
+	var _Page = __webpack_require__(315);
 
 	Object.defineProperty(exports, 'Page404', {
 	  enumerable: true,
@@ -29947,11 +29957,11 @@ webpackJsonp([0,1],[
 
 	var userActions = _interopRequireWildcard(_action);
 
-	var _Footer = __webpack_require__(277);
+	var _Footer = __webpack_require__(278);
 
 	var _Footer2 = _interopRequireDefault(_Footer);
 
-	__webpack_require__(279);
+	__webpack_require__(280);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -30004,6 +30014,7 @@ webpackJsonp([0,1],[
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            console.log(this.props.route);
 	            var _props2 = this.props;
 	            var user = _props2.user;
 	            var status = _props2.status;
@@ -30048,7 +30059,7 @@ webpackJsonp([0,1],[
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-					value: true
+	    value: true
 	});
 	exports.loginCheck = loginCheck;
 	exports.loginUser = loginUser;
@@ -30061,93 +30072,67 @@ webpackJsonp([0,1],[
 
 	var _api2 = _interopRequireDefault(_api);
 
-	var _utils = __webpack_require__(275);
-
-	__webpack_require__(276);
+	var _utils = __webpack_require__(277);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-	//import api from '../../../api'
-	var uid = _utils.Tool.getItem('uid');
-	var session = _utils.Tool.getItem('session');
-	console.log(uid);
-	var device = '';
-
 	function loginUserError() {
-					return {
-									type: types.LOGIN_USER_ERROR,
-									payload: {
-													loginState: false,
-													loginStateText: '登录验证末通过'
-									}
-					};
-	}
+	    return {
+	        type: types.LOGIN_USER_ERROR,
+	        payload: {
+	            loginState: false,
+	            loginStateText: '登录验证末通过'
+	        }
+	    };
+	} //import api from '../../../api'
+
 
 	function loginSuccess(data) {
-					return {
-									type: types.LOGIN_USER_SUCCESS,
-									payload: data
-					};
+	    return {
+	        type: types.LOGIN_USER_SUCCESS,
+	        payload: data
+	    };
 	}
 
+	//用户登录检查
 	function loginCheck() {
-					return function (dispatch) {
-									return fetch(_api2.default.check_session + ('target_uid=' + uid + '&save_session=' + session + '&device=' + device)).then(function (response) {
-													return response.json();
-									}).then(function (json) {
-													if (json.ret != '0') {
-																	//history.pushState(null, '/signin');
-																	dispatch(loginUserError());
-													} else {
-																	//这里要传入uid 与 seccess
-																	dispatch(loginSuccess({ uid: uid, session: session }));
-													}
-									}).catch(function (err) {
-													return console.log(err);
-									});
-					};
+	    return function (dispatch) {
+	        return _api2.default.check_session.then(function (data) {
+	            //console.log(data)
+	            if (data.ret != '0') {
+	                //history.pushState(null, '/signin');
+	                dispatch(loginUserError());
+	            } else {
+	                //这里要传入uid 与 seccess
+	                dispatch(loginSuccess({ uid: data.data.uid, session: data.data.session }));
+	            }
+	        });
+	    };
 	}
 
 	//用户登录
-	function loginUser(data) {
-					var redirect = arguments.length <= 1 || arguments[1] === undefined ? "/" : arguments[1];
+	function loginUser(formData) {
+	    var redirect = arguments.length <= 1 || arguments[1] === undefined ? "/" : arguments[1];
 
-					return function (dispatch) {
-									return fetch(_api2.default.login, {
-													headers: {
-																	//'Cache-Control': 'no-cache',
-																	'Accept': 'application/json',
-																	"Content-Type": "application/x-www-form-urlencoded"
-													},
-													method: "POST",
-													body: 'phone=' + data.username + '&pwd=' + data.password + '&device=\'\'&platform=weixin&channel=5000'
-									}).then(function (res) {
-													//console.log("fetch request", JSON.stringify(res.ok));
-													if (res.ok) {
-																	res.json().then(function (json) {
-																					//console.log(push)
-																					if (json.ret == '0') {
-																									console.log(json);
-																									//登录成功
-																									_utils.Tool.setItem('session', json.data.session);
-																									_utils.Tool.setItem('uid', json.data.uid);
-																									dispatch(loginSuccess(json.data));
-																									//dispatch(push('/'))
-																									//console.log(dispatch(push('/')))
-																					} else {
-																									alert('登录失败');
-																									console.log(json.ret);
-																					}
-																	});
-													} else {
-																	alert('请求失败');
-													}
-									}).catch(function (res) {
-													console.log(res);
-									});
-					};
+	    return function (dispatch) {
+	        return _api2.default.login(formData).then(function (data) {
+	            console.log(JSON.stringify(formData));
+	            console.log(data);
+	            if (data.ret == '0') {
+	                //登录成功
+	                _utils.Tool.setItem('session', data.data.session);
+	                _utils.Tool.setItem('uid', data.data.uid);
+	                dispatch(loginSuccess(data.data));
+	                //dispatch(push('/'))
+	                //console.log(dispatch(push('/')))
+	            } else {
+	                alert('登录失败');
+	                console.log(data.ret);
+	            }
+	        });
+	    };
 	}
 
 /***/ },
@@ -30159,73 +30144,174 @@ webpackJsonp([0,1],[
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	//用户登录
 	var LOGIN_USER_SUCCESS = exports.LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';
 	var LOGIN_USER_ERROR = exports.LOGIN_USER_ERROR = 'LOGIN_USER_ERROR';
 
+	//广告
+	var GET_HOLICHAT_BANNER = exports.GET_HOLICHAT_BANNER = 'GET_HOLICHAT_BANNER';
+	var GET_COMMUNITY_BANNER = exports.GET_COMMUNITY_BANNER = 'GET_COMMUNITY_BANNER';
+
 /***/ },
 /* 274 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	//const urlBase = "http://121.41.0.124:81/";
-	var urlBase = "http://app.holichat.com/";
+
+	var _api = __webpack_require__(275);
+
+	var _api2 = _interopRequireDefault(_api);
+
+	var _utils = __webpack_require__(277);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var uid = _utils.Tool.getItem('uid');
+	var session = _utils.Tool.getItem('session');
+	var device = '';
+	var baseURI = 'http://app.holichat.com/';
+	var imgBaseUrl = 'http://img.holichat.com/uploads/';
+	var api = new _api2.default({
+		baseURI: baseURI,
+		headers: { 'Accept': 'application/json' }
+	});
 
 	exports.default = {
-
-		//系统
-		"sys_info": urlBase + "sys/api/info?",
-		"get_sts_auth": urlBase + "sys/api/sts_auth?", //name: 获取sts授权， type: Post, params: mark=RES_UPLOADS
-
+		//获取图片
+		getImg: function getImg(url) {
+			return imgBaseUrl + url;
+		},
 		//登录
-		"login": urlBase + "login/api/login",
-		"check_session": urlBase + "login/api/check_session?",
-		"re_session": urlBase + "login/api/re_session?",
-		"other_login": urlBase + "login/sdk/other_login?", //第三方登录
-		"wx_access_token": urlBase + "login/sdk/wx_access_token?", //name:獲取微信令牌  type: Get params: source=mp code= grant_type=
-		"check_logined": urlBase + "login/api/check_logined?", //活跃统计
+		login: function login(formData) {
+			return api.post('login/api/login', formData);
+		},
+		check_session: api.get('login/api/check_session', { 'target_uid': uid, 'save_session': session, 'device': device }),
 
 		//广告
-		"get_holichat_banner": urlBase + "ad/api/ad_holichat_banner?", //name: 活力圈广告
-		"get_community_banner": urlBase + "ad/api/ad_community_banner?", //name: 圈子广告
-		'get_community_home_ad': urlBase + 'ad/api/ad_home?' };
+		get_community_banner: api.get('ad/api/ad_community_banner', { 'community_cid': 1 }), //name: 社团首页广告位
+		get_holichat_banner: api.get('ad/api/ad_holichat_banner') //name: 活力圈首页广告位
+	};
+
+	/*
+	//const urlBase = "http://121.41.0.124:81/";
+	const urlBase = "http://app.holichat.com/";
+
+	export default{
+		'imgURL'  :  "http://holichat-res-inside.img-cn-hangzhou.aliyuncs.com/uploads/",
+		//系统
+		"sys_info"       : urlBase + "sys/api/info?",
+		"get_sts_auth"   : urlBase + "sys/api/sts_auth?",             //name: 获取sts授权， type: Post, params: mark=RES_UPLOADS
+
+		//登录
+		"login"          : urlBase + "login/api/login",
+		"check_session"  : urlBase + "login/api/check_session?",
+		"re_session"     : urlBase + "login/api/re_session?",
+		"other_login"    : urlBase + "login/sdk/other_login?",   //第三方登录
+		"wx_access_token": urlBase + "login/sdk/wx_access_token?", //name:獲取微信令牌  type: Get params: source=mp code= grant_type=
+		"check_logined"  : urlBase + "login/api/check_logined?",  //活跃统计
+
+		//广告
+		"get_holichat_banner":    urlBase + "ad/api/ad_holichat_banner?",     //name: 活力圈广告
+		"get_community_banner":   urlBase + "ad/api/ad_community_banner",     //name: 圈子广告
+		'get_community_home_ad':  urlBase + 'ad/api/ad_home?',               //name:社团宣传图
+	}
+	*/
 
 /***/ },
 /* 275 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+	    value: true
 	});
-	var Tool = {
-		setItem: function setItem(a, b) {
-			if (window.localStorage) {
-				window.localStorage.setItem("hlq_" + a, b);
-			} else {
-				var c = new Date();
-				c.setTime(c.getTime() + 31536e6), document.cookie = "hlq_" + a + "=" + escape(b) + ";expires=" + c.toGMTString();
-			}
-		},
-		getItem: function getItem(a) {
-			if (window.localStorage) {
-				return window.localStorage.getItem("hlq_" + a);
-			} else {
-				var b = document.cookie.match(new RegExp("(^| )hlq_" + a + "=([^;]*)(;|$)"));
-				return null != b ? unescape(b[2]) : null;
-			}
-		},
-		removeItem: function removeItem(a) {
-			var b, c;
-			window.localStorage ? window.localStorage.removeItem("hlq_" + a) : (b = new Date(), b.setTime(b.getTime() - 1), c = H.getItem(a), null != c && (document.cookie = "hlq_" + a + "=" + c + ";expires=" + b.toGMTString()));
-		}
+
+	__webpack_require__(276);
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var _Api = function _Api(opts) {
+	    _classCallCheck(this, _Api);
+
+	    //console.log(opts)
+	    opts = opts || {};
+	    if (!opts.baseURI) throw new Error('请设置baseURI');
+	    /**
+	     * 基于 fetch 封装的 GET请求
+	     * @param url
+	     * @param params {}
+	     * @returns {Promise}
+	     */
+	    this.get = function (url, params) {
+	        if (params) {
+	            (function () {
+	                var paramsArray = [];
+	                //encodeURIComponent
+	                Object.keys(params).forEach(function (key) {
+	                    return paramsArray.push(key + '=' + params[key]);
+	                });
+	                if (url.search(/\?/) === -1) {
+	                    url += '?' + paramsArray.join('&');
+	                } else {
+	                    url += '&' + paramsArray.join('&');
+	                }
+	            })();
+	        }
+	        return new Promise(function (resolve, reject) {
+	            fetch(opts.baseURI + url, {
+	                method: 'GET',
+	                headers: opts.headers
+	            }).then(function (response) {
+	                if (response.ok) {
+	                    return response.json();
+	                } else {
+	                    reject({ status: response.status });
+	                }
+	            }).then(function (response) {
+	                resolve(response);
+	            }).catch(function (err) {
+	                reject({ status: -1 });
+	            });
+	        });
+	    };
+	    /**
+	     * 基于 fetch 封装的 POST请求  FormData 表单数据
+	     * @param url
+	     * @param formData
+	     * @param headers
+	     * @returns {Promise}
+	     */
+	    this.post = function (url, formData) {
+	        return new Promise(function (resolve, reject) {
+	            fetch(opts.baseURI + url, {
+	                method: 'POST',
+	                headers: {
+	                    'Accept': 'application/json',
+	                    "Content-Type": "application/x-www-form-urlencoded"
+	                },
+	                body: formData
+	            }).then(function (response) {
+	                if (response.ok) {
+	                    return response.json();
+	                } else {
+	                    reject({ status: response.status });
+	                }
+	            }).then(function (response) {
+	                resolve(response);
+	            }).catch(function (err) {
+	                reject({ status: -1 });
+	            });
+	        });
+	    };
 	};
 
-	exports.Tool = Tool;
+	var Api = _Api;
+	exports.default = Api;
 
 /***/ },
 /* 276 */
@@ -30668,6 +30754,40 @@ webpackJsonp([0,1],[
 
 /***/ },
 /* 277 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	var Tool = {
+		setItem: function setItem(a, b) {
+			if (window.localStorage) {
+				window.localStorage.setItem("hlq_" + a, b);
+			} else {
+				var c = new Date();
+				c.setTime(c.getTime() + 31536e6), document.cookie = "hlq_" + a + "=" + escape(b) + ";expires=" + c.toGMTString();
+			}
+		},
+		getItem: function getItem(a) {
+			if (window.localStorage) {
+				return window.localStorage.getItem("hlq_" + a);
+			} else {
+				var b = document.cookie.match(new RegExp("(^| )hlq_" + a + "=([^;]*)(;|$)"));
+				return null != b ? unescape(b[2]) : null;
+			}
+		},
+		removeItem: function removeItem(a) {
+			var b, c;
+			window.localStorage ? window.localStorage.removeItem("hlq_" + a) : (b = new Date(), b.setTime(b.getTime() - 1), c = H.getItem(a), null != c && (document.cookie = "hlq_" + a + "=" + c + ";expires=" + b.toGMTString()));
+		}
+	};
+
+	exports.Tool = Tool;
+
+/***/ },
+/* 278 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30684,7 +30804,7 @@ webpackJsonp([0,1],[
 
 	var _reactRouter = __webpack_require__(199);
 
-	var _icon_tabbar = __webpack_require__(278);
+	var _icon_tabbar = __webpack_require__(279);
 
 	var _icon_tabbar2 = _interopRequireDefault(_icon_tabbar);
 
@@ -30770,28 +30890,28 @@ webpackJsonp([0,1],[
 	exports.default = Footer;
 
 /***/ },
-/* 278 */
+/* 279 */
 /***/ function(module, exports) {
 
 	module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADYAAAA2CAMAAAC7m5rvAAAAllBMVEUAAAC/v7+qqqrHx8evr6/ExMS5ubmxsbGsrKysrKytra2pqam8vLy9vb2lpaXExMT////s7Oz8/Pz09PTu7u729vb5+fnp6enMzMzLy8vm5ub4+Pjj4+O3t7fx8fHb29vAwMDHx8ePj4/S0tLf39+rq6ulpaWSkpK7u7vY2NjR0dGnp6eenp6ampqysrLPz8+fn5+ioqKXtObzAAAAEHRSTlMA6wT4/e/f0KyZSy/z8mz4uKbH2gAAA6FJREFUSMellody2zAMhuXEGU6TVBgkbGp529np+79cKREUpbrxdfxnn7g+cYACkKku7m5vricPl4v5Yq5arWLJN14+TK5vbu8udLhCsyuHeY6QD0Q0rEHb765mA/DbJIw4j4XGybdIPV5q13lMC9NHnWvKpxhiAVBYPMX4ezffxSQnHmFoahFgkRpEmHCEMeWTdn8zygOnmAVhkxZZ1AImYdyOnvnJrrohrBiymF/3ZgGsYty1XV1kdy6MATKGnJRgoiAVuRRH/inhTe4uu9U1Q8MMmy0nOcdJ5bMwbEs9g9vsJg8yjq2UXxugdJYBtHKTXUeM64bO2c00bGP/dTbBIAIBERyIaFgTASHQyiS7hyC3KaHcQNSm2r2+vbwvBFRt91OjlfssXizZ+q2WjN3yqvXrcfWxmS/362lYGJfYjQm6zBah4InWbtRyy3UlGPaGvDxU6B8EvqVo9NgX2TwUGDosJzb7vQyPBHafxNSZ2zq9hXOdzYoJWM6Hyo5P0h4PkAcMwI5mAxOx/bvgGEOpfqBihoezoeSKLffWAA4xBLIvS8VywYR5RjFaix8PmDBs77+sa8XYDDA2ilVV9xbAiCF0cFUpZniASa6Yn0y5aICO8tMplkvCMGKbV8x7jqhbYSf8fI4YJgwUq46+FjmillIdK8UgYQUrtlvliaspUflqpxgXHbYiIhD/d77w+kG9oGkg1T5eiYhLImkbV2PsbUO96qcnStq8jbCwyFoX+TJPjhK8kpucv+gi66LfmwXF3peJMkQmcct3xcCeGmCxx55qDdBzuF8kA5yYW9bcUy3Wc7x2p+bOuQgYTJdKxctVBG65g4AVMMCoVgwOECjFlOMDKFbTbz+camcRilwxvS84rX79cPQztYrh51HM+DMtZPmGilkYOQUDiuX1iVPA44F7p2DGLghYZwP+8SJDjKdvADqbg+SCOtmyw9p94anDKwCDw7Pq8JJ7LduTga69rtaf0b3uIJyneAySe32AIPdc+r8D1bM6c23oulzvzB9S6BDnf1+HDifkUugYBCrT1OcCVd1QClQpLALQubDoHAGlsBiDMG3J0pMUthdzKhfw5LtLiUE4hnx0AgDNtnEQVZYQ5XyHf8jWasjXBAPBxgQDziQYFqwmGNmMlIrpDH+ZzihHs5A8+co4eeKUPEFKngKHIXnKvn0H++epmoWppoaP079JDL8//lsa+p9Jb0qx77sUexG0WmmhS7HvRyn2TxZ1zUyK+LY0AAAAAElFTkSuQmCC"
 
 /***/ },
-/* 279 */
+/* 280 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 280 */,
 /* 281 */,
 /* 282 */,
-/* 283 */
+/* 283 */,
+/* 284 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+	  value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -30802,19 +30922,27 @@ webpackJsonp([0,1],[
 
 	var _reactRedux = __webpack_require__(175);
 
-	var _Header = __webpack_require__(284);
+	var _redux = __webpack_require__(182);
+
+	var _action = __webpack_require__(285);
+
+	var quanziActions = _interopRequireWildcard(_action);
+
+	var _Header = __webpack_require__(286);
 
 	var _Header2 = _interopRequireDefault(_Header);
 
-	var _Slider = __webpack_require__(288);
+	var _Slider = __webpack_require__(290);
 
 	var _Slider2 = _interopRequireDefault(_Slider);
 
-	__webpack_require__(294);
-
-	var _antd = __webpack_require__(289);
-
 	__webpack_require__(296);
+
+	var _antd = __webpack_require__(291);
+
+	__webpack_require__(298);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30827,174 +30955,237 @@ webpackJsonp([0,1],[
 	var TabPane = _antd.Tabs.TabPane;
 
 	var Index = function (_Component) {
-		_inherits(Index, _Component);
+	  _inherits(Index, _Component);
 
-		function Index(props) {
-			_classCallCheck(this, Index);
+	  function Index(props) {
+	    _classCallCheck(this, Index);
 
-			var _this = _possibleConstructorReturn(this, (Index.__proto__ || Object.getPrototypeOf(Index)).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (Index.__proto__ || Object.getPrototypeOf(Index)).call(this, props));
 
-			_this.groupChat = _this.groupChat.bind(_this);
-			_this.attention = _this.attention.bind(_this);
-			_this.checkIn = _this.checkIn.bind(_this);
-			return _this;
-		}
+	    _this.groupChat = _this.groupChat.bind(_this);
+	    _this.attention = _this.attention.bind(_this);
+	    _this.checkIn = _this.checkIn.bind(_this);
+	    return _this;
+	  }
 
-		_createClass(Index, [{
-			key: 'groupChat',
-			value: function groupChat() {
-				console.log('群聊');
-			}
-		}, {
-			key: 'attention',
-			value: function attention() {
-				console.log('已关注');
-			}
-		}, {
-			key: 'checkIn',
-			value: function checkIn() {
-				console.log('签到');
-			}
-		}, {
-			key: 'callback',
-			value: function callback(key) {
-				console.log(key);
-			}
-		}, {
-			key: 'render',
-			value: function render() {
-				console.log(this.props);
-				return _react2.default.createElement(
-					'div',
-					{ className: 'wx_index' },
-					_react2.default.createElement(_Header2.default, { title: '活力圈', leftTo: 'quanzi' }),
-					_react2.default.createElement(_Slider2.default, null),
-					_react2.default.createElement(
-						'div',
-						{ className: 'weui-panel__bd' },
-						_react2.default.createElement(
-							'div',
-							{ className: 'weui-media-box weui-media-box_appmsg' },
-							_react2.default.createElement(
-								'div',
-								{ className: 'weui-media__hd' },
-								_react2.default.createElement('img', { className: 'weui-media__thumb img_rounded', width: '40', src: 'http://m.holichat.com/dist/img/icon_152.png', alt: '' })
-							),
-							_react2.default.createElement(
-								'div',
-								{ className: 'weui-media__bd' },
-								_react2.default.createElement(
-									'h4',
-									{ className: 'weui-media__title' },
-									'活力圈'
-								),
-								_react2.default.createElement(
-									'div',
-									{ className: 'wx_main_btn' },
-									_react2.default.createElement(
-										'button',
-										{ className: 'weui-btn weui-btn_mini green_btn', onClick: this.groupChat },
-										'群聊'
-									),
-									_react2.default.createElement(
-										'button',
-										{ className: 'weui-btn weui-btn_mini blue_btn', onClick: this.attention },
-										'已关注'
-									),
-									_react2.default.createElement(
-										'button',
-										{ className: 'weui-btn weui-btn_mini pink_btn', onClick: this.checkIn },
-										'签到'
-									)
-								)
-							)
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'weui-panel__ft' },
-						_react2.default.createElement(
-							'a',
-							{ href: 'javascript:void(0);', className: 'weui-cell weui-cell_access weui-cell_link' },
-							_react2.default.createElement(
-								'div',
-								{ className: 'weui-cell__hd' },
-								_react2.default.createElement(
-									'span',
-									{ className: 'bulletin' },
-									'公告：'
-								)
-							),
-							_react2.default.createElement(
-								'div',
-								{ className: 'weui-cell__bd' },
-								'欢迎加入活力圈'
-							),
-							_react2.default.createElement(
-								'div',
-								{ className: 'weui-cell__ft f12' },
-								'2016-09-22'
-							)
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'index_tabs' },
-						_react2.default.createElement(
-							_antd.Tabs,
-							{ defaultActiveKey: '3', onChange: this.callback },
-							_react2.default.createElement(
-								TabPane,
-								{ tab: '主页', key: '1' },
-								'主页 内容'
-							),
-							_react2.default.createElement(
-								TabPane,
-								{ tab: '活动', key: '2' },
-								'活动 内容'
-							),
-							_react2.default.createElement(
-								TabPane,
-								{ tab: '赛事', key: '3' },
-								'赛事 内容'
-							),
-							_react2.default.createElement(
-								TabPane,
-								{ tab: '培训', key: '4' },
-								'培训 内容'
-							),
-							_react2.default.createElement(
-								TabPane,
-								{ tab: '相册', key: '5' },
-								'相册 内容'
-							),
-							_react2.default.createElement(
-								TabPane,
-								{ tab: '资讯', key: '6' },
-								'资讯 内容'
-							),
-							_react2.default.createElement(
-								TabPane,
-								{ tab: '场馆', key: '7' },
-								'场馆 内容'
-							)
-						)
-					)
-				);
-			}
-		}]);
+	  _createClass(Index, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      var _props = this.props;
+	      var quanziActions = _props.quanziActions;
+	      var dispatch = _props.dispatch;
 
-		return Index;
+	      quanziActions.get_community_banner();
+	    }
+	  }, {
+	    key: 'groupChat',
+	    value: function groupChat() {
+	      console.log('群聊');
+	    }
+	  }, {
+	    key: 'attention',
+	    value: function attention() {
+	      console.log('已关注');
+	    }
+	  }, {
+	    key: 'checkIn',
+	    value: function checkIn() {
+	      console.log('签到');
+	    }
+	  }, {
+	    key: 'callback',
+	    value: function callback(key) {
+	      console.log(key);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var quanzi = this.props.quanzi;
+
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'wx_index' },
+	        _react2.default.createElement(_Header2.default, { title: '活力圈', leftTo: 'quanzi' }),
+	        quanzi.banner.is_banner ? _react2.default.createElement(_Slider2.default, { autoplay: false, items: quanzi.banner.list }) : "",
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'weui-panel__bd' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'weui-media-box weui-media-box_appmsg' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'weui-media__hd' },
+	              _react2.default.createElement('img', { className: 'weui-media__thumb img_rounded', width: '40', src: 'http://m.holichat.com/dist/img/icon_152.png', alt: '' })
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'weui-media__bd' },
+	              _react2.default.createElement(
+	                'h4',
+	                { className: 'weui-media__title' },
+	                '活力圈'
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'wx_main_btn' },
+	                _react2.default.createElement(
+	                  'button',
+	                  { className: 'weui-btn weui-btn_mini green_btn', onClick: this.groupChat },
+	                  '群聊'
+	                ),
+	                _react2.default.createElement(
+	                  'button',
+	                  { className: 'weui-btn weui-btn_mini blue_btn', onClick: this.attention },
+	                  '已关注'
+	                ),
+	                _react2.default.createElement(
+	                  'button',
+	                  { className: 'weui-btn weui-btn_mini pink_btn', onClick: this.checkIn },
+	                  '签到'
+	                )
+	              )
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'weui-panel__ft' },
+	          _react2.default.createElement(
+	            'a',
+	            { href: 'javascript:void(0);', className: 'weui-cell weui-cell_access weui-cell_link' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'weui-cell__hd' },
+	              _react2.default.createElement(
+	                'span',
+	                { className: 'bulletin' },
+	                '公告：'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'weui-cell__bd' },
+	              '欢迎加入活力圈'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'weui-cell__ft f12' },
+	              '2016-09-22'
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'index_tabs' },
+	          _react2.default.createElement(
+	            _antd.Tabs,
+	            { defaultActiveKey: '3', onChange: this.callback },
+	            _react2.default.createElement(
+	              TabPane,
+	              { tab: '主页', key: '1' },
+	              '主页 内容'
+	            ),
+	            _react2.default.createElement(
+	              TabPane,
+	              { tab: '活动', key: '2' },
+	              '活动 内容'
+	            ),
+	            _react2.default.createElement(
+	              TabPane,
+	              { tab: '赛事', key: '3' },
+	              '赛事 内容'
+	            ),
+	            _react2.default.createElement(
+	              TabPane,
+	              { tab: '培训', key: '4' },
+	              '培训 内容'
+	            ),
+	            _react2.default.createElement(
+	              TabPane,
+	              { tab: '相册', key: '5' },
+	              '相册 内容'
+	            ),
+	            _react2.default.createElement(
+	              TabPane,
+	              { tab: '资讯', key: '6' },
+	              '资讯 内容'
+	            ),
+	            _react2.default.createElement(
+	              TabPane,
+	              { tab: '场馆', key: '7' },
+	              '场馆 内容'
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Index;
 	}(_react.Component);
 
 	exports.default = (0, _reactRedux.connect)(function (state) {
-		return {
-			qunzi: state.qunzi
-		};
+	  return {
+	    quanzi: state.quanzi
+	  };
+	}, function (dispatch) {
+	  return {
+	    quanziActions: (0, _redux.bindActionCreators)(quanziActions, dispatch)
+	  };
 	})(Index);
 
 /***/ },
-/* 284 */
+/* 285 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.get_community_banner = get_community_banner;
+
+	var _types = __webpack_require__(273);
+
+	var types = _interopRequireWildcard(_types);
+
+	var _api = __webpack_require__(274);
+
+	var _api2 = _interopRequireDefault(_api);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	// E:\APP源文件\trunk\jsCode\appCode\table  错误提示码
+
+	//import api from '../../../api'
+	function setBanner(data) {
+		return {
+			type: types.GET_COMMUNITY_BANNER,
+			banner: {
+				is_banner: true,
+				list: data
+			}
+		};
+	}
+
+	//获取圈子广告
+	function get_community_banner() {
+		return function (dispatch) {
+			return _api2.default.get_community_banner.then(function (data) {
+				var banner = data.data.holichat;
+				data.data.community.map(function (item) {
+					banner.push(item);
+				});
+				data.ret == '0' ? dispatch(setBanner(banner)) : console.log(data.ret);
+			});
+		};
+	}
+
+/***/ },
+/* 286 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31011,7 +31202,7 @@ webpackJsonp([0,1],[
 
 	var _reactRouter = __webpack_require__(199);
 
-	__webpack_require__(285);
+	__webpack_require__(287);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31078,15 +31269,15 @@ webpackJsonp([0,1],[
 	exports.default = Header;
 
 /***/ },
-/* 285 */
+/* 287 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 286 */,
-/* 287 */,
-/* 288 */
+/* 288 */,
+/* 289 */,
+/* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31103,11 +31294,15 @@ webpackJsonp([0,1],[
 
 	var _reactRouter = __webpack_require__(199);
 
-	var _antd = __webpack_require__(289);
-
-	__webpack_require__(290);
+	var _antd = __webpack_require__(291);
 
 	__webpack_require__(292);
+
+	__webpack_require__(294);
+
+	var _api = __webpack_require__(274);
+
+	var _api2 = _interopRequireDefault(_api);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31123,45 +31318,48 @@ webpackJsonp([0,1],[
 		function Slider(props) {
 			_classCallCheck(this, Slider);
 
-			var _this = _possibleConstructorReturn(this, (Slider.__proto__ || Object.getPrototypeOf(Slider)).call(this, props));
-
-			_this.state = {
-				data: null
-			};
-			return _this;
+			return _possibleConstructorReturn(this, (Slider.__proto__ || Object.getPrototypeOf(Slider)).call(this, props));
+			//this.state ={data : null}
 		}
 
 		_createClass(Slider, [{
-			key: 'componentWillMount',
-			value: function componentWillMount() {
-				//console.log('Slider')
-			}
-		}, {
-			key: 'componentDidMount',
-			value: function componentDidMount() {}
-		}, {
 			key: 'render',
+
+			// componentWillMount() {
+			//
+			// }
 			value: function render() {
+				var _props = this.props;
+				var items = _props.items;
+				var autoplay = _props.autoplay;
+
+				var list = items.map(function (item, index) {
+					//console.log(index)
+					if (item.action == '') {
+						return _react2.default.createElement(
+							'div',
+							{ key: index },
+							_react2.default.createElement('img', { src: _api2.default.getImg(item.image) })
+						);
+					} else {
+						var action = JSON.parse(item.action);
+						return _react2.default.createElement(
+							_reactRouter.Link,
+							{ key: index, to: { pathname: '/home/' + action.type, query: { id: '' + action.data.id } } },
+							_react2.default.createElement('img', { src: _api2.default.getImg(item.image) })
+						);
+					}
+				});
 				function onChange(a, b, c) {
 					console.log(a, b, c);
 				}
-
 				return _react2.default.createElement(
 					'div',
-					{ className: 'longs' },
+					{ className: 'slide_area' },
 					_react2.default.createElement(
 						_antd.Carousel,
-						{ afterChange: onChange },
-						_react2.default.createElement(
-							_reactRouter.Link,
-							{ to: '/', className: 'a' },
-							_react2.default.createElement('img', { className: 'img', src: 'http://holichat-res-inside.img-cn-hangzhou.aliyuncs.com/uploads/m/hr/61f9e5f3ac0038d9a5a2ec0548a5c7cf.jpg' })
-						),
-						_react2.default.createElement(
-							_reactRouter.Link,
-							{ to: '/', className: 'a' },
-							_react2.default.createElement('img', { className: 'img', src: 'http://holichat-res-inside.img-cn-hangzhou.aliyuncs.com/uploads/m/hr/380aff9164de5d04b8e18c790c8b194d.jpg' })
-						)
+						{ autoplay: autoplay, afterChange: onChange },
+						list
 					)
 				);
 			}
@@ -31170,10 +31368,14 @@ webpackJsonp([0,1],[
 		return Slider;
 	}(_react.Component);
 
+	Slider.propTypes = {
+		items: _react.PropTypes.array,
+		autoplay: _react.PropTypes.bool
+	};
 	exports.default = Slider;
 
 /***/ },
-/* 289 */
+/* 291 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -83614,13 +83816,6 @@ webpackJsonp([0,1],[
 	//# sourceMappingURL=antd.js.map
 
 /***/ },
-/* 290 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 291 */,
 /* 292 */
 /***/ function(module, exports) {
 
@@ -83643,6 +83838,13 @@ webpackJsonp([0,1],[
 /***/ },
 /* 297 */,
 /* 298 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 299 */,
+/* 300 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -83657,27 +83859,39 @@ webpackJsonp([0,1],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Header = __webpack_require__(284);
+	var _reactRouter = __webpack_require__(199);
+
+	var _reactRedux = __webpack_require__(175);
+
+	var _redux = __webpack_require__(182);
+
+	var _action = __webpack_require__(301);
+
+	var homeActions = _interopRequireWildcard(_action);
+
+	var _Header = __webpack_require__(286);
 
 	var _Header2 = _interopRequireDefault(_Header);
 
-	var _Slider = __webpack_require__(288);
+	var _Slider = __webpack_require__(290);
 
 	var _Slider2 = _interopRequireDefault(_Slider);
 
-	__webpack_require__(299);
+	__webpack_require__(302);
 
-	var _activity_icon = __webpack_require__(301);
+	var _activity_icon = __webpack_require__(304);
 
 	var _activity_icon2 = _interopRequireDefault(_activity_icon);
 
-	var _event_icon = __webpack_require__(302);
+	var _event_icon = __webpack_require__(305);
 
 	var _event_icon2 = _interopRequireDefault(_event_icon);
 
-	var _training_icon = __webpack_require__(303);
+	var _training_icon = __webpack_require__(306);
 
 	var _training_icon2 = _interopRequireDefault(_training_icon);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -83690,81 +83904,108 @@ webpackJsonp([0,1],[
 	var Home = function (_Component) {
 	    _inherits(Home, _Component);
 
-	    function Home() {
+	    function Home(props) {
 	        _classCallCheck(this, Home);
 
-	        return _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).apply(this, arguments));
+	        return _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this, props));
 	    }
 
 	    _createClass(Home, [{
 	        key: 'componentWillMount',
 	        value: function componentWillMount() {
-	            console.log('加载HOME');
+	            var _props = this.props;
+	            var homeActions = _props.homeActions;
+	            var dispatch = _props.dispatch;
+
+	            homeActions.get_holichat_banner();
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var home = this.props.home;
+
+	            console.log(this.props);
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'wx_home' },
 	                _react2.default.createElement(_Header2.default, { title: '活力圈', leftTo: 'fanhui' }),
-	                _react2.default.createElement(_Slider2.default, null),
+	                home.banner.is_banner ? _react2.default.createElement(_Slider2.default, { autoplay: false, items: home.banner.list }) : "",
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'weui-flex nav white_bj' },
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'weui-flex__item', key: 'fujing' },
-	                        _react2.default.createElement('img', { className: 'nav_img', src: _activity_icon2.default }),
-	                        ' ',
+	                        { className: 'weui-flex__item', key: 'nearby' },
 	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'nav_name' },
-	                            '附近'
+	                            _reactRouter.Link,
+	                            { className: 'nav_link', to: '/home/nearby' },
+	                            _react2.default.createElement('img', { className: 'nav_img', src: _activity_icon2.default }),
+	                            ' ',
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'nav_name' },
+	                                '附近'
+	                            )
 	                        )
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'weui-flex__item', key: 'huodong' },
-	                        _react2.default.createElement('img', { className: 'nav_img', src: _event_icon2.default }),
-	                        ' ',
+	                        { className: 'weui-flex__item', key: 'activity' },
 	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'nav_name' },
-	                            '活动'
+	                            _reactRouter.Link,
+	                            { className: 'nav_link', to: '/home/activity' },
+	                            _react2.default.createElement('img', { className: 'nav_img', src: _event_icon2.default }),
+	                            ' ',
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'nav_name' },
+	                                '活动'
+	                            )
 	                        )
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'weui-flex__item', key: 'shuaishi' },
-	                        _react2.default.createElement('img', { className: 'nav_img', src: _training_icon2.default }),
-	                        ' ',
+	                        { className: 'weui-flex__item', key: 'event' },
 	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'nav_name' },
-	                            '赛事'
+	                            _reactRouter.Link,
+	                            { className: 'nav_link', to: '/home/event/' },
+	                            _react2.default.createElement('img', { className: 'nav_img', src: _training_icon2.default }),
+	                            ' ',
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'nav_name' },
+	                                '赛事'
+	                            )
 	                        )
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'weui-flex__item', key: 'pixung' },
-	                        _react2.default.createElement('img', { className: 'nav_img', src: _activity_icon2.default }),
-	                        ' ',
+	                        { className: 'weui-flex__item', key: 'training' },
 	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'nav_name' },
-	                            '培训'
+	                            _reactRouter.Link,
+	                            { className: 'nav_link', to: '/home/training' },
+	                            _react2.default.createElement('img', { className: 'nav_img', src: _activity_icon2.default }),
+	                            ' ',
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'nav_name' },
+	                                '培训'
+	                            )
 	                        )
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'weui-flex__item', key: 'zhixun' },
-	                        _react2.default.createElement('img', { className: 'nav_img', src: _activity_icon2.default }),
-	                        ' ',
+	                        { className: 'weui-flex__item', key: 'news' },
 	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'nav_name' },
-	                            '资讯'
+	                            _reactRouter.Link,
+	                            { className: 'nav_link', to: '/home/news' },
+	                            _react2.default.createElement('img', { className: 'nav_img', src: _activity_icon2.default }),
+	                            ' ',
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'nav_name' },
+	                                '资讯'
+	                            )
 	                        )
 	                    )
 	                ),
@@ -83776,35 +84017,143 @@ webpackJsonp([0,1],[
 	    return Home;
 	}(_react.Component);
 
-	exports.default = Home;
+	exports.default = (0, _reactRedux.connect)(function (state) {
+	    return {
+	        home: state.home
+	    };
+	}, function (dispatch) {
+	    return {
+	        homeActions: (0, _redux.bindActionCreators)(homeActions, dispatch)
+	    };
+	})(Home);
 
 /***/ },
-/* 299 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 300 */,
 /* 301 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "data:image/png;base64,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"
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.get_holichat_banner = get_holichat_banner;
+
+	var _types = __webpack_require__(273);
+
+	var types = _interopRequireWildcard(_types);
+
+	var _api = __webpack_require__(274);
+
+	var _api2 = _interopRequireDefault(_api);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	//活力圈首页广告位 createAction
+	//import api from '../../../api'
+	function setBanner(data) {
+		return {
+			type: types.GET_HOLICHAT_BANNER,
+			banner: { is_banner: true, list: data }
+		};
+	}
+
+	//活力圈首页广告位
+	function get_holichat_banner() {
+		return function (dispatch) {
+			return _api2.default.get_holichat_banner.then(function (data) {
+				data.ret == '0' ? dispatch(setBanner(data.data)) : console.log(data.ret);
+			});
+		};
+	}
 
 /***/ },
 /* 302 */
 /***/ function(module, exports) {
 
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 303 */,
+/* 304 */
+/***/ function(module, exports) {
+
+	module.exports = "data:image/png;base64,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"
+
+/***/ },
+/* 305 */
+/***/ function(module, exports) {
+
 	module.exports = "data:image/png;base64,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"
 
 /***/ },
-/* 303 */
+/* 306 */
 /***/ function(module, exports) {
 
 	module.exports = "data:image/png;base64,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"
 
 /***/ },
-/* 304 */
+/* 307 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(4);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Event = function (_Component) {
+	    _inherits(Event, _Component);
+
+	    function Event() {
+	        _classCallCheck(this, Event);
+
+	        return _possibleConstructorReturn(this, (Event.__proto__ || Object.getPrototypeOf(Event)).apply(this, arguments));
+	    }
+
+	    _createClass(Event, [{
+	        key: "render",
+	        value: function render() {
+	            console.log(this.props);
+	            return _react2.default.createElement(
+	                "div",
+	                { className: "wx_event" },
+	                "fdsfds",
+	                _react2.default.createElement("br", null),
+	                _react2.default.createElement("br", null),
+	                _react2.default.createElement("br", null),
+	                _react2.default.createElement("br", null),
+	                _react2.default.createElement("br", null),
+	                _react2.default.createElement("br", null),
+	                _react2.default.createElement("br", null),
+	                _react2.default.createElement("br", null),
+	                _react2.default.createElement("br", null)
+	            );
+	        }
+	    }]);
+
+	    return Event;
+	}(_react.Component);
+
+	exports.default = Event;
+
+/***/ },
+/* 308 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -83819,7 +84168,7 @@ webpackJsonp([0,1],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Header = __webpack_require__(284);
+	var _Header = __webpack_require__(286);
 
 	var _Header2 = _interopRequireDefault(_Header);
 
@@ -83858,7 +84207,7 @@ webpackJsonp([0,1],[
 	exports.default = Messages;
 
 /***/ },
-/* 305 */
+/* 309 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -83907,7 +84256,7 @@ webpackJsonp([0,1],[
 	exports.default = User;
 
 /***/ },
-/* 306 */
+/* 310 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -83930,7 +84279,7 @@ webpackJsonp([0,1],[
 
 	var userActions = _interopRequireWildcard(_action);
 
-	var _md = __webpack_require__(307);
+	var _md = __webpack_require__(311);
 
 	var _md2 = _interopRequireDefault(_md);
 
@@ -83978,11 +84327,10 @@ webpackJsonp([0,1],[
 	            e.preventDefault();
 	            var dispatch = this.props.dispatch;
 
-	            var pas = (0, _md2.default)(this.refs.password.value.trim());
-	            dispatch(userActions.loginUser({
-	                username: this.refs.username.value.trim(),
-	                password: (0, _md2.default)(pas)
-	            }));
+	            var phone = this.refs.username.value.trim();
+	            var pwd = (0, _md2.default)(this.refs.password.value.trim());
+	            var formData = 'phone=' + phone + '&pwd=' + (0, _md2.default)(pwd) + '&device=\'\'&platform=weixin&channel=5000';
+	            dispatch(userActions.loginUser(formData));
 	        }
 	    }, {
 	        key: 'render',
@@ -84033,14 +84381,14 @@ webpackJsonp([0,1],[
 	exports.default = (0, _reactRedux.connect)(mapStateToProps)(SignIn);
 
 /***/ },
-/* 307 */
+/* 311 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function(){
-	  var crypt = __webpack_require__(308),
-	      utf8 = __webpack_require__(309).utf8,
-	      isBuffer = __webpack_require__(310),
-	      bin = __webpack_require__(309).bin,
+	  var crypt = __webpack_require__(312),
+	      utf8 = __webpack_require__(313).utf8,
+	      isBuffer = __webpack_require__(314),
+	      bin = __webpack_require__(313).bin,
 
 	  // The core
 	  md5 = function (message, options) {
@@ -84199,7 +84547,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 308 */
+/* 312 */
 /***/ function(module, exports) {
 
 	(function() {
@@ -84301,7 +84649,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 309 */
+/* 313 */
 /***/ function(module, exports) {
 
 	var charenc = {
@@ -84340,7 +84688,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 310 */
+/* 314 */
 /***/ function(module, exports) {
 
 	/*!
@@ -84367,7 +84715,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 311 */
+/* 315 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -84416,7 +84764,7 @@ webpackJsonp([0,1],[
 	exports.default = Page404;
 
 /***/ },
-/* 312 */
+/* 316 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84428,11 +84776,11 @@ webpackJsonp([0,1],[
 
 	var _redux = __webpack_require__(182);
 
-	var _reduxThunk = __webpack_require__(313);
+	var _reduxThunk = __webpack_require__(317);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-	var _reducers = __webpack_require__(314);
+	var _reducers = __webpack_require__(318);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -84454,8 +84802,8 @@ webpackJsonp([0,1],[
 	  //热替换选项
 	  if (true) {
 	    // Enable Webpack hot module replacement for reducers
-	    module.hot.accept(314, function () {
-	      var nextReducer = __webpack_require__(314);
+	    module.hot.accept(318, function () {
+	      var nextReducer = __webpack_require__(318);
 	      store.replaceReducer(nextReducer);
 	    });
 	  }
@@ -84477,7 +84825,7 @@ webpackJsonp([0,1],[
 	*/
 
 /***/ },
-/* 313 */
+/* 317 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -84505,7 +84853,7 @@ webpackJsonp([0,1],[
 	exports['default'] = thunk;
 
 /***/ },
-/* 314 */
+/* 318 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84516,27 +84864,32 @@ webpackJsonp([0,1],[
 
 	var _redux = __webpack_require__(182);
 
-	var _reduxRouter = __webpack_require__(315);
+	var _reduxRouter = __webpack_require__(319);
 
-	var _reducer = __webpack_require__(328);
+	var _reducer = __webpack_require__(332);
 
 	var _reducer2 = _interopRequireDefault(_reducer);
 
-	var _reducer3 = __webpack_require__(329);
+	var _reducer3 = __webpack_require__(333);
 
 	var _reducer4 = _interopRequireDefault(_reducer3);
+
+	var _reducer5 = __webpack_require__(334);
+
+	var _reducer6 = _interopRequireDefault(_reducer5);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var rootReducer = (0, _redux.combineReducers)({
 	    user: _reducer2.default,
 	    quanzi: _reducer4.default,
+	    home: _reducer6.default,
 	    router: _reduxRouter.routerStateReducer
 	});
 	exports.default = rootReducer;
 
 /***/ },
-/* 315 */
+/* 319 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84545,31 +84898,31 @@ webpackJsonp([0,1],[
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _routerStateReducer2 = __webpack_require__(316);
+	var _routerStateReducer2 = __webpack_require__(320);
 
 	var _routerStateReducer3 = _interopRequireDefault(_routerStateReducer2);
 
 	exports.routerStateReducer = _routerStateReducer3['default'];
 
-	var _ReduxRouter2 = __webpack_require__(318);
+	var _ReduxRouter2 = __webpack_require__(322);
 
 	var _ReduxRouter3 = _interopRequireDefault(_ReduxRouter2);
 
 	exports.ReduxRouter = _ReduxRouter3['default'];
 
-	var _client = __webpack_require__(321);
+	var _client = __webpack_require__(325);
 
 	var _client2 = _interopRequireDefault(_client);
 
 	exports.reduxReactRouter = _client2['default'];
 
-	var _isActive2 = __webpack_require__(327);
+	var _isActive2 = __webpack_require__(331);
 
 	var _isActive3 = _interopRequireDefault(_isActive2);
 
 	exports.isActive = _isActive3['default'];
 
-	var _actionCreators = __webpack_require__(320);
+	var _actionCreators = __webpack_require__(324);
 
 	exports.historyAPI = _actionCreators.historyAPI;
 	exports.push = _actionCreators.push;
@@ -84580,7 +84933,7 @@ webpackJsonp([0,1],[
 	exports.goForward = _actionCreators.goForward;
 
 /***/ },
-/* 316 */
+/* 320 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84591,7 +84944,7 @@ webpackJsonp([0,1],[
 
 	exports['default'] = routerStateReducer;
 
-	var _constants = __webpack_require__(317);
+	var _constants = __webpack_require__(321);
 
 	/**
 	 * Reducer of ROUTER_DID_CHANGE actions. Returns a state object
@@ -84620,7 +84973,7 @@ webpackJsonp([0,1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 317 */
+/* 321 */
 /***/ function(module, exports) {
 
 	// Signals that the router's state has changed. It should
@@ -84648,7 +85001,7 @@ webpackJsonp([0,1],[
 	exports.DOES_NEED_REFRESH = DOES_NEED_REFRESH;
 
 /***/ },
-/* 318 */
+/* 322 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84675,13 +85028,13 @@ webpackJsonp([0,1],[
 
 	var _reactRouterLibRouterUtils = __webpack_require__(237);
 
-	var _routerStateEquals = __webpack_require__(319);
+	var _routerStateEquals = __webpack_require__(323);
 
 	var _routerStateEquals2 = _interopRequireDefault(_routerStateEquals);
 
-	var _constants = __webpack_require__(317);
+	var _constants = __webpack_require__(321);
 
-	var _actionCreators = __webpack_require__(320);
+	var _actionCreators = __webpack_require__(324);
 
 	function memoizeRouterStateSelector(selector) {
 	  var previousRouterState = null;
@@ -84806,7 +85159,7 @@ webpackJsonp([0,1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 319 */
+/* 323 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84820,7 +85173,7 @@ webpackJsonp([0,1],[
 
 	var _deepEqual2 = _interopRequireDefault(_deepEqual);
 
-	var _constants = __webpack_require__(317);
+	var _constants = __webpack_require__(321);
 
 	/**
 	 * Check if two router states are equal. Ignores `location.key`.
@@ -84838,7 +85191,7 @@ webpackJsonp([0,1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 320 */
+/* 324 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84849,7 +85202,7 @@ webpackJsonp([0,1],[
 	exports.replaceRoutes = replaceRoutes;
 	exports.historyAPI = historyAPI;
 
-	var _constants = __webpack_require__(317);
+	var _constants = __webpack_require__(321);
 
 	/**
 	 * Action creator for signaling that the router has changed.
@@ -84928,7 +85281,7 @@ webpackJsonp([0,1],[
 	exports.goForward = goForward;
 
 /***/ },
-/* 321 */
+/* 325 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84939,21 +85292,21 @@ webpackJsonp([0,1],[
 
 	var _redux = __webpack_require__(182);
 
-	var _actionCreators = __webpack_require__(320);
+	var _actionCreators = __webpack_require__(324);
 
-	var _routerStateEquals = __webpack_require__(319);
+	var _routerStateEquals = __webpack_require__(323);
 
 	var _routerStateEquals2 = _interopRequireDefault(_routerStateEquals);
 
-	var _reduxReactRouter = __webpack_require__(322);
+	var _reduxReactRouter = __webpack_require__(326);
 
 	var _reduxReactRouter2 = _interopRequireDefault(_reduxReactRouter);
 
-	var _useDefaults = __webpack_require__(324);
+	var _useDefaults = __webpack_require__(328);
 
 	var _useDefaults2 = _interopRequireDefault(_useDefaults);
 
-	var _routeReplacement = __webpack_require__(325);
+	var _routeReplacement = __webpack_require__(329);
 
 	var _routeReplacement2 = _interopRequireDefault(_routeReplacement);
 
@@ -85008,7 +85361,7 @@ webpackJsonp([0,1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 322 */
+/* 326 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -85026,11 +85379,11 @@ webpackJsonp([0,1],[
 
 	var _reactRouterLibCreateTransitionManager2 = _interopRequireDefault(_reactRouterLibCreateTransitionManager);
 
-	var _historyMiddleware = __webpack_require__(323);
+	var _historyMiddleware = __webpack_require__(327);
 
 	var _historyMiddleware2 = _interopRequireDefault(_historyMiddleware);
 
-	var _constants = __webpack_require__(317);
+	var _constants = __webpack_require__(321);
 
 	function reduxReactRouter(_ref) {
 	  var routes = _ref.routes;
@@ -85074,7 +85427,7 @@ webpackJsonp([0,1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 323 */
+/* 327 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -85082,7 +85435,7 @@ webpackJsonp([0,1],[
 	exports.__esModule = true;
 	exports['default'] = historyMiddleware;
 
-	var _constants = __webpack_require__(317);
+	var _constants = __webpack_require__(321);
 
 	/**
 	 * Middleware for interacting with the history API
@@ -85109,7 +85462,7 @@ webpackJsonp([0,1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 324 */
+/* 328 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -85159,7 +85512,7 @@ webpackJsonp([0,1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 325 */
+/* 329 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -85176,7 +85529,7 @@ webpackJsonp([0,1],[
 
 	var _reactRouter = __webpack_require__(199);
 
-	var _replaceRoutesMiddleware = __webpack_require__(326);
+	var _replaceRoutesMiddleware = __webpack_require__(330);
 
 	var _replaceRoutesMiddleware2 = _interopRequireDefault(_replaceRoutesMiddleware);
 
@@ -85253,7 +85606,7 @@ webpackJsonp([0,1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 326 */
+/* 330 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -85261,7 +85614,7 @@ webpackJsonp([0,1],[
 	exports.__esModule = true;
 	exports['default'] = replaceRoutesMiddleware;
 
-	var _constants = __webpack_require__(317);
+	var _constants = __webpack_require__(321);
 
 	function replaceRoutesMiddleware(replaceRoutes) {
 	  return function () {
@@ -85280,7 +85633,7 @@ webpackJsonp([0,1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 327 */
+/* 331 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -85319,7 +85672,7 @@ webpackJsonp([0,1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 328 */
+/* 332 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -85379,7 +85732,7 @@ webpackJsonp([0,1],[
 	}
 
 /***/ },
-/* 329 */
+/* 333 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -85387,6 +85740,9 @@ webpackJsonp([0,1],[
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	exports.default = quanzi;
 
 	var _types = __webpack_require__(273);
@@ -85395,29 +85751,75 @@ webpackJsonp([0,1],[
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-	var holichat = {
-	    quanzi: false
+	var InitState = {
+	    loading: false,
+	    banner: {
+	        is_banner: false,
+	        list: []
+	    }
 	};
+
 	function quanzi() {
-	    var state = arguments.length <= 0 || arguments[0] === undefined ? holichat : arguments[0];
+	    var state = arguments.length <= 0 || arguments[0] === undefined ? InitState : arguments[0];
 	    var action = arguments[1];
 
 	    switch (action.type) {
-
+	        case types.GET_COMMUNITY_BANNER:
+	            return _extends({}, state, { banner: action.banner });
 	        default:
 	            return state;
 	    }
 	}
 
 /***/ },
-/* 330 */
+/* 334 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	exports.default = home;
+
+	var _types = __webpack_require__(273);
+
+	var types = _interopRequireWildcard(_types);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	var InitState = {
+	    loading: false,
+	    banner: {
+	        is_banner: false,
+	        list: []
+	    }
+	};
+
+	function home() {
+	    var state = arguments.length <= 0 || arguments[0] === undefined ? InitState : arguments[0];
+	    var action = arguments[1];
+
+	    switch (action.type) {
+	        case types.GET_HOLICHAT_BANNER:
+	            return _extends({}, state, { banner: action.banner });
+	        default:
+	            return state;
+	    }
+	}
+
+/***/ },
+/* 335 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 331 */,
-/* 332 */
+/* 336 */,
+/* 337 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

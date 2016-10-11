@@ -10,22 +10,26 @@ class Slider extends Component {
 		//this.state ={data : null}
 	}
 	static propTypes = {
-		items: PropTypes.array,
-		currentKey: PropTypes.bool
+		items:PropTypes.array,
+		autoplay: PropTypes.bool
 	}
 	// componentWillMount() {
 	//
     // }
 	render(){
 		const { items , autoplay } = this.props;
-
+		const list = items.map( (item,index) => {
+			//console.log(index)
+			if(item.action ==''){
+				return(<div key={index}><img src={api.getImg(item.image)} /></div>)
+			}else{
+				const action = JSON.parse(item.action);
+				return(<Link key={index} to={{pathname:`/home/${action.type}`,query:{id:`${action.data.id}`}}} ><img src={api.getImg(item.image)} /></Link>)
+			}
+		})
 		function onChange(a, b, c) {
 			console.log(a, b, c);
 		}
-		const list = items.map( (item) => {
-			const action = JSON.parse(item.action);
-			return(<Link key={item.id}  to={{pathname:`/home/${action.type}`, query:{id: `${action.data.id}`} }} ><img className="img" src={api.imgURL + item.image} /></Link>)
-		})
 		return(
 			<div className="slide_area">
 				<Carousel autoplay={autoplay} afterChange={onChange}>

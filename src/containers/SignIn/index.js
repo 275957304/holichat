@@ -26,13 +26,11 @@ class SignIn extends Component {
     login(e) {
         e.preventDefault();
         const { dispatch } = this.props;
-		const pas = md5(this.refs.password.value.trim());
-        dispatch(userActions.loginUser({
-            username: this.refs.username.value.trim(),
-            password: md5(pas),
-        }));
+        const phone =  this.refs.username.value.trim();
+		const pwd = md5(this.refs.password.value.trim());
+        const formData = `phone=${phone}&pwd=${md5(pwd)}&device=''&platform=weixin&channel=5000`;
+        dispatch(userActions.loginUser(formData));
     }
-
     render () {
         return (
             <div className='login-box'>

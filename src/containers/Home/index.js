@@ -1,4 +1,8 @@
 import React, {Component, PropTypes} from 'react'
+import {Link} from 'react-router';
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import * as homeActions from '../../reducers/modules/home/action'
 import Header from '../../components/Header/'
 import Slider from '../../components/Slider/'
 import './home.css'
@@ -8,25 +12,61 @@ import eventIcon from '../../images/event_icon.png'
 import trainingIcon from '../../images/training_icon.png'
 
 class Home extends Component {
-    componentWillMount() {
-        console.log('加载HOME')
+    constructor(props) {
+        super(props)
     }
+    componentWillMount(){
+        const { homeActions, dispatch } = this.props
+        homeActions.get_holichat_banner()
+	}
     render(){
+        const { home } = this.props;
+        console.log(this.props)
         return(
             <div className="wx_home">
                 <Header title="活力圈" leftTo="fanhui" />
-                <p>幻灯片</p>
+                {home.banner.is_banner ? <Slider autoplay={false} items={home.banner.list} /> : ""}
                 <div className="weui-flex nav white_bj">
-					<div className="weui-flex__item" key="fujing"><img className="nav_img" src={activityIcon} /> <div className="nav_name">附近</div></div>
-					<div className="weui-flex__item" key="huodong"><img className="nav_img" src={eventIcon} /> <div className="nav_name">活动</div></div>
-					<div className="weui-flex__item" key="shuaishi"><img className="nav_img" src={trainingIcon} /> <div className="nav_name">赛事</div></div>
-					<div className="weui-flex__item" key="pixung"><img className="nav_img" src={activityIcon} /> <div className="nav_name">培训</div></div>
-					<div className="weui-flex__item" key="zhixun"><img className="nav_img" src={activityIcon} /> <div className="nav_name">资讯</div></div>
+                    <div className="weui-flex__item" key="nearby">
+                        <Link className="nav_link" to="/home/nearby">
+                            <img className="nav_img" src={activityIcon} /> <div className="nav_name">附近</div>
+                        </Link>
+                    </div>
+                    <div className="weui-flex__item" key="activity">
+                        <Link className="nav_link" to="/home/activity">
+                            <img className="nav_img" src={eventIcon} /> <div className="nav_name">活动</div>
+                        </Link>
+                    </div>
+                    <div className="weui-flex__item" key="event">
+                        <Link className="nav_link" to="/home/event/">
+                            <img className="nav_img" src={trainingIcon} /> <div className="nav_name">赛事</div>
+                        </Link>
+                    </div>
+                    <div className="weui-flex__item" key="training">
+                        <Link className="nav_link" to="/home/training">
+                            <img className="nav_img" src={activityIcon} /> <div className="nav_name">培训</div>
+                        </Link>
+                    </div>
+                    <div className="weui-flex__item" key="news">
+                        <Link className="nav_link" to="/home/news">
+                            <img className="nav_img" src={activityIcon} /> <div className="nav_name">资讯</div>
+                        </Link>
+                    </div>
 				</div>
 
 				Home
+
             </div>
         )
     }
 }
-export default Home
+
+
+export default connect(
+   state => ({
+       home : state.home
+   }),
+   dispatch => ({
+       homeActions: bindActionCreators(homeActions, dispatch)
+   })
+)(Home)

@@ -1,5 +1,6 @@
-body{font-size: 14px;}
+body{font-size: 14px; color: #999;}
 ul,li{list-style: none; }
+a{color: #333;}
 img{
 	max-width: 100%; height: auto;
 }
@@ -839,6 +840,10 @@ img{
 .nav{
 	text-align:center;
 	padding: 10px 5px;
+}
+.nav_link{
+	color: #333;
+	display: block;
 }
 .nav_img{
 	max-width:70%;
