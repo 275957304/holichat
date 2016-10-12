@@ -18,3 +18,11 @@ export function get_holichat_banner(){
 		data.ret == '0' ? dispatch(setBanner(data.data)) : console.log(data.ret)
 	})
 }
+
+export function get_topic_list(){
+	return dispatch =>
+	api.get_topic_list.then(function(data){
+		console.log(data)
+		//data.ret == '0' ? dispatch(setBanner(data.data)) : console.log(data.ret)
+	})
+}

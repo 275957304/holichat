@@ -1,0 +1,6 @@
+.wx_app .weui-search-bar{
+    background-color: #eee;
+}
+.wx_app .weui-search-bar:after{
+    border-bottom: 1px solid #ddd;
+}

@@ -17,7 +17,8 @@ class Home extends Component {
     }
     componentWillMount(){
         const { homeActions, dispatch } = this.props
-        homeActions.get_holichat_banner()
+        homeActions.get_holichat_banner();
+        homeActions.get_topic_list();
 	}
     render(){
         const { home } = this.props;
@@ -53,14 +54,14 @@ class Home extends Component {
                         </Link>
                     </div>
 				</div>
-
-				Home
-
+                <div className="hot_topics white_bj">
+                    <div className="weui-cells__title">热门专题</div>
+                    fdsfs
+				</div>
             </div>
         )
     }
 }
-
 
 export default connect(
    state => ({

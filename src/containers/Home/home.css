@@ -1,3 +1,6 @@
+.wx_home{
+	background-color: #eee;
+}
 .nav{
 	text-align:center;
 	padding: 10px 5px;
@@ -9,4 +12,11 @@
 .nav_img{
 	max-width:70%;
 	display:inline-block;
+}
+.hot_topics{
+	 margin-top: 5px;
+	 padding: 10px;
+}
+.hot_topics .weui-cells__title{
+	margin-top: 0;
 }

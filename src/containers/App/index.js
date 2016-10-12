@@ -31,16 +31,17 @@ class App extends Component {
 	}
     render() {
         const { user, status , actions } = this.props;
-        const currentURL = this.props.routes[1].path;
-        let currentPath = '';
-        (currentURL + "").indexOf("/") > 0 ?  currentPath = (currentURL +"").split('/')[0] : currentPath = currentURL;
-        const tab = currentPath || 'index'
+        const currentPath = this.props.routes[1].path;
+        // const currentURL = this.props.routes[1].path;
+        // let currentPath = '';
+        // (currentURL + "").indexOf("/") > 0 ?  currentPath = (currentURL +"").split('/')[0] : currentPath = currentURL;
+        // const tab = currentPath || 'index'
         return(
             <div className="wx_app">
                 <div className="weui_tab_bd">
                     {this.props.children}
                 </div>
-				<Footer tab={tab} />
+				<Footer tab={currentPath} />
             </div>
         )
     }

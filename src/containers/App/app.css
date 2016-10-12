@@ -4,6 +4,9 @@ a{color: #333;}
 img{
 	max-width: 100%; height: auto;
 }
+.wx_app{
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
 .img_rounded{
 	border-radius: 6px;
 }

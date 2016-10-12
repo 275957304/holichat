@@ -20,7 +20,10 @@ export default{
 
 	//广告
 	get_community_banner: api.get('ad/api/ad_community_banner',{'community_cid':1}),  //name: 社团首页广告位
-	get_holichat_banner: api.get('ad/api/ad_holichat_banner')   //name: 活力圈首页广告位
+	get_holichat_banner: api.get('ad/api/ad_holichat_banner'),   //name: 活力圈首页广告位
+
+	//专题
+	get_topic_list: api.get('topic/view/topic_list'),  //name: 专题列表
 }
 
 

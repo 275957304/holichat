@@ -3,16 +3,24 @@ import {Link} from 'react-router';
 
 import imgSrc from '../../images/icon_tabbar.png'
 class Footer extends Component {
+    constructor(props){
+        super(props)
+    }
+    componentWillMount(){
+        const { tab } = this.props;
+        console.log(tab)
+	}
     render() {
-		const setCur = {
-			index:"",
-			home:"",
-			messages:"",
-			user:""
-		};
-		setCur[this.props.tab]= 'weui-bar__item_on';
-		//var tab = this.props.location.query.tab || 'all';
-		//console.log(setCur[this.props.tab])
+        const { tab } = this.props;
+		const setCur ={index:"",home:"",messages:"",user:""};
+        const getTab = tab || 'index';
+        const switchTab = getTab.indexOf('/');
+        if(switchTab > 0){
+            const setTab = tab.split('/')[0];
+            setCur[setTab]= 'weui-bar__item_on';
+        }else{
+            setCur[getTab]= 'weui-bar__item_on';
+        }
         return (
             <nav className="weui-tabbar">
                 <Link to="/" className={`weui-tabbar__item ${setCur.index}`}>

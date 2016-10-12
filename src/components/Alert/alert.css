@@ -1,0 +1,37 @@
+.wx_app .weui-toast{
+    margin-left: -7.5em;
+    width:15em;
+    min-height: 1em;
+    padding: 10px 20px;
+    -webkit-animation: bounceInUp 1s;
+    animation: bounceInUp 1s;
+}
+.wx_app .weui-toast__content{
+    margin: 0;
+}
+
+@-webkit-keyframes bounceInUp {
+	0% {
+		opacity: 0;
+		-webkit-transform: translate3d(0,100px,0);
+		transform: translate3d(0,100px,0)
+	}
+	100% {
+		-webkit-transform: translate3d(0,0,0);
+		transform: translate3d(0,0,0)
+	}
+}
+
+@keyframes bounceInUp {
+	0% {
+		opacity: 0;
+		-webkit-transform: translate3d(0,100px,0);
+		-ms-transform: translate3d(0,100px,0);
+		transform: translate3d(0,100px,0)
+	}
+	100% {
+		-webkit-transform: translate3d(0,0,0);
+		-ms-transform: translate3d(0,0,0);
+		transform: translate3d(0,0,0)
+	}
+}
