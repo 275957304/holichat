@@ -36,6 +36,7 @@
     "react-redux": "^4.4.5",
     "react-router": "^2.0.1",
     "react-router-redux": "^4.0.6",
+    "reactjs-iscroll": "^0.3.2",
     "redux": "^3.5.2",
     "redux-devtools": "^3.3.1",
     "redux-logger": "^2.6.1",

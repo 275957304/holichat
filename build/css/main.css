@@ -4,6 +4,12 @@ a{color: #333;}
 img{
 	max-width: 100%; height: auto;
 }
+.wx_app{
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.wx_app .weui-tabbar{
+	position: fixed;
+}
 .img_rounded{
 	border-radius: 6px;
 }
@@ -837,6 +843,9 @@ img{
 .ant-tabs-extra-content .ant-tabs-new-tab:hover {
   color: #404040;
 }
+.wx_home{
+	background-color: #eee;
+}
 .nav{
 	text-align:center;
 	padding: 10px 5px;
@@ -848,6 +857,64 @@ img{
 .nav_img{
 	max-width:70%;
 	display:inline-block;
+}
+.hot_topics{
+	 margin-top: 5px;
+	 padding: 10px;
+}
+.hot_topics .weui-cells__title{
+	margin-top: 0;
+}
+.wx_app .weui-toast{
+    margin-left: -7.5em;
+    width:15em;
+    min-height: 1em;
+    padding: 10px 20px;
+    -webkit-animation: bounceInUp 1s;
+    animation: bounceInUp 1s;
+}
+.wx_app .weui-toast__content{
+    margin: 0;
+}
+
+@-webkit-keyframes bounceInUp {
+	0% {
+		opacity: 0;
+		-webkit-transform: translate3d(0,100px,0);
+		transform: translate3d(0,100px,0)
+	}
+	100% {
+		-webkit-transform: translate3d(0,0,0);
+		transform: translate3d(0,0,0)
+	}
+}
+
+@keyframes bounceInUp {
+	0% {
+		opacity: 0;
+		-webkit-transform: translate3d(0,100px,0);
+		-ms-transform: translate3d(0,100px,0);
+		transform: translate3d(0,100px,0)
+	}
+	100% {
+		-webkit-transform: translate3d(0,0,0);
+		-ms-transform: translate3d(0,0,0);
+		transform: translate3d(0,0,0)
+	}
+}
+.wx_app .weui-search-bar{
+    background-color: #eee;
+}
+.wx_app .weui-search-bar:after{
+    border-bottom: 1px solid #ddd;
+}
+.iscroll_main{
+	position: relative;
+	height: 600px;
+}
+.iscroll_main{
+	position: relative;
+	height: 600px;
 }
 /*! normalize.css v4.1.1 | MIT License | github.com/necolas/normalize.css */
 

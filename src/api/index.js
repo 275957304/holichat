@@ -22,6 +22,10 @@ export default{
 	get_community_banner: api.get('ad/api/ad_community_banner',{'community_cid':1}),  //name: 社团首页广告位
 	get_holichat_banner: api.get('ad/api/ad_holichat_banner'),   //name: 活力圈首页广告位
 
+	//赛事
+	get_competition_list :(parameter) => api.get('event/view/event_list',{parameter}),
+	//"get_competition_list"         :this.urlBase + "event/view/event_list?",     //name: 获取赛事列表       type: Get  Params: community_cid=0 category_id=0 city_id=0 status= official=0 cost=0 page_size=10 page=1 event_type=0
+
 	//专题
 	get_topic_list: api.get('topic/view/topic_list'),  //name: 专题列表
 }

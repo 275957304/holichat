@@ -1,0 +1,2 @@
+{ this.props.params.id }
+http://react-china.org/t/react-router-duo-ceng-ji-lu-you-zhi-hou-componentwillmount-wu-xiao/366

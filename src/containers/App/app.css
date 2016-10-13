@@ -7,6 +7,9 @@ img{
 .wx_app{
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+.wx_app .weui-tabbar{
+	position: fixed;
+}
 .img_rounded{
 	border-radius: 6px;
 }
@@ -23,4 +26,10 @@ img{
     padding-bottom: 55px;
     overflow: auto;
     -webkit-overflow-scrolling: touch;
+}
+.orange{
+	color: #dc5a0c
+}
+.green{
+	color: green
 }
