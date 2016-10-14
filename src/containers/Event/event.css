@@ -1,4 +1,10 @@
-.iscroll_main{
-	position: relative;
-	height: 600px;
+.type_tab{
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+    height: 39px;
+    line-height: 39px;
+    border-bottom: 1px solid #eee;
+    z-index: 999;
+    position: relative;
 }

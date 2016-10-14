@@ -7,6 +7,7 @@ import {
 	Index,
 	Home,
 	Event,
+	EventDetail,
 	Messages,
 	User,
 	SignIn,
@@ -15,12 +16,14 @@ import {
 
 //console.log(createBrowserHistory)
 
+
 const routes = (
     <Router history={hashHistory}>
         <Route path="/" component={App}>
 			<IndexRoute component={Index} />
 			<Route path="home" component={Home}/>
-			<Route path="home/event/" component={Event}/>
+			<Route path="home/event" component={Event}/>
+			<Route path="home/event/:id" component={EventDetail}/>
 
 			<Route path="messages" component={Messages}/>
 			<Route path="user" component={User}/>

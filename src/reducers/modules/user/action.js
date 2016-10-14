@@ -1,7 +1,7 @@
 //import api from '../../../api'
 import * as types from '../../types'
 import api from '../../../api/'
-import { Tool } from '../../../utils/'
+import { setItem } from '../../../utils/'
 
 function loginUserError() {
     return {
@@ -43,8 +43,8 @@ export function loginUser(formData,redirect="/"){
             console.log(data)
             if(data.ret == '0'){
 				//登录成功
-				Tool.setItem('session',data.data.session);
-				Tool.setItem('uid',data.data.uid);
+				setItem('session',data.data.session);
+				setItem('uid',data.data.uid);
 				dispatch(loginSuccess(data.data))
 				//dispatch(push('/'))
 				//console.log(dispatch(push('/')))

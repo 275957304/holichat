@@ -1,8 +1,8 @@
 import Api from './api';
-import { Tool } from '../utils/'
+import { getItem } from '../utils/'
 
-const uid = Tool.getItem('uid');
-const session = Tool.getItem('session');
+const uid = getItem('uid');
+const session = getItem('session');
 const device = '';
 const baseURI = 'http://app.holichat.com/'
 const imgBaseUrl = 'http://img.holichat.com/uploads/'

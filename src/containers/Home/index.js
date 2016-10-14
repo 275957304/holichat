@@ -29,27 +29,27 @@ class Home extends Component {
                 {home.banner.is_banner ? <Slider autoplay={false} items={home.banner.list} /> : ""}
                 <div className="weui-flex nav white_bj">
                     <div className="weui-flex__item" key="nearby">
-                        <Link className="nav_link" to="/home/nearby">
+                        <Link className="nav_link" to="/home/nearby/">
                             <img className="nav_img" src={activityIcon} /> <div className="nav_name">附近</div>
                         </Link>
                     </div>
                     <div className="weui-flex__item" key="activity">
-                        <Link className="nav_link" to="/home/activity">
+                        <Link className="nav_link" to="/home/activity/">
                             <img className="nav_img" src={eventIcon} /> <div className="nav_name">活动</div>
                         </Link>
                     </div>
                     <div className="weui-flex__item" key="event">
-                        <Link className="nav_link" to="/home/event/">
+                        <Link className="nav_link" to="/home/event">
                             <img className="nav_img" src={trainingIcon} /> <div className="nav_name">赛事</div>
                         </Link>
                     </div>
                     <div className="weui-flex__item" key="training">
-                        <Link className="nav_link" to="/home/training">
+                        <Link className="nav_link" to="/home/training/">
                             <img className="nav_img" src={activityIcon} /> <div className="nav_name">培训</div>
                         </Link>
                     </div>
                     <div className="weui-flex__item" key="news">
-                        <Link className="nav_link" to="/home/news">
+                        <Link className="nav_link" to="/home/news/">
                             <img className="nav_img" src={activityIcon} /> <div className="nav_name">资讯</div>
                         </Link>
                     </div>

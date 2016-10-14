@@ -27,6 +27,27 @@ img{
     overflow: auto;
     -webkit-overflow-scrolling: touch;
 }
+.orange{
+	color: #dc5a0c
+}
+.green{
+	color: green
+}
+.red{
+	color: #d44950
+}
+.warning{
+	color: #f0ad4e
+}
+.gary{
+	color: #666;
+}
+.pull-left{
+	float: left!important;
+}
+.pull-right{
+	float: right!important;
+}
 .header{
 	height:42px;
 	line-height:42px;
@@ -908,13 +929,78 @@ img{
 .wx_app .weui-search-bar:after{
     border-bottom: 1px solid #ddd;
 }
-.iscroll_main{
-	position: relative;
-	height: 600px;
+.panel_iscroll .weui-media-box{
+	padding: 10px;
+	webkit-transform: translate3d(0,0,0);
+	-moz-transform: translate3d(0,0,0);
+	-ms-transform: translate3d(0,0,0);
+	-o-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
+}
+.iscroll-wrapper{
+	webkit-transform: translate3d(0,0,0);
+	-moz-transform: translate3d(0,0,0);
+	-ms-transform: translate3d(0,0,0);
+	-o-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
+	-webkit-backface-visibility:hidden;
+	-webkit-transform-style:preserve-3d;
+}
+.weui-media-box_appmsg .weui-media-box__hd {
+        margin-right: .8em;
+        width: 75px;
+        height: 75px;
+        line-height: 60px;
+        text-align: center;
+}
+.weui-media-box_appmsg .weui-media-box__thumb {
+        width: 100%;
+        max-height: 100%;
+        vertical-align: top;
+}
+.weui-media-box_appmsg .weui-media-box__bd {
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+        flex: 1;
+        min-width: 0;
+}
+.weui-media-box__title {
+        font-weight: 400;
+        font-size: 13px;
+        width: auto;
+        line-height: 1.2;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+}
+
+.weui-media-list__desc {
+        color: #999999;
+		font-size: 14px;
+        overflow: hidden;
+}
+
+.panel_iscroll .weui-media-box:before{
+	border-top: 1px solid #ccc;
+}
+.category{
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	padding: 2px 5px;
+	font-size: 12px;
+	display: inline-block;
+	line-height: 1.4;
+}
+.list_state{
+	float: right;
+	font-size: 14px;
 }
 .iscroll_main{
+	overflow: hidden;
 	position: relative;
-	height: 600px;
+	height: 400px;
 }
 /*! normalize.css v4.1.1 | MIT License | github.com/necolas/normalize.css */
 

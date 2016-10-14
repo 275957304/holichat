@@ -33,3 +33,18 @@ img{
 .green{
 	color: green
 }
+.red{
+	color: #d44950
+}
+.warning{
+	color: #f0ad4e
+}
+.gary{
+	color: #666;
+}
+.pull-left{
+	float: left!important;
+}
+.pull-right{
+	float: right!important;
+}

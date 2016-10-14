@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react'
+import { message } from 'antd'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as userActions from '../../reducers/modules/user/action'

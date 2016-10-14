@@ -1,5 +1,19 @@
 .panel_iscroll .weui-media-box{
 	padding: 10px;
+	webkit-transform: translate3d(0,0,0);
+	-moz-transform: translate3d(0,0,0);
+	-ms-transform: translate3d(0,0,0);
+	-o-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
+}
+.iscroll-wrapper{
+	webkit-transform: translate3d(0,0,0);
+	-moz-transform: translate3d(0,0,0);
+	-ms-transform: translate3d(0,0,0);
+	-o-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
+	-webkit-backface-visibility:hidden;
+	-webkit-transform-style:preserve-3d;
 }
 .weui-media-box_appmsg .weui-media-box__hd {
         margin-right: .8em;
@@ -47,4 +61,13 @@
 	font-size: 12px;
 	display: inline-block;
 	line-height: 1.4;
+}
+.list_state{
+	float: right;
+	font-size: 14px;
+}
+
+.iscroll_main{
+	overflow: hidden;
+	position: relative;
 }

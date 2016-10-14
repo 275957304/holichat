@@ -138,13 +138,13 @@ webpackJsonp([0,1],[
 
 	var _routes2 = _interopRequireDefault(_routes);
 
-	var _configureStore = __webpack_require__(329);
+	var _configureStore = __webpack_require__(333);
 
 	var _configureStore2 = _interopRequireDefault(_configureStore);
 
-	__webpack_require__(348);
+	__webpack_require__(352);
 
-	__webpack_require__(350);
+	__webpack_require__(354);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23126,6 +23126,7 @@ webpackJsonp([0,1],[
 
 	//console.log(createBrowserHistory)
 
+
 	var routes = _react2.default.createElement(
 					_reactRouter.Router,
 					{ history: _reactRouter.hashHistory },
@@ -23134,7 +23135,8 @@ webpackJsonp([0,1],[
 									{ path: '/', component: _containers.App },
 									_react2.default.createElement(_reactRouter.IndexRoute, { component: _containers.Index }),
 									_react2.default.createElement(_reactRouter.Route, { path: 'home', component: _containers.Home }),
-									_react2.default.createElement(_reactRouter.Route, { path: 'home/event/', component: _containers.Event }),
+									_react2.default.createElement(_reactRouter.Route, { path: 'home/event', component: _containers.Event }),
+									_react2.default.createElement(_reactRouter.Route, { path: 'home/event/:id', component: _containers.EventDetail }),
 									_react2.default.createElement(_reactRouter.Route, { path: 'messages', component: _containers.Messages }),
 									_react2.default.createElement(_reactRouter.Route, { path: 'user', component: _containers.User })
 					),
@@ -29868,7 +29870,7 @@ webpackJsonp([0,1],[
 	  }
 	});
 
-	var _Index = __webpack_require__(284);
+	var _Index = __webpack_require__(285);
 
 	Object.defineProperty(exports, 'Index', {
 	  enumerable: true,
@@ -29877,7 +29879,7 @@ webpackJsonp([0,1],[
 	  }
 	});
 
-	var _Home = __webpack_require__(300);
+	var _Home = __webpack_require__(301);
 
 	Object.defineProperty(exports, 'Home', {
 	  enumerable: true,
@@ -29886,7 +29888,7 @@ webpackJsonp([0,1],[
 	  }
 	});
 
-	var _Event = __webpack_require__(307);
+	var _Event = __webpack_require__(308);
 
 	Object.defineProperty(exports, 'Event', {
 	  enumerable: true,
@@ -29895,7 +29897,16 @@ webpackJsonp([0,1],[
 	  }
 	});
 
-	var _Messages = __webpack_require__(321);
+	var _EventDetail = __webpack_require__(322);
+
+	Object.defineProperty(exports, 'EventDetail', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_EventDetail).default;
+	  }
+	});
+
+	var _Messages = __webpack_require__(325);
 
 	Object.defineProperty(exports, 'Messages', {
 	  enumerable: true,
@@ -29904,7 +29915,7 @@ webpackJsonp([0,1],[
 	  }
 	});
 
-	var _User = __webpack_require__(322);
+	var _User = __webpack_require__(326);
 
 	Object.defineProperty(exports, 'User', {
 	  enumerable: true,
@@ -29913,7 +29924,7 @@ webpackJsonp([0,1],[
 	  }
 	});
 
-	var _SignIn = __webpack_require__(323);
+	var _SignIn = __webpack_require__(327);
 
 	Object.defineProperty(exports, 'SignIn', {
 	  enumerable: true,
@@ -29922,7 +29933,7 @@ webpackJsonp([0,1],[
 	  }
 	});
 
-	var _Page = __webpack_require__(328);
+	var _Page = __webpack_require__(332);
 
 	Object.defineProperty(exports, 'Page404', {
 	  enumerable: true,
@@ -29957,11 +29968,11 @@ webpackJsonp([0,1],[
 
 	var userActions = _interopRequireWildcard(_action);
 
-	var _Footer = __webpack_require__(278);
+	var _Footer = __webpack_require__(279);
 
 	var _Footer2 = _interopRequireDefault(_Footer);
 
-	__webpack_require__(280);
+	__webpack_require__(281);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -30125,8 +30136,8 @@ webpackJsonp([0,1],[
 	            console.log(data);
 	            if (data.ret == '0') {
 	                //登录成功
-	                _utils.Tool.setItem('session', data.data.session);
-	                _utils.Tool.setItem('uid', data.data.uid);
+	                (0, _utils.setItem)('session', data.data.session);
+	                (0, _utils.setItem)('uid', data.data.uid);
 	                dispatch(loginSuccess(data.data));
 	                //dispatch(push('/'))
 	                //console.log(dispatch(push('/')))
@@ -30173,8 +30184,8 @@ webpackJsonp([0,1],[
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var uid = _utils.Tool.getItem('uid');
-	var session = _utils.Tool.getItem('session');
+	var uid = (0, _utils.getItem)('uid');
+	var session = (0, _utils.getItem)('session');
 	var device = '';
 	var baseURI = 'http://app.holichat.com/';
 	var imgBaseUrl = 'http://img.holichat.com/uploads/';
@@ -30740,59 +30751,494 @@ webpackJsonp([0,1],[
 
 /***/ },
 /* 277 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.formatTime = exports.getCurrentStatus = exports.removeItem = exports.getItem = exports.setItem = exports.getCategory = exports.devLog = undefined;
+
+	var _category = __webpack_require__(278);
+
+	var _category2 = _interopRequireDefault(_category);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var devLog = exports.devLog = function devLog() {
+		for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+			args[_key] = arguments[_key];
+		}
+
+		if (process.env.NODE_ENV !== 'production') {
+			console.log.apply(console, args);
+		}
+	};
+
+	/*
+	获取类项
+	id:类项的ID
+	*/
+	var getCategory = exports.getCategory = function getCategory(id) {
+		return _category2.default[id].name;
+	};
+
+	/*
+	设置localStorage
+	*/
+	var setItem = exports.setItem = function setItem(a, b) {
+		if (window.localStorage) {
+			window.localStorage.setItem("hlq_" + a, b);
+		} else {
+			var c = new Date();
+			c.setTime(c.getTime() + 31536e6), document.cookie = "hlq_" + a + "=" + escape(b) + ";expires=" + c.toGMTString();
+		}
+	};
+
+	/*
+	获取localStorage
+	*/
+	var getItem = exports.getItem = function getItem(a) {
+		if (window.localStorage) {
+			return window.localStorage.getItem("hlq_" + a);
+		} else {
+			var b = document.cookie.match(new RegExp("(^| )hlq_" + a + "=([^;]*)(;|$)"));
+			return null != b ? unescape(b[2]) : null;
+		}
+	};
+
+	/*
+	删除localStorage
+	*/
+	var removeItem = exports.removeItem = function removeItem(a) {
+		var b, c;
+		window.localStorage ? window.localStorage.removeItem("hlq_" + a) : (b = new Date(), b.setTime(b.getTime() - 1), c = H.getItem(a), null != c && (document.cookie = "hlq_" + a + "=" + c + ";expires=" + b.toGMTString()));
+	};
+
+	/*
+	根椐时间判断赛事情况
+	signline: 报名开始时间
+	deadline:  报名截止
+	begin_date:  赛事开始时间
+	end_date:  赛事结束
+	*/
+	var getCurrentStatus = exports.getCurrentStatus = function getCurrentStatus(signline, deadline, begin_date, end_date) {
+		var signlineDate = signline.substring(0, 10).split('-');
+		var deadlineDate = deadline.substring(0, 10).split('-');
+		var beginDate = begin_date.substring(0, 10).split('-');
+		var endDate = end_date.substring(0, 10).split('-');
+		signlineDate = signlineDate[1] + '/' + signlineDate[2] + '/' + signlineDate[0] + ' ' + signline.substring(10, 19);
+		deadlineDate = deadlineDate[1] + '/' + deadlineDate[2] + '/' + deadlineDate[0] + ' ' + deadline.substring(10, 19);
+		beginDate = beginDate[1] + '/' + beginDate[2] + '/' + beginDate[0] + ' ' + begin_date.substring(10, 19);
+		endDate = endDate[1] + '/' + endDate[2] + '/' + endDate[0] + ' ' + end_date.substring(10, 19);
+		var today = new Date().getTime();
+		if (today < Date.parse(signlineDate)) {
+			return '<span class="red yr">预热中</span>';
+		} else if (today < Date.parse(deadlineDate)) {
+			return '<span class="green bm">报名中</span>';
+		} else if (today < Date.parse(beginDate)) {
+			return '<span class="green ks">即将开始</span>';
+		} else if (today < Date.parse(endDate)) {
+			return '<span class="warning jx">进行中</span>';
+		} else {
+			return '<span class="gary js">已结束</span>';
+		}
+	};
+
+	/*
+	返回时间
+	*/
+	var formatTime = exports.formatTime = function formatTime(str) {
+		var date = new Date(str);
+		var time = new Date().getTime() - date.getTime(); //现在的时间-传入的时间 = 相差的时间（单位 = 毫秒）
+		if (time < 0) {
+			return '';
+		} else if (time / 1000 < 60) {
+			return '刚刚';
+		} else if (time / 60000 < 60) {
+			return parseInt(time / 60000) + '分钟前';
+		} else if (time / 3600000 < 24) {
+			return parseInt(time / 3600000) + '小时前';
+		} else if (time / 86400000 < 31) {
+			return parseInt(time / 86400000) + '天前';
+		} else if (time / 2592000000 < 12) {
+			return parseInt(time / 2592000000) + '月前';
+		} else {
+			return parseInt(time / 31536000000) + '年前';
+		}
+	};
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
+
+/***/ },
+/* 278 */
 /***/ function(module, exports) {
 
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+	    value: true
 	});
-	var Tool = {
-		setItem: function setItem(a, b) {
-			if (window.localStorage) {
-				window.localStorage.setItem("hlq_" + a, b);
-			} else {
-				var c = new Date();
-				c.setTime(c.getTime() + 31536e6), document.cookie = "hlq_" + a + "=" + escape(b) + ";expires=" + c.toGMTString();
-			}
-		},
-		getItem: function getItem(a) {
-			if (window.localStorage) {
-				return window.localStorage.getItem("hlq_" + a);
-			} else {
-				var b = document.cookie.match(new RegExp("(^| )hlq_" + a + "=([^;]*)(;|$)"));
-				return null != b ? unescape(b[2]) : null;
-			}
-		},
-		removeItem: function removeItem(a) {
-			var b, c;
-			window.localStorage ? window.localStorage.removeItem("hlq_" + a) : (b = new Date(), b.setTime(b.getTime() - 1), c = H.getItem(a), null != c && (document.cookie = "hlq_" + a + "=" + c + ";expires=" + b.toGMTString()));
-		},
-		formatTime: function formatTime(str) {
-			var date = new Date(str);
-			var time = new Date().getTime() - date.getTime(); //现在的时间-传入的时间 = 相差的时间（单位 = 毫秒）
-			if (time < 0) {
-				return '';
-			} else if (time / 1000 < 60) {
-				return '刚刚';
-			} else if (time / 60000 < 60) {
-				return parseInt(time / 60000) + '分钟前';
-			} else if (time / 3600000 < 24) {
-				return parseInt(time / 3600000) + '小时前';
-			} else if (time / 86400000 < 31) {
-				return parseInt(time / 86400000) + '天前';
-			} else if (time / 2592000000 < 12) {
-				return parseInt(time / 2592000000) + '月前';
-			} else {
-				return parseInt(time / 31536000000) + '年前';
-			}
-		}
-	};
+	var category = {
+	    "1": {
+	        "name": "游泳"
 
-	exports.Tool = Tool;
+	    },
+	    "2": {
+	        "name": "射箭"
+
+	    },
+	    "3": {
+	        "name": "田径"
+
+	    },
+	    "4": {
+	        "name": "羽毛球"
+
+	    },
+	    "5": {
+	        "name": "皮划艇"
+
+	    },
+	    "6": {
+	        "name": "棒球"
+
+	    },
+	    "7": {
+	        "name": "篮球"
+
+	    },
+	    "8": {
+	        "name": "拳击"
+
+	    },
+	    "9": {
+	        "name": "自行车"
+
+	    },
+	    "10": {
+	        "name": "击剑"
+
+	    },
+	    "11": {
+	        "name": "足球"
+
+	    },
+	    "12": {
+	        "name": "手球"
+
+	    },
+	    "13": {
+	        "name": "马术"
+
+	    },
+	    "14": {
+	        "name": "曲棍球"
+
+	    },
+	    "15": {
+	        "name": "柔道"
+
+	    },
+	    "16": {
+	        "name": "现代五项"
+
+	    },
+	    "17": {
+	        "name": "体操"
+
+	    },
+	    "18": {
+	        "name": "赛艇"
+
+	    },
+	    "19": {
+	        "name": "帆船"
+
+	    },
+	    "20": {
+	        "name": "射击"
+
+	    },
+	    "21": {
+	        "name": "排球"
+
+	    },
+	    "22": {
+	        "name": "垒球"
+
+	    },
+	    "23": {
+	        "name": "乒乓球"
+
+	    },
+	    "24": {
+	        "name": "跆拳道"
+
+	    },
+	    "25": {
+	        "name": "网球"
+
+	    },
+	    "26": {
+	        "name": "铁人三项"
+
+	    },
+	    "27": {
+	        "name": "举重"
+
+	    },
+	    "28": {
+	        "name": "摔跤"
+
+	    },
+	    "29": {
+	        "name": "冬季两项"
+
+	    },
+	    "30": {
+	        "name": "冰壶"
+
+	    },
+	    "31": {
+	        "name": "冰球"
+
+	    },
+	    "32": {
+	        "name": "滑冰"
+
+	    },
+	    "33": {
+	        "name": "滑雪"
+
+	    },
+	    "34": {
+	        "name": "潜水"
+
+	    },
+	    "35": {
+	        "name": "滑水"
+
+	    },
+	    "36": {
+	        "name": "摩托艇"
+
+	    },
+	    "37": {
+	        "name": "救生"
+
+	    },
+	    "38": {
+	        "name": "健美操"
+
+	    },
+	    "39": {
+	        "name": "技巧"
+
+	    },
+	    "40": {
+	        "name": "高尔夫球"
+
+	    },
+	    "41": {
+	        "name": "保龄球"
+
+	    },
+	    "42": {
+	        "name": "掷球"
+
+	    },
+	    "43": {
+	        "name": "台球"
+
+	    },
+	    "44": {
+	        "name": "藤球"
+
+	    },
+	    "45": {
+	        "name": "壁球"
+
+	    },
+	    "46": {
+	        "name": "橄榄球"
+
+	    },
+	    "47": {
+	        "name": "软式网球"
+
+	    },
+	    "48": {
+	        "name": "热气球"
+
+	    },
+	    "49": {
+	        "name": "运动飞机"
+
+	    },
+	    "50": {
+	        "name": "跳伞"
+
+	    },
+	    "51": {
+	        "name": "滑翔"
+
+	    },
+	    "52": {
+	        "name": "航空模型"
+
+	    },
+	    "53": {
+	        "name": "车辆模型"
+
+	    },
+	    "54": {
+	        "name": "航海模型"
+
+	    },
+	    "55": {
+	        "name": "定向"
+
+	    },
+	    "56": {
+	        "name": "业余无线电"
+
+	    },
+	    "57": {
+	        "name": "围棋"
+
+	    },
+	    "58": {
+	        "name": "国际象棋"
+
+	    },
+	    "59": {
+	        "name": "中国象棋"
+
+	    },
+	    "60": {
+	        "name": "桥牌"
+
+	    },
+	    "61": {
+	        "name": "武术"
+
+	    },
+	    "62": {
+	        "name": "健身气功"
+
+	    },
+	    "63": {
+	        "name": "登山"
+
+	    },
+	    "64": {
+	        "name": "汽车"
+
+	    },
+	    "65": {
+	        "name": "摩托车"
+
+	    },
+	    "66": {
+	        "name": "轮滑"
+
+	    },
+	    "67": {
+	        "name": "毽球"
+
+	    },
+	    "68": {
+	        "name": "门球"
+
+	    },
+	    "69": {
+	        "name": "舞龙舞狮"
+
+	    },
+	    "70": {
+	        "name": "龙舟"
+
+	    },
+	    "71": {
+	        "name": "钓鱼"
+
+	    },
+	    "72": {
+	        "name": "风筝"
+
+	    },
+	    "73": {
+	        "name": "信鸽"
+
+	    },
+	    "74": {
+	        "name": "体育舞蹈"
+
+	    },
+	    "75": {
+	        "name": "健美"
+
+	    },
+	    "76": {
+	        "name": "拔河"
+
+	    },
+	    "77": {
+	        "name": "飞镖"
+
+	    },
+	    "78": {
+	        "name": "电子竞技"
+
+	    },
+	    "79": {
+	        "name": "舞蹈"
+
+	    },
+	    "80": {
+	        "name": "桌球"
+
+	    },
+	    "81": {
+	        "name": "瑜伽"
+
+	    },
+	    "82": {
+	        "name": "健身中心"
+
+	    },
+	    "83": {
+	        "name": "高尔夫"
+
+	    },
+	    "84": {
+	        "name": "溜冰"
+
+	    },
+	    "85": {
+	        "name": "跑步"
+
+	    },
+	    "86": {
+	        "name": "攀岩"
+
+	    },
+	    "87": {
+	        "name": "综合"
+
+	    },
+	    "88": {
+	        "name": "其它"
+
+	    }
+
+	};
+	exports.default = category;
+	//export default (id) => categoryData[id].name
 
 /***/ },
-/* 278 */
+/* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30809,7 +31255,7 @@ webpackJsonp([0,1],[
 
 	var _reactRouter = __webpack_require__(199);
 
-	var _icon_tabbar = __webpack_require__(279);
+	var _icon_tabbar = __webpack_require__(280);
 
 	var _icon_tabbar2 = _interopRequireDefault(_icon_tabbar);
 
@@ -30904,22 +31350,22 @@ webpackJsonp([0,1],[
 	exports.default = Footer;
 
 /***/ },
-/* 279 */
+/* 280 */
 /***/ function(module, exports) {
 
 	module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADYAAAA2CAMAAAC7m5rvAAAAllBMVEUAAAC/v7+qqqrHx8evr6/ExMS5ubmxsbGsrKysrKytra2pqam8vLy9vb2lpaXExMT////s7Oz8/Pz09PTu7u729vb5+fnp6enMzMzLy8vm5ub4+Pjj4+O3t7fx8fHb29vAwMDHx8ePj4/S0tLf39+rq6ulpaWSkpK7u7vY2NjR0dGnp6eenp6ampqysrLPz8+fn5+ioqKXtObzAAAAEHRSTlMA6wT4/e/f0KyZSy/z8mz4uKbH2gAAA6FJREFUSMellody2zAMhuXEGU6TVBgkbGp529np+79cKREUpbrxdfxnn7g+cYACkKku7m5vricPl4v5Yq5arWLJN14+TK5vbu8udLhCsyuHeY6QD0Q0rEHb765mA/DbJIw4j4XGybdIPV5q13lMC9NHnWvKpxhiAVBYPMX4ezffxSQnHmFoahFgkRpEmHCEMeWTdn8zygOnmAVhkxZZ1AImYdyOnvnJrrohrBiymF/3ZgGsYty1XV1kdy6MATKGnJRgoiAVuRRH/inhTe4uu9U1Q8MMmy0nOcdJ5bMwbEs9g9vsJg8yjq2UXxugdJYBtHKTXUeM64bO2c00bGP/dTbBIAIBERyIaFgTASHQyiS7hyC3KaHcQNSm2r2+vbwvBFRt91OjlfssXizZ+q2WjN3yqvXrcfWxmS/362lYGJfYjQm6zBah4InWbtRyy3UlGPaGvDxU6B8EvqVo9NgX2TwUGDosJzb7vQyPBHafxNSZ2zq9hXOdzYoJWM6Hyo5P0h4PkAcMwI5mAxOx/bvgGEOpfqBihoezoeSKLffWAA4xBLIvS8VywYR5RjFaix8PmDBs77+sa8XYDDA2ilVV9xbAiCF0cFUpZniASa6Yn0y5aICO8tMplkvCMGKbV8x7jqhbYSf8fI4YJgwUq46+FjmillIdK8UgYQUrtlvliaspUflqpxgXHbYiIhD/d77w+kG9oGkg1T5eiYhLImkbV2PsbUO96qcnStq8jbCwyFoX+TJPjhK8kpucv+gi66LfmwXF3peJMkQmcct3xcCeGmCxx55qDdBzuF8kA5yYW9bcUy3Wc7x2p+bOuQgYTJdKxctVBG65g4AVMMCoVgwOECjFlOMDKFbTbz+camcRilwxvS84rX79cPQztYrh51HM+DMtZPmGilkYOQUDiuX1iVPA44F7p2DGLghYZwP+8SJDjKdvADqbg+SCOtmyw9p94anDKwCDw7Pq8JJ7LduTga69rtaf0b3uIJyneAySe32AIPdc+r8D1bM6c23oulzvzB9S6BDnf1+HDifkUugYBCrT1OcCVd1QClQpLALQubDoHAGlsBiDMG3J0pMUthdzKhfw5LtLiUE4hnx0AgDNtnEQVZYQ5XyHf8jWasjXBAPBxgQDziQYFqwmGNmMlIrpDH+ZzihHs5A8+co4eeKUPEFKngKHIXnKvn0H++epmoWppoaP079JDL8//lsa+p9Jb0qx77sUexG0WmmhS7HvRyn2TxZ1zUyK+LY0AAAAAElFTkSuQmCC"
 
 /***/ },
-/* 280 */
+/* 281 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 281 */,
 /* 282 */,
 /* 283 */,
-/* 284 */
+/* 284 */,
+/* 285 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30938,23 +31384,23 @@ webpackJsonp([0,1],[
 
 	var _redux = __webpack_require__(182);
 
-	var _action = __webpack_require__(285);
+	var _action = __webpack_require__(286);
 
 	var quanziActions = _interopRequireWildcard(_action);
 
-	var _Header = __webpack_require__(286);
+	var _Header = __webpack_require__(287);
 
 	var _Header2 = _interopRequireDefault(_Header);
 
-	var _Slider = __webpack_require__(290);
+	var _Slider = __webpack_require__(291);
 
 	var _Slider2 = _interopRequireDefault(_Slider);
 
-	__webpack_require__(296);
+	__webpack_require__(297);
 
-	var _antd = __webpack_require__(291);
+	var _antd = __webpack_require__(292);
 
-	__webpack_require__(298);
+	__webpack_require__(299);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -31150,7 +31596,7 @@ webpackJsonp([0,1],[
 	})(Index);
 
 /***/ },
-/* 285 */
+/* 286 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31199,7 +31645,7 @@ webpackJsonp([0,1],[
 	}
 
 /***/ },
-/* 286 */
+/* 287 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31216,7 +31662,7 @@ webpackJsonp([0,1],[
 
 	var _reactRouter = __webpack_require__(199);
 
-	__webpack_require__(287);
+	__webpack_require__(288);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31283,15 +31729,15 @@ webpackJsonp([0,1],[
 	exports.default = Header;
 
 /***/ },
-/* 287 */
+/* 288 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 288 */,
 /* 289 */,
-/* 290 */
+/* 290 */,
+/* 291 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31308,11 +31754,11 @@ webpackJsonp([0,1],[
 
 	var _reactRouter = __webpack_require__(199);
 
-	var _antd = __webpack_require__(291);
+	var _antd = __webpack_require__(292);
 
-	__webpack_require__(292);
+	__webpack_require__(293);
 
-	__webpack_require__(294);
+	__webpack_require__(295);
 
 	var _api = __webpack_require__(274);
 
@@ -31389,7 +31835,7 @@ webpackJsonp([0,1],[
 	exports.default = Slider;
 
 /***/ },
-/* 291 */
+/* 292 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -83830,35 +84276,35 @@ webpackJsonp([0,1],[
 	//# sourceMappingURL=antd.js.map
 
 /***/ },
-/* 292 */
+/* 293 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 293 */,
-/* 294 */
+/* 294 */,
+/* 295 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 295 */,
-/* 296 */
+/* 296 */,
+/* 297 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 297 */,
-/* 298 */
+/* 298 */,
+/* 299 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 299 */,
-/* 300 */
+/* 300 */,
+/* 301 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -83879,29 +84325,29 @@ webpackJsonp([0,1],[
 
 	var _redux = __webpack_require__(182);
 
-	var _action = __webpack_require__(301);
+	var _action = __webpack_require__(302);
 
 	var homeActions = _interopRequireWildcard(_action);
 
-	var _Header = __webpack_require__(286);
+	var _Header = __webpack_require__(287);
 
 	var _Header2 = _interopRequireDefault(_Header);
 
-	var _Slider = __webpack_require__(290);
+	var _Slider = __webpack_require__(291);
 
 	var _Slider2 = _interopRequireDefault(_Slider);
 
-	__webpack_require__(302);
+	__webpack_require__(303);
 
-	var _activity_icon = __webpack_require__(304);
+	var _activity_icon = __webpack_require__(305);
 
 	var _activity_icon2 = _interopRequireDefault(_activity_icon);
 
-	var _event_icon = __webpack_require__(305);
+	var _event_icon = __webpack_require__(306);
 
 	var _event_icon2 = _interopRequireDefault(_event_icon);
 
-	var _training_icon = __webpack_require__(306);
+	var _training_icon = __webpack_require__(307);
 
 	var _training_icon2 = _interopRequireDefault(_training_icon);
 
@@ -83953,7 +84399,7 @@ webpackJsonp([0,1],[
 	                        { className: 'weui-flex__item', key: 'nearby' },
 	                        _react2.default.createElement(
 	                            _reactRouter.Link,
-	                            { className: 'nav_link', to: '/home/nearby' },
+	                            { className: 'nav_link', to: '/home/nearby/' },
 	                            _react2.default.createElement('img', { className: 'nav_img', src: _activity_icon2.default }),
 	                            ' ',
 	                            _react2.default.createElement(
@@ -83968,7 +84414,7 @@ webpackJsonp([0,1],[
 	                        { className: 'weui-flex__item', key: 'activity' },
 	                        _react2.default.createElement(
 	                            _reactRouter.Link,
-	                            { className: 'nav_link', to: '/home/activity' },
+	                            { className: 'nav_link', to: '/home/activity/' },
 	                            _react2.default.createElement('img', { className: 'nav_img', src: _event_icon2.default }),
 	                            ' ',
 	                            _react2.default.createElement(
@@ -83983,7 +84429,7 @@ webpackJsonp([0,1],[
 	                        { className: 'weui-flex__item', key: 'event' },
 	                        _react2.default.createElement(
 	                            _reactRouter.Link,
-	                            { className: 'nav_link', to: '/home/event/' },
+	                            { className: 'nav_link', to: '/home/event' },
 	                            _react2.default.createElement('img', { className: 'nav_img', src: _training_icon2.default }),
 	                            ' ',
 	                            _react2.default.createElement(
@@ -83998,7 +84444,7 @@ webpackJsonp([0,1],[
 	                        { className: 'weui-flex__item', key: 'training' },
 	                        _react2.default.createElement(
 	                            _reactRouter.Link,
-	                            { className: 'nav_link', to: '/home/training' },
+	                            { className: 'nav_link', to: '/home/training/' },
 	                            _react2.default.createElement('img', { className: 'nav_img', src: _activity_icon2.default }),
 	                            ' ',
 	                            _react2.default.createElement(
@@ -84013,7 +84459,7 @@ webpackJsonp([0,1],[
 	                        { className: 'weui-flex__item', key: 'news' },
 	                        _react2.default.createElement(
 	                            _reactRouter.Link,
-	                            { className: 'nav_link', to: '/home/news' },
+	                            { className: 'nav_link', to: '/home/news/' },
 	                            _react2.default.createElement('img', { className: 'nav_img', src: _activity_icon2.default }),
 	                            ' ',
 	                            _react2.default.createElement(
@@ -84052,7 +84498,7 @@ webpackJsonp([0,1],[
 	})(Home);
 
 /***/ },
-/* 301 */
+/* 302 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84103,32 +84549,32 @@ webpackJsonp([0,1],[
 	}
 
 /***/ },
-/* 302 */
+/* 303 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 303 */,
-/* 304 */
+/* 304 */,
+/* 305 */
 /***/ function(module, exports) {
 
 	module.exports = "data:image/png;base64,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"
 
 /***/ },
-/* 305 */
+/* 306 */
 /***/ function(module, exports) {
 
 	module.exports = "data:image/png;base64,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"
 
 /***/ },
-/* 306 */
+/* 307 */
 /***/ function(module, exports) {
 
 	module.exports = "data:image/png;base64,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"
 
 /***/ },
-/* 307 */
+/* 308 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84143,23 +84589,23 @@ webpackJsonp([0,1],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Header = __webpack_require__(286);
+	var _Header = __webpack_require__(287);
 
 	var _Header2 = _interopRequireDefault(_Header);
 
-	var _Alert = __webpack_require__(308);
+	var _Alert = __webpack_require__(309);
 
 	var _Alert2 = _interopRequireDefault(_Alert);
 
-	var _SearchBar = __webpack_require__(311);
+	var _SearchBar = __webpack_require__(312);
 
 	var _SearchBar2 = _interopRequireDefault(_SearchBar);
 
-	var _List = __webpack_require__(314);
+	var _List = __webpack_require__(315);
 
 	var _List2 = _interopRequireDefault(_List);
 
-	__webpack_require__(319);
+	__webpack_require__(320);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -84175,8 +84621,23 @@ webpackJsonp([0,1],[
 	    function Event(props) {
 	        _classCallCheck(this, Event);
 
+	        // cost:0为全价格,1为收费,2为免费
+	        // event_type:0为活力圈所有赛事列表,1为社团赛事和最新赛事列表,2社团推荐赛事列表,3为活力圈推荐赛事列表
+	        // category_id:赛事类型
+	        // official:0为全部,1为官方
+	        // status:N为项目预告,R为报名中,E为报名结束,P为进行中,C为己结束,NR为项目预告+报名中
 	        var _this = _possibleConstructorReturn(this, (Event.__proto__ || Object.getPrototypeOf(Event)).call(this, props));
 
+	        _this.state = {
+	            community_cid: 0,
+	            category_id: 0,
+	            location_id: 0,
+	            status: '',
+	            official: 0,
+	            cost: 0,
+	            page_size: 10,
+	            page: 1
+	        };
 	        _this.handleSearch = _this.handleSearch.bind(_this);
 	        return _this;
 	    }
@@ -84186,22 +84647,19 @@ webpackJsonp([0,1],[
 	        value: function handleSearch(val) {
 	            console.log('获取搜索内容' + val);
 	        }
-	    }, {
-	        key: 'componentDidMount',
-	        value: function componentDidMount() {
-	            window.addEventListener('scroll', this.handleScroll.bind(this));
-	        }
-	    }, {
-	        key: 'componentWillUnmount',
-	        value: function componentWillUnmount() {
-	            window.removeEventListener('scroll', this.handleScroll.bind(this));
-	        }
-	    }, {
-	        key: 'handleScroll',
-	        value: function handleScroll(e) {
-	            console.log(e);
-	            console.log('浏览器滚动事件');
-	        }
+
+	        // componentDidMount() {
+	        // 	window.addEventListener('scroll', this.handleScroll.bind(this));
+	        // }
+	        // componentWillUnmount() {
+	        // 	window.removeEventListener('scroll', this.handleScroll.bind(this));
+	        // }
+	        //
+	        // handleScroll(e) {
+	        // 	console.log(e);
+	        // 	console.log('浏览器滚动事件');
+	        // }
+
 	    }, {
 	        key: 'render',
 	        value: function render() {
@@ -84218,9 +84676,8 @@ webpackJsonp([0,1],[
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'iscroll_main' },
-	                    _react2.default.createElement(_List2.default, { url: 'get_competition_list' })
-	                ),
-	                '滚动加载 https://github.com/fisshy/react-scroll'
+	                    _react2.default.createElement(_List2.default, { url: 'get_competition_list', type: 'event', parameter: 'community_cid=0&category_id=0&location_id=0&status=&official=0&cost=0&page_size=10&event_type=0&page=' })
+	                )
 	            );
 	        }
 	    }]);
@@ -84231,7 +84688,7 @@ webpackJsonp([0,1],[
 	exports.default = Event;
 
 /***/ },
-/* 308 */
+/* 309 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84246,7 +84703,7 @@ webpackJsonp([0,1],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	__webpack_require__(309);
+	__webpack_require__(310);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -84326,14 +84783,14 @@ webpackJsonp([0,1],[
 	exports.default = Alert;
 
 /***/ },
-/* 309 */
+/* 310 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 310 */,
-/* 311 */
+/* 311 */,
+/* 312 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84348,7 +84805,7 @@ webpackJsonp([0,1],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	__webpack_require__(312);
+	__webpack_require__(313);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -84434,14 +84891,14 @@ webpackJsonp([0,1],[
 	exports.default = SearchBar;
 
 /***/ },
-/* 312 */
+/* 313 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 313 */,
-/* 314 */
+/* 314 */,
+/* 315 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84458,11 +84915,11 @@ webpackJsonp([0,1],[
 
 	var _reactRouter = __webpack_require__(199);
 
-	var _iscrollProbe = __webpack_require__(315);
+	var _iscrollProbe = __webpack_require__(316);
 
 	var _iscrollProbe2 = _interopRequireDefault(_iscrollProbe);
 
-	var _reactjsIscroll = __webpack_require__(316);
+	var _reactjsIscroll = __webpack_require__(317);
 
 	var _reactjsIscroll2 = _interopRequireDefault(_reactjsIscroll);
 
@@ -84470,7 +84927,9 @@ webpackJsonp([0,1],[
 
 	var _api2 = _interopRequireDefault(_api);
 
-	__webpack_require__(317);
+	__webpack_require__(318);
+
+	var _utils = __webpack_require__(277);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -84502,8 +84961,18 @@ webpackJsonp([0,1],[
 		_createClass(List, [{
 			key: 'componentWillMount',
 			value: function componentWillMount() {
-				console.log(this.props.apis);
+				//console.log(this.props.apis)
+				window.addEventListener('touchmove', function (e) {
+					e.preventDefault();
+				});
 				this.loadData();
+			}
+		}, {
+			key: 'componentWillUnmount',
+			value: function componentWillUnmount() {
+				window.addEventListener('touchmove', function (e) {
+					e.preventDefault();
+				});
 			}
 
 			//调用 IScroll refresh 后回调函数
@@ -84513,12 +84982,11 @@ webpackJsonp([0,1],[
 			value: function handleRefresh(downOrUp, callback) {
 				var _this2 = this;
 
-				console.log('后回调函数');
+				//console.log('后回调函数')
 				//真实的世界中是从后端取页面和判断是否是最后一页
 				var _state = this.state;
 				var currentPage = _state.currentPage;
 				var lastPage = _state.lastPage;
-
 				// 加载更多
 
 				if (downOrUp === 'up') {
@@ -84542,15 +85010,14 @@ webpackJsonp([0,1],[
 		}, {
 			key: 'loadData',
 			value: function loadData(downOrUp, callback) {
-				//console.log(downOrUp)
 				var currentPage = this.state.currentPage;
-				//const url = `./json/person/${currentPage}.json`;
 
-				var parameter = 'community_cid=0&category_id=0&location_id=0&status=&official=0&cost=0&page_size=10&page=' + currentPage + '&event_type=0';
-				_api2.default.get_competition_list(parameter).then(function (json) {
+				var url = _api2.default[this.props.url];
+				//获取参数
+				var parameter = this.props.parameter + ' + ' + currentPage;
+				url(parameter).then(function (json) {
 					var _this3 = this;
 
-					console.log(json);
 					setTimeout(function () {
 						var list = _this3.state.list;
 
@@ -84563,32 +85030,28 @@ webpackJsonp([0,1],[
 					}, 500);
 				}.bind(this));
 			}
-
-			//console.log(iScroll)   https://github.com/reactjs-ui/reactjs-iscroll/blob/master/examples/paging.js  异步加载
-			// reactjs-iscroll https://github.com/reactjs-ui/reactjs-iscroll/blob/master/src/scripts/index.js
-
 		}, {
 			key: 'render',
 			value: function render() {
-				//https://www.npmjs.com/package/reactjs-iscroll    加载 https://github.com/reactjs-ui/reactjs-iscroll/blob/master/examples/pullOption.js
-
-				//<div list={list} className="scrillBox">{this.props.children}</div>
 				var _state2 = this.state;
 				var list = _state2.list;
 				var pullUp = _state2.pullUp;
 				var pullDown = _state2.pullDown;
+				var type = this.props.type;
+				//跟椐类型 获取id
 
-				console.log(list);
+				var getid = type + '_id';
+				//console.log(this.props.query)
 				return _react2.default.createElement(
 					_reactjsIscroll2.default,
 					{ iScroll: _iscrollProbe2.default, pullUp: pullUp, pullDown: pullDown, handleRefresh: this.handleRefresh },
 					_react2.default.createElement(
 						'div',
-						{ className: 'weui-panel__bd' },
+						{ className: 'weui-panel__bd panel_iscroll' },
 						list.map(function (item, index) {
 							return _react2.default.createElement(
 								_reactRouter.Link,
-								{ key: index, className: 'weui-media-box weui-media-box_appmsg' },
+								{ key: index, to: '/home/' + type + '/' + item[getid], className: 'weui-media-box weui-media-box_appmsg' },
 								_react2.default.createElement(
 									'div',
 									{ className: 'weui-media-box__hd' },
@@ -84603,15 +85066,24 @@ webpackJsonp([0,1],[
 										item.title
 									),
 									_react2.default.createElement(
-										'p',
-										{ className: 'weui-media-box__desc' },
-										'¥',
-										item.cost
+										'div',
+										{ className: 'weui-media-list__desc' },
+										_react2.default.createElement(
+											'span',
+											{ className: 'orange' },
+											'¥',
+											item.cost
+										)
 									),
 									_react2.default.createElement(
-										'p',
-										{ className: 'weui-media-box__desc' },
-										item.name
+										'div',
+										{ className: 'weui-media-list__desc' },
+										_react2.default.createElement(
+											'span',
+											{ className: 'category' },
+											(0, _utils.getCategory)(item.sports_category_id)
+										),
+										_react2.default.createElement('div', { className: 'list_state', dangerouslySetInnerHTML: { __html: '' + (0, _utils.getCurrentStatus)(item.signline, item.deadline, item.begin_date, item.end_date) } })
 									)
 								)
 							);
@@ -84624,10 +85096,15 @@ webpackJsonp([0,1],[
 		return List;
 	}(_react.Component);
 
+	List.propTypes = {
+		url: _react.PropTypes.string.isRequired,
+		parameter: _react.PropTypes.string.isRequired,
+		type: _react.PropTypes.string.isRequired
+	};
 	exports.default = List;
 
 /***/ },
-/* 315 */
+/* 316 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;'use strict';
@@ -84944,7 +85421,8 @@ webpackJsonp([0,1],[
 				bounceTime: 600,
 				bounceEasing: '',
 
-				preventDefault: true,
+				//preventDefault: true,
+				preventDefault: false,
 				preventDefaultException: { tagName: /^(INPUT|TEXTAREA|BUTTON|SELECT)$/ },
 
 				HWCompositing: true,
@@ -86762,7 +87240,7 @@ webpackJsonp([0,1],[
 	})(window, document, Math);
 
 /***/ },
-/* 316 */
+/* 317 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function webpackUniversalModuleDefinition(root, factory) {
@@ -87810,21 +88288,21 @@ webpackJsonp([0,1],[
 	;
 
 /***/ },
-/* 317 */
+/* 318 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 318 */,
-/* 319 */
+/* 319 */,
+/* 320 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 320 */,
-/* 321 */
+/* 321 */,
+/* 322 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -87839,7 +88317,88 @@ webpackJsonp([0,1],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Header = __webpack_require__(286);
+	var _Header = __webpack_require__(287);
+
+	var _Header2 = _interopRequireDefault(_Header);
+
+	__webpack_require__(323);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var EventDetail = function (_Component) {
+	    _inherits(EventDetail, _Component);
+
+	    function EventDetail(props) {
+	        _classCallCheck(this, EventDetail);
+
+	        return _possibleConstructorReturn(this, (EventDetail.__proto__ || Object.getPrototypeOf(EventDetail)).call(this, props));
+	    }
+
+	    _createClass(EventDetail, [{
+	        key: 'componentWillMount',
+	        value: function componentWillMount() {
+	            var _props = this.props;
+	            var dispatch = _props.dispatch;
+	            var params = _props.params;
+	            var type = params.type;
+	            var name = params.name;
+
+	            console.log(this.props.params.id);
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'wx_event' },
+	                _react2.default.createElement(_Header2.default, { title: '赛事', leftTo: 'fanhui' }),
+	                '详情页面',
+	                _react2.default.createElement('br', null),
+	                '详情页面',
+	                _react2.default.createElement('br', null),
+	                '详情页面',
+	                _react2.default.createElement('br', null),
+	                '详情页面',
+	                _react2.default.createElement('br', null)
+	            );
+	        }
+	    }]);
+
+	    return EventDetail;
+	}(_react.Component);
+
+	exports.default = EventDetail;
+
+/***/ },
+/* 323 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 324 */,
+/* 325 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(4);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Header = __webpack_require__(287);
 
 	var _Header2 = _interopRequireDefault(_Header);
 
@@ -87878,7 +88437,7 @@ webpackJsonp([0,1],[
 	exports.default = Messages;
 
 /***/ },
-/* 322 */
+/* 326 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -87927,7 +88486,7 @@ webpackJsonp([0,1],[
 	exports.default = User;
 
 /***/ },
-/* 323 */
+/* 327 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -87950,7 +88509,7 @@ webpackJsonp([0,1],[
 
 	var userActions = _interopRequireWildcard(_action);
 
-	var _md = __webpack_require__(324);
+	var _md = __webpack_require__(328);
 
 	var _md2 = _interopRequireDefault(_md);
 
@@ -88052,14 +88611,14 @@ webpackJsonp([0,1],[
 	exports.default = (0, _reactRedux.connect)(mapStateToProps)(SignIn);
 
 /***/ },
-/* 324 */
+/* 328 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function(){
-	  var crypt = __webpack_require__(325),
-	      utf8 = __webpack_require__(326).utf8,
-	      isBuffer = __webpack_require__(327),
-	      bin = __webpack_require__(326).bin,
+	  var crypt = __webpack_require__(329),
+	      utf8 = __webpack_require__(330).utf8,
+	      isBuffer = __webpack_require__(331),
+	      bin = __webpack_require__(330).bin,
 
 	  // The core
 	  md5 = function (message, options) {
@@ -88218,7 +88777,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 325 */
+/* 329 */
 /***/ function(module, exports) {
 
 	(function() {
@@ -88320,7 +88879,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 326 */
+/* 330 */
 /***/ function(module, exports) {
 
 	var charenc = {
@@ -88359,7 +88918,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 327 */
+/* 331 */
 /***/ function(module, exports) {
 
 	/*!
@@ -88386,10 +88945,10 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 328 */
+/* 332 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -88400,6 +88959,8 @@ webpackJsonp([0,1],[
 	var _react = __webpack_require__(4);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(199);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -88419,12 +88980,19 @@ webpackJsonp([0,1],[
 	    }
 
 	    _createClass(Page404, [{
-	        key: "render",
+	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
-	                "div",
-	                { className: "wx_index" },
-	                "Page404"
+	                'div',
+	                null,
+	                '你所访问的页面丢失',
+	                _react2.default.createElement('br', null),
+	                '请返回',
+	                _react2.default.createElement(
+	                    _reactRouter.Link,
+	                    { to: '/' },
+	                    '首页'
+	                )
 	            );
 	        }
 	    }]);
@@ -88435,7 +89003,7 @@ webpackJsonp([0,1],[
 	exports.default = Page404;
 
 /***/ },
-/* 329 */
+/* 333 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -88447,11 +89015,11 @@ webpackJsonp([0,1],[
 
 	var _redux = __webpack_require__(182);
 
-	var _reduxThunk = __webpack_require__(330);
+	var _reduxThunk = __webpack_require__(334);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-	var _reducers = __webpack_require__(331);
+	var _reducers = __webpack_require__(335);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -88473,8 +89041,8 @@ webpackJsonp([0,1],[
 	  //热替换选项
 	  if (true) {
 	    // Enable Webpack hot module replacement for reducers
-	    module.hot.accept(331, function () {
-	      var nextReducer = __webpack_require__(331);
+	    module.hot.accept(335, function () {
+	      var nextReducer = __webpack_require__(335);
 	      store.replaceReducer(nextReducer);
 	    });
 	  }
@@ -88496,7 +89064,7 @@ webpackJsonp([0,1],[
 	*/
 
 /***/ },
-/* 330 */
+/* 334 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -88524,7 +89092,7 @@ webpackJsonp([0,1],[
 	exports['default'] = thunk;
 
 /***/ },
-/* 331 */
+/* 335 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -88535,17 +89103,17 @@ webpackJsonp([0,1],[
 
 	var _redux = __webpack_require__(182);
 
-	var _reduxRouter = __webpack_require__(332);
+	var _reduxRouter = __webpack_require__(336);
 
-	var _reducer = __webpack_require__(345);
+	var _reducer = __webpack_require__(349);
 
 	var _reducer2 = _interopRequireDefault(_reducer);
 
-	var _reducer3 = __webpack_require__(346);
+	var _reducer3 = __webpack_require__(350);
 
 	var _reducer4 = _interopRequireDefault(_reducer3);
 
-	var _reducer5 = __webpack_require__(347);
+	var _reducer5 = __webpack_require__(351);
 
 	var _reducer6 = _interopRequireDefault(_reducer5);
 
@@ -88560,7 +89128,7 @@ webpackJsonp([0,1],[
 	exports.default = rootReducer;
 
 /***/ },
-/* 332 */
+/* 336 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -88569,31 +89137,31 @@ webpackJsonp([0,1],[
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _routerStateReducer2 = __webpack_require__(333);
+	var _routerStateReducer2 = __webpack_require__(337);
 
 	var _routerStateReducer3 = _interopRequireDefault(_routerStateReducer2);
 
 	exports.routerStateReducer = _routerStateReducer3['default'];
 
-	var _ReduxRouter2 = __webpack_require__(335);
+	var _ReduxRouter2 = __webpack_require__(339);
 
 	var _ReduxRouter3 = _interopRequireDefault(_ReduxRouter2);
 
 	exports.ReduxRouter = _ReduxRouter3['default'];
 
-	var _client = __webpack_require__(338);
+	var _client = __webpack_require__(342);
 
 	var _client2 = _interopRequireDefault(_client);
 
 	exports.reduxReactRouter = _client2['default'];
 
-	var _isActive2 = __webpack_require__(344);
+	var _isActive2 = __webpack_require__(348);
 
 	var _isActive3 = _interopRequireDefault(_isActive2);
 
 	exports.isActive = _isActive3['default'];
 
-	var _actionCreators = __webpack_require__(337);
+	var _actionCreators = __webpack_require__(341);
 
 	exports.historyAPI = _actionCreators.historyAPI;
 	exports.push = _actionCreators.push;
@@ -88604,7 +89172,7 @@ webpackJsonp([0,1],[
 	exports.goForward = _actionCreators.goForward;
 
 /***/ },
-/* 333 */
+/* 337 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -88615,7 +89183,7 @@ webpackJsonp([0,1],[
 
 	exports['default'] = routerStateReducer;
 
-	var _constants = __webpack_require__(334);
+	var _constants = __webpack_require__(338);
 
 	/**
 	 * Reducer of ROUTER_DID_CHANGE actions. Returns a state object
@@ -88644,7 +89212,7 @@ webpackJsonp([0,1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 334 */
+/* 338 */
 /***/ function(module, exports) {
 
 	// Signals that the router's state has changed. It should
@@ -88672,7 +89240,7 @@ webpackJsonp([0,1],[
 	exports.DOES_NEED_REFRESH = DOES_NEED_REFRESH;
 
 /***/ },
-/* 335 */
+/* 339 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -88699,13 +89267,13 @@ webpackJsonp([0,1],[
 
 	var _reactRouterLibRouterUtils = __webpack_require__(237);
 
-	var _routerStateEquals = __webpack_require__(336);
+	var _routerStateEquals = __webpack_require__(340);
 
 	var _routerStateEquals2 = _interopRequireDefault(_routerStateEquals);
 
-	var _constants = __webpack_require__(334);
+	var _constants = __webpack_require__(338);
 
-	var _actionCreators = __webpack_require__(337);
+	var _actionCreators = __webpack_require__(341);
 
 	function memoizeRouterStateSelector(selector) {
 	  var previousRouterState = null;
@@ -88830,7 +89398,7 @@ webpackJsonp([0,1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 336 */
+/* 340 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -88844,7 +89412,7 @@ webpackJsonp([0,1],[
 
 	var _deepEqual2 = _interopRequireDefault(_deepEqual);
 
-	var _constants = __webpack_require__(334);
+	var _constants = __webpack_require__(338);
 
 	/**
 	 * Check if two router states are equal. Ignores `location.key`.
@@ -88862,7 +89430,7 @@ webpackJsonp([0,1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 337 */
+/* 341 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -88873,7 +89441,7 @@ webpackJsonp([0,1],[
 	exports.replaceRoutes = replaceRoutes;
 	exports.historyAPI = historyAPI;
 
-	var _constants = __webpack_require__(334);
+	var _constants = __webpack_require__(338);
 
 	/**
 	 * Action creator for signaling that the router has changed.
@@ -88952,7 +89520,7 @@ webpackJsonp([0,1],[
 	exports.goForward = goForward;
 
 /***/ },
-/* 338 */
+/* 342 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -88963,21 +89531,21 @@ webpackJsonp([0,1],[
 
 	var _redux = __webpack_require__(182);
 
-	var _actionCreators = __webpack_require__(337);
+	var _actionCreators = __webpack_require__(341);
 
-	var _routerStateEquals = __webpack_require__(336);
+	var _routerStateEquals = __webpack_require__(340);
 
 	var _routerStateEquals2 = _interopRequireDefault(_routerStateEquals);
 
-	var _reduxReactRouter = __webpack_require__(339);
+	var _reduxReactRouter = __webpack_require__(343);
 
 	var _reduxReactRouter2 = _interopRequireDefault(_reduxReactRouter);
 
-	var _useDefaults = __webpack_require__(341);
+	var _useDefaults = __webpack_require__(345);
 
 	var _useDefaults2 = _interopRequireDefault(_useDefaults);
 
-	var _routeReplacement = __webpack_require__(342);
+	var _routeReplacement = __webpack_require__(346);
 
 	var _routeReplacement2 = _interopRequireDefault(_routeReplacement);
 
@@ -89032,7 +89600,7 @@ webpackJsonp([0,1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 339 */
+/* 343 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -89050,11 +89618,11 @@ webpackJsonp([0,1],[
 
 	var _reactRouterLibCreateTransitionManager2 = _interopRequireDefault(_reactRouterLibCreateTransitionManager);
 
-	var _historyMiddleware = __webpack_require__(340);
+	var _historyMiddleware = __webpack_require__(344);
 
 	var _historyMiddleware2 = _interopRequireDefault(_historyMiddleware);
 
-	var _constants = __webpack_require__(334);
+	var _constants = __webpack_require__(338);
 
 	function reduxReactRouter(_ref) {
 	  var routes = _ref.routes;
@@ -89098,7 +89666,7 @@ webpackJsonp([0,1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 340 */
+/* 344 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -89106,7 +89674,7 @@ webpackJsonp([0,1],[
 	exports.__esModule = true;
 	exports['default'] = historyMiddleware;
 
-	var _constants = __webpack_require__(334);
+	var _constants = __webpack_require__(338);
 
 	/**
 	 * Middleware for interacting with the history API
@@ -89133,7 +89701,7 @@ webpackJsonp([0,1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 341 */
+/* 345 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -89183,7 +89751,7 @@ webpackJsonp([0,1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 342 */
+/* 346 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -89200,7 +89768,7 @@ webpackJsonp([0,1],[
 
 	var _reactRouter = __webpack_require__(199);
 
-	var _replaceRoutesMiddleware = __webpack_require__(343);
+	var _replaceRoutesMiddleware = __webpack_require__(347);
 
 	var _replaceRoutesMiddleware2 = _interopRequireDefault(_replaceRoutesMiddleware);
 
@@ -89277,7 +89845,7 @@ webpackJsonp([0,1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 343 */
+/* 347 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -89285,7 +89853,7 @@ webpackJsonp([0,1],[
 	exports.__esModule = true;
 	exports['default'] = replaceRoutesMiddleware;
 
-	var _constants = __webpack_require__(334);
+	var _constants = __webpack_require__(338);
 
 	function replaceRoutesMiddleware(replaceRoutes) {
 	  return function () {
@@ -89304,7 +89872,7 @@ webpackJsonp([0,1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 344 */
+/* 348 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -89343,7 +89911,7 @@ webpackJsonp([0,1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 345 */
+/* 349 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -89403,7 +89971,7 @@ webpackJsonp([0,1],[
 	}
 
 /***/ },
-/* 346 */
+/* 350 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -89443,7 +90011,7 @@ webpackJsonp([0,1],[
 	}
 
 /***/ },
-/* 347 */
+/* 351 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -89483,14 +90051,14 @@ webpackJsonp([0,1],[
 	}
 
 /***/ },
-/* 348 */
+/* 352 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 349 */,
-/* 350 */
+/* 353 */,
+/* 354 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
