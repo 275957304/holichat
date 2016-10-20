@@ -1,8 +1,8 @@
 import React, {Component, PropTypes} from 'react'
 import {Link} from 'react-router';
 import { Carousel} from 'antd';
-import 'antd/lib/carousel/style/index.css';
-import './slider.css'
+import 'antd/lib/carousel/style/index.less';
+import './slider.less'
 import api from '../../api/'
 class Slider extends Component {
 	constructor (props) {

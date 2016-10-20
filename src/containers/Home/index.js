@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 import * as homeActions from '../../reducers/modules/home/action'
 import Header from '../../components/Header/'
 import Slider from '../../components/Slider/'
-import './home.css'
+import './home.less'
 
 import activityIcon from '../../images/activity_icon.png'
 import eventIcon from '../../images/event_icon.png'

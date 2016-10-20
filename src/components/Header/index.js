@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import {Link} from 'react-router';
-import './index.css'
+import './index.less'
 class Header extends Component {
 	render() {
 		const { title , leftTo } = this.props;

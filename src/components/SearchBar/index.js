@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import './search.css'
+import './search.less'
 class SearchBar extends Component {
 	constructor (props) {
 		super(props)

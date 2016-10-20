@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import './alert.css'
+import './alert.less'
 class Alert extends Component {
 	constructor (props) {
 		super(props)

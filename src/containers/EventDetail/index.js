@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import Header from '../../components/Header/'
-import './detail.css'
+import './detail.less'
 
 class EventDetail extends Component {
     constructor(props){

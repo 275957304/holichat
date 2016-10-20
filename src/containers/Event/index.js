@@ -3,10 +3,10 @@ import Header from '../../components/Header/'
 import Alert from '../../components/Alert/'
 import SearchBar from '../../components/SearchBar/'
 import List from '../../components/List/'
-import './event.css'
+import './event.less'
 
 import { Select } from 'antd';
-import 'antd/lib/select/style/index.css';
+import 'antd/lib/select/style/index.less';
 const Option = Select.Option;
 
 class Event extends Component {
@@ -68,8 +68,8 @@ class Event extends Component {
                             <div className="weui-flex__item">全状态</div>
                         </div>
                     </div>
-                </div>
 
+                </div>
                 <List url={this.state.url}  type='event'  parameter="community_cid=0&category_id=0&location_id=0&status=&official=0&cost=0&page_size=10&event_type=0&page=" />
 
             </div>

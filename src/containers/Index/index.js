@@ -4,10 +4,10 @@ import { bindActionCreators } from 'redux'
 import * as quanziActions from '../../reducers/modules/quanzi/action'
 import Header from '../../components/Header/'
 import Slider from '../../components/Slider/'
-import './index.css'
+import './index.less'
 
 import { Tabs } from 'antd';
-import 'antd/lib/tabs/style/index.css';
+import 'antd/lib/tabs/style/index.less';
 const TabPane = Tabs.TabPane;
 class Index extends Component {
     constructor(props) {

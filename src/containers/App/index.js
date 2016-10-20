@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as userActions from '../../reducers/modules/user/action'
 import Footer from '../../components/Footer/'
-import './app.css'
+import './app.less'
 
 class App extends Component {
     constructor(props) {
