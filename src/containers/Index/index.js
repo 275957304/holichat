@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as quanziActions from '../../reducers/modules/quanzi/action'
 import Header from '../../components/Header/'
+import Menu from '../../components/Menu/'
 import Slider from '../../components/Slider/'
 import './index.less'
 
@@ -34,11 +35,11 @@ class Index extends Component {
     }
     render(){
         const { quanzi } = this.props;
+        console.log(this.props)
         return(
             <div className="wx_index">
                 <Header title="活力圈" leftTo="quanzi" />
                 {quanzi.banner.is_banner ? <Slider autoplay={false} items={quanzi.banner.list} /> : ""}
-
 
                 <div className="weui-panel__bd">
 					<div className="weui-media-box weui-media-box_appmsg">
@@ -73,6 +74,8 @@ class Index extends Component {
     					<TabPane tab="场馆" key="7">场馆 内容</TabPane>
     				</Tabs>
     			</div>
+
+                <Menu tab="index" />
             </div>
         )
     }

@@ -3,7 +3,7 @@ import { message } from 'antd'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as userActions from '../../reducers/modules/user/action'
-import Footer from '../../components/Footer/'
+import '../../font/custom.less'
 import './app.less'
 
 class App extends Component {
@@ -32,23 +32,21 @@ class App extends Component {
 	}
     render() {
         const { user, status , actions } = this.props;
-        const currentPath = this.props.routes[1].path;
+        //const currentPath = this.props.routes[1].path;
         // const currentURL = this.props.routes[1].path;
         // let currentPath = '';
         // (currentURL + "").indexOf("/") > 0 ?  currentPath = (currentURL +"").split('/')[0] : currentPath = currentURL;
         // const tab = currentPath || 'index'
         return(
             <div className="wx_app">
-                <div className="weui_tab_bd">
-                    {this.props.children}
-                </div>
-				<Footer tab={currentPath} />
+                {this.props.children}
             </div>
         )
     }
 }
+
 App.contextTypes = {
-  router: PropTypes.object.isRequired
+    router: PropTypes.object.isRequired
 };
 
 export default connect(

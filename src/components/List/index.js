@@ -4,12 +4,12 @@ import iScroll from '../../utils/iscroll/iscroll-probe'
 import ReactIScroll from 'reactjs-iscroll';
 import api from '../../api/'
 import './list.css'
-import { getCategory, getCurrentStatus } from '../../utils/'
+import { getCategory, getCurrentStatus , jsonParam } from '../../utils/'
 
 class List extends Component {
 	static propTypes = {
         url: PropTypes.string.isRequired,
-        parameter: PropTypes.string.isRequired,
+        param: PropTypes.object.isRequired,
         type: PropTypes.string.isRequired
     }
 
@@ -28,7 +28,7 @@ class List extends Component {
 
 	componentWillMount() {
 		//设置滚动区域的高度
-		this.setState({scrollHeight: window.screen.height - 184});
+		this.setState({scrollHeight: window.screen.height - 126});
 		window.addEventListener('touchmove', function(e){e.preventDefault()})
 		this.loadData();
 	}
@@ -60,11 +60,14 @@ class List extends Component {
 	}
 
 	loadData(downOrUp, callback) {
-		const {currentPage} = this.state;
-		const url = api[this.props.url];
+		const {currentPage} = this.state
+		const requestUrl = api[this.props.url]
+		const param = jsonParam(this.props.param) + "&page=" + currentPage
+		console.log(this.props.param)
+		console.log(param)
 		//获取参数
-		const parameter = `${this.props.parameter} + ${currentPage}`;
-		url(parameter).then(
+		//const param = `${this.props.param} + ${currentPage}`;
+		requestUrl(param).then(
 			function(json){
 				setTimeout(() => {
 					const {list} = this.state;

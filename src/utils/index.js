@@ -97,3 +97,14 @@ export const formatTime = (str) => {
 		return parseInt(time / 31536000000) + '年前';
 	}
 }
+
+/*
+json参数转为url参数
+*/
+export const jsonParam = (param) => {
+    let mergeUrl = "?"
+    for(let key in param){
+        mergeUrl += key + "=" + param[key] + "&"
+    }
+    return mergeUrl.substring(0,mergeUrl.length-1)
+}

@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as homeActions from '../../reducers/modules/home/action'
 import Header from '../../components/Header/'
+import Menu from '../../components/Menu/'
 import Slider from '../../components/Slider/'
 import './home.less'
 
@@ -11,6 +12,8 @@ import activityIcon from '../../images/activity_icon.png'
 import eventIcon from '../../images/event_icon.png'
 import trainingIcon from '../../images/training_icon.png'
 
+import Oss from '../../modules/Oss/Oss'
+var oss = Oss.getInstance()
 class Home extends Component {
     constructor(props) {
         super(props)
@@ -58,6 +61,8 @@ class Home extends Component {
                     <div className="weui-cells__title">热门专题</div>
                     fdsfs
 				</div>
+
+                <Menu tab="home" />
             </div>
         )
     }

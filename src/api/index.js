@@ -12,6 +12,8 @@ const api = new Api({
 });
 
 export default{
+	//系统
+	get_sts_auth: api.get('sys/api/sts_auth',{'type':'app_image','session': session, 'uid': uid}), //name: 获取STS授权
 	//获取图片
 	getImg : (url) => imgBaseUrl + url,
 	//登录
@@ -28,6 +30,8 @@ export default{
 
 	//专题
 	get_topic_list: api.get('topic/view/topic_list'),  //name: 专题列表
+
+
 }
 
 
