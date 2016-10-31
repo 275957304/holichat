@@ -19,42 +19,23 @@ class TypeSelect extends Component {
 		loading: PropTypes.bool
 	}
 	*/
+
 	render(){
+        console.log(React.Children)
 		return(
 			<div className="type_tab">
                 <div className="type_tab_hd">
-    				<div className="weui-flex">
-    					<div className="weui-flex__item">
-    						<div className="ty">
-                                <span>全类型</span>
-                            </div>
-                            {/*<ul>
-                                <li>全部</li>
-                                <li>登山</li>
-                                <li>定向</li>
-                            </ul>*/}
-    					</div>
-                        <div className="weui-flex__item">
-    						全赛事
-    					</div>
-                        <div className="weui-flex__item">
-
-                            <Select
-
-                            size="large"
-                            defaultValue="全价格">
-                                <Option value="0">全价格</Option>
-                                <Option value="2">免费</Option>
-                                <Option value="1">收费</Option>
-                            </Select>
-
-    					</div>
-                        <div className="weui-flex__item">
-    						全状态
-    					</div>
-    				</div>
-				</div>
-				<div className="weui-mask"></div>
+                    <nav className="weui-flex">
+                        {React.Children.map(this.props.children, (element, index) => {
+                            return (<div className="weui-flex__item">{element.props.name}</div>)
+                        })}
+                    </nav>
+                    <div className="tab-content-items">
+                        {React.Children.map(this.props.children, element => {
+                            return console.log(element)
+                        })}
+                    </div>
+                </div>
 			</div>
 
 		)

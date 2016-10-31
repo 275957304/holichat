@@ -6,6 +6,12 @@ import SearchBar from '../../components/SearchBar/'
 import List from '../../components/List/'
 import './event.less'
 
+class Tab extends Component{
+    render(){
+        return <div>{this.props.children}</div>
+    }
+}
+
 class Event extends Component {
     constructor(props){
         super(props)
@@ -57,7 +63,20 @@ class Event extends Component {
             <div className="wx_event">
                 <Header title="赛事" leftTo="fanhui" />
                 <SearchBar search={this.handleSearch} />
-                <TypeSelect />
+                <TypeSelect>
+                    <Tab name="全类型">
+                        <div className="red"/>
+                    </Tab>
+                    <Tab name="全赛事">
+                        <div className="blue"/>
+                    </Tab>
+                    <Tab name="全价格">
+                        <div className="yellow"/>
+                    </Tab>
+                    <Tab name="全状态">
+                        <div className="yellow"/>
+                    </Tab>
+                </TypeSelect>
                 <List url={this.state.url}  type='event'  param={this.state.param} />
             </div>
         )

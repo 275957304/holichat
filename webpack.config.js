@@ -16,6 +16,8 @@ module.exports = {
 		path: path.join(__dirname, 'build'),
         filename: 'js/[name].js', //编译后的文件名字
         publicPath: publicPath, // 网站运行时的访问路径
+		// 添加 chunkFilename表示未被列在entry中，却又需要被打包出来的文件命名配置     做按需加载   在按需加载（异步）模块的时候，这样的文件是没有被列在entry中的
+		chunkFilename: '[name].[chunkhash:5].chunk.js' //name 是在代码里为创建的 chunk 指定的名字，如果代码中没指定则 webpack 默认分配 id 作为 name。 chunkhash 是文件的 hash 码，这里只使用前五位。
     },
     module: {
         loaders: [
@@ -28,7 +30,12 @@ module.exports = {
             {test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192&name=./img/[hash].[ext]'}
         ]
     },
-
+	resolve: {
+		alias: {
+			'react': path.join(__dirname, 'node_modules', 'react')
+		},
+		extensions: ['', '.js', '.jsx']
+	},
     plugins:[
 		/*
 		new webpack.ProvidePlugin({	//加载zepto
@@ -37,7 +44,8 @@ module.exports = {
 		*/
 		new HtmlwebpackPlugin({
 			//favicon:'./src/img/favicon.ico', //favicon路径
-			template:'./src/template/index.html',	//html模板路径
+			filename: './index.html', //渲染输出html文件名,路径相对于 output.path 的值
+			template: path.resolve(__dirname, './src/template/index.html'),
 			title: '活力圈',
 			filename: '../index.html',
 			inject:true,//允许插件修改哪些内容，包括head与body
@@ -50,6 +58,7 @@ module.exports = {
 		new webpack.HotModuleReplacementPlugin(), //热加载
 		new ExtractTextPlugin("css/[name].css"),	//单独使用style标签加载css并设置其路径
 		new webpack.optimize.CommonsChunkPlugin('vendors', 'js/vendors.js'),
+		new webpack.NoErrorsPlugin(),
 		/*
 		new webpack.optimize.UglifyJsPlugin({	//压缩代码
 		    compress: {
@@ -60,12 +69,7 @@ module.exports = {
 
 
 		*/
-	],
-	resolve: {
-		alias: {
-			'react': path.join(__dirname, 'node_modules', 'react')
-		},
-		extensions: ['', '.js', '.jsx']
-	}
+	]
+
 
 };

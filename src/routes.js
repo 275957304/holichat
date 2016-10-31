@@ -1,36 +1,63 @@
 import React from 'react'
 // 引入React-Router模块
-import {Router, Route, IndexRoute, browserHistory, hashHistory} from 'react-router';
-import { createBrowserHistory } from 'history';
-import {
-	App,
-	Index,
-	Home,
-	Event,
-	EventDetail,
-	Messages,
-	User,
-	SignIn,
-	Page404
-} from './containers'
-
-//console.log(createBrowserHistory)
-
-
-const routes = (
-    <Router history={hashHistory}>
-        <Route path="/" component={App}>
-			<IndexRoute component={Index} />
-			<Route path="home" component={Home}/>
-			<Route path="home/event" component={Event}/>
-			<Route path="home/event/:id" component={EventDetail}/>
-
-			<Route path="messages" component={Messages}/>
-			<Route path="user" component={User}/>
-        </Route>
-		<Route path="signin" component={SignIn}/>
-		<Route path="*" component={Page404} />
-    </Router>
-);
-
+// import {Router, Route, IndexRoute, browserHistory, hashHistory} from 'react-router';
+// import { createBrowserHistory } from 'history';
+const routes = {
+	component: require('./containers/App/').default,
+	childRoutes : [
+		{
+			path:'/home',
+			getComponent: (nextState, cb) => {
+				require.ensure([], (require) => {
+					cb(null, require('./containers/Home/').default)
+				}, 'home')
+			}
+		},
+		{
+			//onEnter: redirectToLogin,
+			childRoutes: [
+				{
+					path: '/home/event',
+					getComponent: (nextState, cb) => {
+						require.ensure([], (require) => {
+							cb(null, require('./containers/Event/').default)
+						},'event')
+					}
+				},
+				{
+					path: '/home/event/:id',
+					getComponent: (nextState, cb) => {
+						require.ensure([], (require) => {
+							cb(null, require('./containers/EventDetail/').default)
+						},'eventDetail')
+					}
+				}
+			]
+		},
+		{
+			path:'/messages',
+			getComponent: (nextState, cb) => {
+				require.ensure([], (require) => {
+					cb(null, require('./containers/Messages/').default)
+				}, 'messages')
+			}
+		},
+		{
+			path:'/user',
+			getComponent: (nextState, cb) => {
+				require.ensure([], (require) => {
+					cb(null, require('./containers/User/').default)
+				}, 'user')
+			}
+		},
+		{
+			path: '/',
+			getComponent: (nextState, cb) => {
+				require.ensure([], (require) => {
+					cb(null, require('./containers/Index/').default)
+				}, 'index')
+			}
+		}
+	]
+};
 export default routes;
