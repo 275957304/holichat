@@ -23,7 +23,7 @@ export default function news(state = InitState, action = {}) {
 */
 
 const userInfo = {
-    loginState : false
+    loginState : false,
 }
 export default function user(state = userInfo, action ){
     switch(action.type){

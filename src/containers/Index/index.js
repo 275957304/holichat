@@ -35,7 +35,7 @@ class Index extends Component {
     }
     render(){
         const { quanzi } = this.props;
-        console.log(this.props)
+        //console.log(this.props)
         return(
             <div className="wx_index">
                 <Header title="活力圈" leftTo="quanzi" />

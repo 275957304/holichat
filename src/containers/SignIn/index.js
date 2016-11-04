@@ -15,12 +15,17 @@ class SignIn extends Component {
         //const redirectRoute = this.props.location.query.next || '/login';
         this.login = this.login.bind(this);
     }
+    componentWillMount(){
+        //console.log(this.props.location.query.next)
+    }
 	componentWillReceiveProps (nextProps) {
-		let redirectAfterLogin = this.props.location.pathname;
+		//let redirectAfterLogin = this.props.location.pathname;
 		// const { dispatch, selectedReddit } = nextProps
+
+        const next = this.props.location.query.next
 		if(nextProps.user.loginState){
 			//这里要判断第一次进来时的next地址
-			this.context.router.push('/')
+			this.context.router.push(next)
 		}
 	}
     login(e) {

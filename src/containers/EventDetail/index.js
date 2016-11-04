@@ -1,46 +1,40 @@
 import React, {Component, PropTypes} from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import * as itemActions from '../../reducers/modules/item/action'
 import Header from '../../components/Header/'
 import './detail.less'
+
+
+import EventDetails from '../../components/EventDetails/'
+import { Spin } from 'antd';
+import 'antd/lib/spin/style/index.less';
 
 class EventDetail extends Component {
     constructor(props){
         super(props)
     }
-
-    componentWillMount() {
-        const {dispatch, params} = this.props;
-        const {type, name} = params;
-        console.log(this.props.params.id)
+    componentDidMount() {
+        const {params, itemActions} = this.props;
+        const param = {'event_id': params.id }
+        //获取赛事简介信息
+        itemActions.getBrief(param);
     }
-
     render(){
-        return(
-            <div className="event_detail">
-                <Header title="赛事" leftTo="fanhui" />
-
-
-                <div className="weui-media-box weui-media-box_appmsg white_bj">
-                    <div className="weui-media-box__hd">
-                        <img className="weui-media-box__thumb" src="#" alt=""/>
-                    </div>
-                    <div className="weui-media-box__bd">
-                        <h4 className="weui-media-box__title">图片吧</h4>
-                        <p className="weui-media-box__desc">的运行轨道。</p>
-                        <p className="weui-media-box__desc">按钮</p>
-                    </div>
-                </div>
-
-
-
-
-
-
-                <div className="weui-footer_fixed-bottom">
-                    <a href="javascript:;" className="weui-btn weui-btn_warn">我要报名</a>
-                </div>
-            </div>
-        )
+        const {item} = this.props;
+        if(!item.loading){
+            console.log(item)
+            return <div className="event_detail"><Header title="赛事" leftTo="fanhui" /> <EventDetails type="event" data={item.brief} /></div>
+        }
+        return <Spin size="large" spinning={item.loading}></Spin>
     }
 }
 
-export default EventDetail
+export default connect(
+   state => ({
+       item : state.item
+   }),
+   dispatch => ({
+       itemActions: bindActionCreators(itemActions, dispatch)
+   })
+)(EventDetail)

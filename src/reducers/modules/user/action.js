@@ -1,7 +1,10 @@
 //import api from '../../../api'
 import * as types from '../../types'
-import api from '../../../api/'
-import { setItem } from '../../../utils/'
+import {httpRequest} from '../../../api/'
+import { getItem, setItem } from '../../../utils/'
+const uid = getItem('uid');
+const session = getItem('session');
+const device = getItem('device') || 'phone';
 
 function loginUserError() {
     return {
@@ -23,34 +26,28 @@ function loginSuccess(data){
 //用户登录检查
 export function loginCheck(){
 	return dispatch =>
-    api.check_session.then(function(data){
-        //console.log(data)
-        if(data.ret != '0'){
-			//history.pushState(null, '/signin');
+    httpRequest('check_session',{'target_uid':uid,'save_session':session,'device':device}).then(function(data){
+        if(data == '6056'){
+            //history.pushState(null, '/signin');
 			dispatch(loginUserError())
-		}else{
-			//这里要传入uid 与 seccess
-			dispatch(loginSuccess({uid:data.data.uid,session:data.data.session}))
-		}
+        }else{
+            //这里要传入uid 与 seccess
+            dispatch(loginSuccess({uid:data.uid,session:data.session}))
+        }
     })
 }
 
-//用户登录
+//用户登录 login
 export function loginUser(formData,redirect="/"){
     return dispatch =>
-        api.login(formData).then(function(data){
-            console.log(JSON.stringify(formData))
-            console.log(data)
-            if(data.ret == '0'){
-				//登录成功
-				setItem('session',data.data.session);
-				setItem('uid',data.data.uid);
-				dispatch(loginSuccess(data.data))
-				//dispatch(push('/'))
-				//console.log(dispatch(push('/')))
-			}else{
-                alert('登录失败')
-                console.log(data.ret)
-			}
-        })
+    httpRequest('login',formData).then(function(data){
+        if(typeof data !== 'number'){
+            //登录成功
+			setItem('session',data.session);
+			setItem('uid',data.uid);
+			dispatch(loginSuccess(data))
+			//dispatch(push('/'))
+			//console.log(dispatch(push('/')))
+        }
+    })
 }

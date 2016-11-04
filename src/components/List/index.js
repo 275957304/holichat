@@ -2,9 +2,9 @@ import React, {Component, PropTypes} from 'react'
 import {Link} from 'react-router';
 import iScroll from '../../utils/iscroll/iscroll-probe'
 import ReactIScroll from 'reactjs-iscroll';
-import api from '../../api/'
+import { httpRequest, getImageUrlPath } from '../../api/'
 import './list.css'
-import { getCategory, getCurrentStatus , jsonParam } from '../../utils/'
+import { getCategory, getCurrentStatus } from '../../utils/'
 
 class List extends Component {
 	static propTypes = {
@@ -61,25 +61,20 @@ class List extends Component {
 
 	loadData(downOrUp, callback) {
 		const {currentPage} = this.state
-		const requestUrl = api[this.props.url]
-		const param = jsonParam(this.props.param) + "&page=" + currentPage
-		console.log(this.props.param)
-		console.log(param)
+		const param = this.props.param
+		param['page'] = currentPage;
+		//console.log(param)
 		//获取参数
 		//const param = `${this.props.param} + ${currentPage}`;
-		requestUrl(param).then(
-			function(json){
-				setTimeout(() => {
-					const {list} = this.state;
-					this.setState({
-						list: downOrUp === 'up' ?   this.state.list.concat(json.data.list)  : json.data.list
-					})
-					if (callback && typeof callback === 'function') {
-						callback();
-					}
-				},500);
-			}.bind(this)
-		);
+		httpRequest(this.props.url,param).then(function(data){
+			const {list} = this.state;
+			this.setState({
+				list: downOrUp === 'up' ?   this.state.list.concat(data.list)  : data.list
+			})
+			if (callback && typeof callback === 'function') {
+				callback();
+			}
+		}.bind(this))
 	}
 	render(){
 		const {list, pullUp, pullDown} = this.state;
@@ -93,7 +88,7 @@ class List extends Component {
 						{list.map((item,index) =>
 							<Link key={index} to={`/home/${type}/${item[getid]}`} className="weui-media-box weui-media-box_appmsg">
 								<div className="weui-media-box__hd">
-									<img className="weui-media-box__thumb" src={api.getImg(item.logo_image) +'@150h_150w_1e_1c_10-2ci'} />
+									<img className="weui-media-box__thumb" src={getImageUrlPath(item.logo_image) +'@150h_150w_1e_1c_10-2ci'} />
 								</div>
 								<div className="weui-media-box__bd">
 									<h4 className="weui-media-box__title">{item.title}</h4>

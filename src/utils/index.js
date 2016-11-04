@@ -99,12 +99,12 @@ export const formatTime = (str) => {
 }
 
 /*
-json参数转为url参数
+json参数转为url参数   以删除
 */
 export const jsonParam = (param) => {
-    let mergeUrl = "?"
+    let mergeUrl = ""
     for(let key in param){
         mergeUrl += key + "=" + param[key] + "&"
     }
-    return mergeUrl.substring(0,mergeUrl.length-1)
+    return mergeUrl
 }

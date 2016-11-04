@@ -12,8 +12,6 @@ import activityIcon from '../../images/activity_icon.png'
 import eventIcon from '../../images/event_icon.png'
 import trainingIcon from '../../images/training_icon.png'
 
-import Oss from '../../modules/Oss/Oss'
-var oss = Oss.getInstance()
 class Home extends Component {
     constructor(props) {
         super(props)
@@ -21,7 +19,6 @@ class Home extends Component {
     componentWillMount(){
         const { homeActions, dispatch } = this.props
         homeActions.get_holichat_banner();
-        homeActions.get_topic_list();
 	}
     render(){
         const { home } = this.props;

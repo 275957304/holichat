@@ -1,15 +1,23 @@
+body, html{
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
 body{font-size: 14px; color: #999;}
 ul,li{list-style: none; }
-a{color: #333;}
+body a{color: #333}
 img{
 	max-width: 100%; height: auto;
 }
+#app,.wx_index,.wx_home,.wx_messages,.wx_user{
+	height: 100%;
+}
 .wx_app{
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	box-sizing: border-box;
     height: 100%;
     padding-top: 42px;
-    overflow: auto;
+    overflow-y: auto;
     -webkit-overflow-scrolling: touch;
 }
 .wx_app .weui-tabbar{
@@ -45,6 +53,10 @@ img{
 }
 .pull-right{
 	float: right!important;
+}
+
+.mt0{
+	margin-top: 0!important;
 }
 
 #app .iscroll-pull-down > i,#app .iscroll-pull-up > i{

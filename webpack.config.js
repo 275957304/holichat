@@ -37,11 +37,9 @@ module.exports = {
 		extensions: ['', '.js', '.jsx']
 	},
     plugins:[
-		/*
 		new webpack.ProvidePlugin({	//加载zepto
-            $: 'zepto'
+            $ : 'n-zepto'
         }),
-		*/
 		new HtmlwebpackPlugin({
 			//favicon:'./src/img/favicon.ico', //favicon路径
 			filename: './index.html', //渲染输出html文件名,路径相对于 output.path 的值
@@ -50,6 +48,8 @@ module.exports = {
 			filename: '../index.html',
 			inject:true,//允许插件修改哪些内容，包括head与body
 			hash:true,	//为静态资源生成hash值
+			showErrors:false, //是否显示错误
+			cache:false, //是否缓存
 			minify:{	//压缩HTML文件
 				removeComments:true,	//移除HTML中的注释
 				collapseWhitespace:true	//删除空白符与换行符
@@ -57,7 +57,12 @@ module.exports = {
 		}),
 		new webpack.HotModuleReplacementPlugin(), //热加载
 		new ExtractTextPlugin("css/[name].css"),	//单独使用style标签加载css并设置其路径
-		new webpack.optimize.CommonsChunkPlugin('vendors', 'js/vendors.js'),
+		//new webpack.optimize.CommonsChunkPlugin('vendors', 'js/vendors.js'),
+		new webpack.optimize.CommonsChunkPlugin({
+			name: 'vendors', // 这公共代码的chunk名为'commons'
+			filename: '[name].bundle.js', // 生成后的文件名，虽说用了[name]，但实际上就是'commons.bundle.js'了
+			minChunks: 4, // 设定要有4个chunk（即4个页面）加载的js模块才会被纳入公共代码。这数目自己考虑吧，我认为3-5比较合适。
+		}),
 		new webpack.NoErrorsPlugin(),
 		/*
 		new webpack.optimize.UglifyJsPlugin({	//压缩代码

@@ -25,7 +25,7 @@ class _Api {
             return new Promise(function (resolve, reject) {
               fetch(opts.baseURI + url, {
                     method: 'GET',
-                    headers: opts.headers,
+                    headers: {'Accept': 'application/json'}
                   })
                   .then((response) => {
                       if (response.ok) {
@@ -38,18 +38,18 @@ class _Api {
                       resolve(response);
                   })
                   .catch((err)=> {
-                    reject({status:-1});
+                    reject('fail');
                   })
             })
         }
         /**
          * 基于 fetch 封装的 POST请求  FormData 表单数据
          * @param url
-         * @param formData
+         * @param params
          * @param headers
          * @returns {Promise}
          */
-        this.post = function(url, formData) {
+        this.post = function(url, params) {
             return new Promise(function (resolve, reject) {
               fetch(opts.baseURI + url, {
                     method: 'POST',
@@ -57,7 +57,7 @@ class _Api {
                         'Accept': 'application/json',
                         "Content-Type": "application/x-www-form-urlencoded"
                     },
-                    body:formData,
+                    body:params,
                   })
                   .then((response) => {
                       if (response.ok) {
@@ -70,7 +70,7 @@ class _Api {
                       resolve(response);
                   })
                   .catch((err)=> {
-                    reject({status:-1});
+                    reject('fail');
                   })
             })
         }

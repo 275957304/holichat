@@ -3,29 +3,31 @@ import { message } from 'antd'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as userActions from '../../reducers/modules/user/action'
+import '../../font/custom.less'
 import './app.less'
 
 class App extends Component {
     constructor(props) {
-        super(props);
-        this.state = {
-            checkNum : true
-        }
+        super(props)
     }
     componentWillMount() {
 		//检查登录
 		this.checkAuth(this.props.user.loginState);
 	}
+    componentWillReceiveProps (nextProps) {
+		let redirectAfterLogin = this.props.location.pathname;
+		// const { dispatch, selectedReddit } = nextProps
+		//console.log('WillReceiveProps:' + nextProps.userInfo.loginState)
+		//this.checkAuth(nextProps.userInfo.loginState);
+		if(!nextProps.user.loginState){
+			//检查登录
+			//this.context.router.push('/signin?next=${redirectAfterLogin}')
+			this.context.router.push('/signin')
+		}
+	}
 
-    componentWillReceiveProps(nextProps){
-        let redirectAfterLogin = this.props.location.pathname;
-        if(!nextProps.user.loginState && this.state.checkNum){
-            this.setState({checkNum: false});
-            this.context.router.push(`/signin?next=${redirectAfterLogin}`)
-        }
-    }
-
-    checkAuth (loginState){
+    
+    checkAuth (loginState) {
 		if (!loginState){
 			const { userActions, dispatch } = this.props
 			userActions.loginCheck()

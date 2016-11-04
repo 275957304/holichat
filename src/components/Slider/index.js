@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 import { Carousel} from 'antd';
 import 'antd/lib/carousel/style/index.less';
 import './slider.less'
-import api from '../../api/'
+import { getImageUrlPath } from '../../api/'
 class Slider extends Component {
 	constructor (props) {
 		super(props)
@@ -21,10 +21,10 @@ class Slider extends Component {
 		const list = items.map( (item,index) => {
 			//console.log(index)
 			if(item.action ==''){
-				return(<div key={index}><img src={api.getImg(item.image)} /></div>)
+				return(<div key={index}><img src={getImageUrlPath(item.image)} /></div>)
 			}else{
 				const action = JSON.parse(item.action);
-				return(<Link key={index} to={{pathname:`/home/${action.type}/${action.data.id ? action.data.id :''}`}} ><img src={api.getImg(item.image)} /></Link>)
+				return(<Link key={index} to={{pathname:`/home/${action.type}/${action.data.id ? action.data.id :''}`}} ><img src={getImageUrlPath(item.image)} /></Link>)
 			}
 		})
 		function onChange(a, b, c) {

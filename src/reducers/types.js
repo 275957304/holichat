@@ -5,3 +5,7 @@ export const LOGIN_USER_ERROR = 'LOGIN_USER_ERROR'
 //广告
 export const GET_HOLICHAT_BANNER = 'GET_HOLICHAT_BANNER'
 export const GET_COMMUNITY_BANNER = 'GET_COMMUNITY_BANNER'
+
+
+//赛事简介信息
+export const GET_BRIEF = 'GET_BRIEF'
