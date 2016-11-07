@@ -1,11 +1,10 @@
 import React, {Component, PropTypes} from 'react'
 import './style.less'
 
-import Tabs from '../Tabs/'
+import EventTabs from '../EventTabs/'
 import BtnSate from './btn_state'
 import { Icon } from 'antd';
 import { getImageUrlPath } from '../../api/'
-import { getCurrentStatus } from '../../utils/'
 import { getAddress } from '../../utils/address/'
 
 let OtherInfo = React.createClass({
@@ -42,42 +41,24 @@ let ContactItem = React.createClass({
 });
 
 class EventDetails extends Component {
-	static propTypes = {
-        type: PropTypes.string.isRequired,
-        data: PropTypes.object.isRequired
-    }
+	propTypes: {
+		data: PropTypes.object.isRequired
+	}
 	constructor(props) {
-        super(props);
-		this.activeIndex = this.activeIndex.bind(this);
+        super(props)
     }
-
-	// componentWillMount(){
+    // componentWillMount(){
 	// 	console.log(this.props)
 	// }
-
-    componentDidMount(){
-		const detailsTxt = document.getElementById('detailsTxt');
-		const imgs = detailsTxt.getElementsByTagName('img')
-		for(let i=0; i<imgs.length; i++){
-			if(!imgs[i].getAttribute('style')){
-				imgs[i].setAttribute('style','')
-			}
-		}
-	}
-	activeIndex(index){
-		//console.log(index)
-        this.props.getIndex(index)
-    }
 	render(){
 		const brief = this.props.data
 		const other = JSON.parse(brief.other_info)
 		const begin_date = brief.begin_date.substring(0,10)
 		const end_date = brief.end_date.substring(0,10)
-		const setid = brief.event_id || brief.activity_id || brief.training_id ;
-		//console.log(brief)
+		//console.log(this.props)
 		return(
 			<div className="event_details">
-				<Tabs activeIndex={ this.activeIndex } >
+				<EventTabs>
 					<div name="简介">
 						<div className="brief_area">
 						<div className="weui-cells weui-media-box weui-media-box_appmsg mt0">
@@ -87,10 +68,10 @@ class EventDetails extends Component {
 							<div className="weui-media-box__bd">
 								<h4 className="weui-media-box__title">{brief.title}</h4>
 								<div className="weui_media_desc">
-									<div className="pull-right" dangerouslySetInnerHTML={{__html: `${getCurrentStatus(brief.signline,brief.deadline,brief.begin_date,brief.end_date)}`}} />
+									<div className="pull-right">报名中</div>
 									<span className="red">¥ {brief.cost} 元起</span>
 								</div>
-								<p className="weui-media-box__desc">这里要做按钮</p>
+								<p className="weui-media-box__desc">按钮</p>
 							</div>
 						</div>
 
@@ -124,13 +105,13 @@ class EventDetails extends Component {
 						</div>
 
 						<div className="weui-footer_fixed-bottom">
-							<BtnSate type={this.props.type} id={setid} begin_date={brief.begin_date} deadline={brief.deadline}  end_date={brief.end_date}  signline={brief.signline} />
+							<BtnSate type={this.props.type} begin_date={brief.begin_date} deadline={brief.deadline} end_date={brief.end_date} signline={brief.signline} />
 						</div>
 
 						</div>
 					</div>
 					<div name="详情">
-						<div className="brief_content" id="detailsTxt" dangerouslySetInnerHTML={{__html: `${brief.content}`}} />
+						<div className="brief_content" dangerouslySetInnerHTML={{__html: `${brief.content}`}} />
 					</div>
 					<div name="成绩">
 						成绩成绩成绩成绩成绩成绩成绩成绩
@@ -140,7 +121,7 @@ class EventDetails extends Component {
 						精彩瞬间精彩瞬间精彩瞬间精彩瞬间精彩瞬间精彩瞬间
 						<p>这是调那个接口呢</p>
 					</div>
-				</Tabs>
+				</EventTabs>
 			</div>
 		)
 	}

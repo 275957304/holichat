@@ -27,3 +27,13 @@ export function get_community_banner(){
         }
     })
 }
+
+//设置圈子首页
+export function set_home_community(param){
+	return dispatch =>
+	httpRequest('set_home_community').then(function(data){
+		// console.log("---------------")
+    	// console.log(data)
+		// console.log("---------------")
+    })
+}

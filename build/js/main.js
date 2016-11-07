@@ -1,4 +1,4 @@
-webpackJsonp([0,8],[
+webpackJsonp([0,9],[
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -149,13 +149,15 @@ webpackJsonp([0,8],[
 
 	var _routes2 = _interopRequireDefault(_routes);
 
-	var _configureStore = __webpack_require__(352);
+	var _configureStore = __webpack_require__(384);
 
 	var _configureStore2 = _interopRequireDefault(_configureStore);
 
-	__webpack_require__(371);
+	__webpack_require__(404);
 
-	__webpack_require__(373);
+	__webpack_require__(406);
+
+	__webpack_require__(408);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -165,7 +167,7 @@ webpackJsonp([0,8],[
 	//重置浏览器默认样式
 	//微信底层样式
 
-	//import './font/iconfont.css'; //字体图标
+
 	(0, _reactDom.render)(_react2.default.createElement(
 		_reactRedux.Provider,
 		{ store: store, key: 'provider' },
@@ -28838,65 +28840,108 @@ webpackJsonp([0,8],[
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	// 引入React-Router模块
-	// import {Router, Route, IndexRoute, browserHistory, hashHistory} from 'react-router';
-	// import { createBrowserHistory } from 'history';
+	//import checkLogin from './utils/checkLogin/'
+	//this.props.params.id
+
+	// function redirectToDashboard(nextState, replace){
+	// 	if(!checkLogin.loggedIn()){
+	// 		replace({
+	// 			pathname: '/signin',
+	// 			state: { nextPathname: nextState.location.pathname }
+	// 		})
+	// 	}
+	// }
+
+	var Home = {
+		path: '/home',
+		getComponent: function getComponent(nextState, cb) {
+			__webpack_require__.e/* nsure */(1, function (require) {
+				cb(null, __webpack_require__(293).default);
+			});
+		}
+	};
+
+	//赛事列表页
+	var HomeList = {
+		path: '/home/list',
+		getComponent: function getComponent(nextState, cb) {
+			__webpack_require__.e/* nsure */(2, function (require) {
+				cb(null, __webpack_require__(314).default);
+			});
+		}
+	};
+
+	//赛事-活动-培训 详情页
+	var HomeDetails = {
+		path: '/home/details/:id',
+		getComponent: function getComponent(nextState, cb) {
+			__webpack_require__.e/* nsure */(3, function (require) {
+				cb(null, __webpack_require__(331).default);
+			});
+		}
+	};
+
+	//级别选择
+	var HomeEnroll = {
+		path: '/home/enroll/:id',
+		getComponent: function getComponent(nextState, cb) {
+			__webpack_require__.e/* nsure */(4, function (require) {
+				cb(null, __webpack_require__(353).default);
+			});
+		}
+	};
+
+	var Messages = {
+		path: '/messages',
+		getComponent: function getComponent(nextState, cb) {
+			__webpack_require__.e/* nsure */(5, function (require) {
+				cb(null, __webpack_require__(356).default);
+			});
+		}
+	};
+
+	var User = {
+		path: '/user',
+		getComponent: function getComponent(nextState, cb) {
+			__webpack_require__.e/* nsure */(6, function (require) {
+				cb(null, __webpack_require__(357).default);
+			});
+		}
+	};
+
+	var Signin = {
+		path: '/signin',
+		getComponent: function getComponent(nextState, cb) {
+			__webpack_require__.e/* nsure */(7, function (require) {
+				cb(null, __webpack_require__(372).default);
+			});
+		}
+	};
+
+	var Other = {
+		path: '/',
+		getComponent: function getComponent(nextState, cb) {
+			__webpack_require__.e/* nsure */(8, function (require) {
+				cb(null, __webpack_require__(377).default);
+			});
+		}
+	};
+
+	var Page404 = {
+		path: '*',
+		getComponent: function getComponent(nextState, cb) {
+			__webpack_require__.e/* nsure */(8, function (require) {
+				cb(null, __webpack_require__(383).default);
+			});
+		}
+	};
+
 	var routes = {
 		component: __webpack_require__(276).default,
-		childRoutes: [{
-			path: '/home',
-			getComponent: function getComponent(nextState, cb) {
-				__webpack_require__.e/* nsure */(1, function (require) {
-					cb(null, __webpack_require__(295).default);
-				});
-			}
-		}, {
-			//onEnter: redirectToLogin,
-			childRoutes: [{
-				path: '/home/event',
-				getComponent: function getComponent(nextState, cb) {
-					__webpack_require__.e/* nsure */(2, function (require) {
-						cb(null, __webpack_require__(313).default);
-					});
-				}
-			}, {
-				path: '/home/event/:id',
-				getComponent: function getComponent(nextState, cb) {
-					__webpack_require__.e/* nsure */(3, function (require) {
-						cb(null, __webpack_require__(332).default);
-					});
-				}
-			}]
-		}, {
-			path: '/messages',
-			getComponent: function getComponent(nextState, cb) {
-				__webpack_require__.e/* nsure */(4, function (require) {
-					cb(null, __webpack_require__(339).default);
-				});
-			}
-		}, {
-			path: '/user',
-			getComponent: function getComponent(nextState, cb) {
-				__webpack_require__.e/* nsure */(5, function (require) {
-					cb(null, __webpack_require__(340).default);
-				});
-			}
-		}, {
-			path: '/signin',
-			getComponent: function getComponent(nextState, cb) {
-				__webpack_require__.e/* nsure */(6, function (require) {
-					cb(null, __webpack_require__(341).default);
-				});
-			}
-		}, {
-			path: '/',
-			getComponent: function getComponent(nextState, cb) {
-				__webpack_require__.e/* nsure */(7, function (require) {
-					cb(null, __webpack_require__(346).default);
-				});
-			}
-		}]
+		//onEnter: redirectToDashboard,
+		childRoutes: [Home, HomeList, HomeDetails, HomeEnroll, Messages, User, Signin, Other, Page404]
 	};
+
 	exports.default = routes;
 
 /***/ },
@@ -28925,9 +28970,7 @@ webpackJsonp([0,8],[
 
 	var userActions = _interopRequireWildcard(_action);
 
-	__webpack_require__(285);
-
-	__webpack_require__(293);
+	__webpack_require__(291);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -28945,26 +28988,26 @@ webpackJsonp([0,8],[
 	    function App(props) {
 	        _classCallCheck(this, App);
 
-	        return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+	        var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+
+	        _this.state = { checkNum: true };
+	        return _this;
 	    }
 
 	    _createClass(App, [{
 	        key: 'componentWillMount',
 	        value: function componentWillMount() {
+	            //console.log(this.props)
 	            //检查登录
 	            this.checkAuth(this.props.user.loginState);
 	        }
 	    }, {
 	        key: 'componentWillReceiveProps',
 	        value: function componentWillReceiveProps(nextProps) {
-	            var redirectAfterLogin = this.props.location.pathname;
-	            // const { dispatch, selectedReddit } = nextProps
-	            //console.log('WillReceiveProps:' + nextProps.userInfo.loginState)
-	            //this.checkAuth(nextProps.userInfo.loginState);
-	            if (!nextProps.user.loginState) {
-	                //检查登录
-	                //this.context.router.push('/signin?next=${redirectAfterLogin}')
-	                this.context.router.push('/signin');
+	            var redirectAfterLogin = this.props.location.pathname + this.props.location.search;
+	            if (!nextProps.user.loginState && this.state.checkNum) {
+	                this.setState({ checkNum: false });
+	                this.context.router.push('/signin?next=' + redirectAfterLogin);
 	            }
 	        }
 	    }, {
@@ -81487,6 +81530,7 @@ webpackJsonp([0,8],[
 	});
 	exports.loginCheck = loginCheck;
 	exports.loginUser = loginUser;
+	exports.userLocation = userLocation;
 
 	var _types = __webpack_require__(279);
 
@@ -81494,13 +81538,13 @@ webpackJsonp([0,8],[
 
 	var _api = __webpack_require__(280);
 
-	var _api2 = _interopRequireDefault(_api);
-
-	var _utils = __webpack_require__(283);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	var _utils = __webpack_require__(285);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	var uid = (0, _utils.getItem)('uid');
+	var session = (0, _utils.getItem)('session');
+	var device = (0, _utils.getItem)('device') || 'phone';
 
 	function loginUserError() {
 	    return {
@@ -81510,8 +81554,7 @@ webpackJsonp([0,8],[
 	            loginStateText: '登录验证末通过'
 	        }
 	    };
-	} //import api from '../../../api'
-
+	}
 
 	function loginSuccess(data) {
 	    return {
@@ -81523,40 +81566,94 @@ webpackJsonp([0,8],[
 	//用户登录检查
 	function loginCheck() {
 	    return function (dispatch) {
-	        return _api2.default.check_session.then(function (data) {
-	            //console.log(data)
-	            if (data.ret != '0') {
+	        return (0, _api.httpRequest)('check_session', { 'target_uid': uid, 'save_session': session, 'device': device }).then(function (data) {
+	            if (data == '6056' || data == '6066') {
 	                //history.pushState(null, '/signin');
+	                //console.log('登录失败')
 	                dispatch(loginUserError());
 	            } else {
 	                //这里要传入uid 与 seccess
-	                dispatch(loginSuccess({ uid: data.data.uid, session: data.data.session }));
+	                //console.log('登录成功')
+	                dispatch(loginSuccess({ uid: data.uid, session: data.session, loginState: true }));
 	            }
 	        });
 	    };
 	}
 
-	//用户登录
+	//用户登录 login
 	function loginUser(formData) {
-	    var redirect = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "/";
-
 	    return function (dispatch) {
-	        return _api2.default.login(formData).then(function (data) {
-	            console.log(JSON.stringify(formData));
-	            console.log(data);
-	            if (data.ret == '0') {
+	        return (0, _api.httpRequest)('login', formData).then(function (data) {
+	            if (typeof data !== 'number') {
 	                //登录成功
-	                (0, _utils.setItem)('session', data.data.session);
-	                (0, _utils.setItem)('uid', data.data.uid);
-	                dispatch(loginSuccess(data.data));
+	                (0, _utils.setItem)('session', data.session);
+	                (0, _utils.setItem)('uid', data.uid);
+	                dispatch(loginSuccess(data));
 	                //dispatch(push('/'))
 	                //console.log(dispatch(push('/')))
-	            } else {
-	                alert('登录失败');
-	                console.log(data.ret);
 	            }
 	        });
 	    };
+	}
+
+	//用户定位
+	if (!(0, _utils.getItem)('city_id')) {
+	    (function () {
+	        //解析定位结果
+	        var onComplete = function onComplete(data) {
+	            var str = ['定位成功'];
+	            str.push('经度：' + data.position.getLng());
+	            str.push('纬度：' + data.position.getLat());
+	            str.push('精度：' + data.accuracy + ' 米');
+	            str.push('是否经过偏移：' + (data.isConverted ? '是' : '否'));
+	            regeocoder(data.position.getLng(), data.position.getLat());
+	        };
+	        //解析定位错误信息
+
+
+	        var onError = function onError(data) {
+	            (0, _utils.setItem)("city_id", '000000');
+	            (0, _utils.setItem)("city_name", '全国');
+	            console.log('解析定位错误信息');
+	        };
+	        //高德逆编辑获取城市与城市ID
+
+
+	        var regeocoder = function regeocoder(longitude, latitude) {
+	            var lnglatXY = (longitude + ',' + latitude).split(',');
+	            var geocoder = new AMap.Geocoder({ radius: 1000, extensions: "all" });
+	            geocoder.getAddress(lnglatXY, function (status, result) {
+	                if (status === 'complete' && result.info === 'OK') {
+	                    var city_id = result.regeocode.addressComponent.adcode.substring(0, 4) + '00';
+	                    var city_name = result.regeocode.addressComponent.city;
+	                    (0, _utils.setItem)("city_id", city_id);
+	                    (0, _utils.setItem)("city_name", city_name);
+	                }
+	            });
+	        };
+
+	        console.log('高德定位');
+	        var map = new AMap.Map('iCenter');
+	        map.plugin('AMap.Geolocation', function () {
+	            var geolocation = new AMap.Geolocation({
+	                enableHighAccuracy: true, //是否使用高精度定位，默认:true
+	                timeout: 10000, //超过10秒后停止定位，默认：无穷大
+	                maximumAge: 0 });
+	            map.addControl(geolocation);
+	            geolocation.getCurrentPosition();
+	            AMap.event.addListener(geolocation, 'complete', onComplete);
+	            AMap.event.addListener(geolocation, 'error', onError);
+	        });
+	    })();
+	}
+	console.log((0, _utils.getItem)('city_id'));
+	console.log((0, _utils.getItem)('city_name'));
+
+	function userLocation(data) {
+	    return function (dispatch) {
+	        return console.log(data);
+	    };
+	    dispatch(setLocation(data));
 	}
 
 /***/ },
@@ -81569,12 +81666,23 @@ webpackJsonp([0,8],[
 	  value: true
 	});
 	//用户登录
+	var SET_LOCATION = exports.SET_LOCATION = 'SET_LOCATION';
 	var LOGIN_USER_SUCCESS = exports.LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';
 	var LOGIN_USER_ERROR = exports.LOGIN_USER_ERROR = 'LOGIN_USER_ERROR';
 
 	//广告
 	var GET_HOLICHAT_BANNER = exports.GET_HOLICHAT_BANNER = 'GET_HOLICHAT_BANNER';
 	var GET_COMMUNITY_BANNER = exports.GET_COMMUNITY_BANNER = 'GET_COMMUNITY_BANNER';
+
+	//赛事简介信息
+	var GET_BRIEF = exports.GET_BRIEF = 'GET_BRIEF';
+	var GET_RESULT = exports.GET_RESULT = 'GET_RESULT';
+
+	//报名表信息
+	var GET_ENROLL = exports.GET_ENROLL = 'GET_ENROLL';
+
+	//主页推荐广告
+	var GET_RECOMMENDED = exports.GET_RECOMMENDED = 'GET_RECOMMENDED';
 
 /***/ },
 /* 280 */
@@ -81585,12 +81693,25 @@ webpackJsonp([0,8],[
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
+	exports.getItemInfo = exports.getImageUrlPath = exports.httpRequest = undefined;
 
 	var _api = __webpack_require__(281);
 
 	var _api2 = _interopRequireDefault(_api);
 
-	var _utils = __webpack_require__(283);
+	var _httpConfig = __webpack_require__(283);
+
+	var _httpConfig2 = _interopRequireDefault(_httpConfig);
+
+	var _httpErrorCodeConfig = __webpack_require__(284);
+
+	var _httpErrorCodeConfig2 = _interopRequireDefault(_httpErrorCodeConfig);
+
+	var _utils = __webpack_require__(285);
+
+	var _antd = __webpack_require__(277);
+
+	__webpack_require__(287);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -81598,37 +81719,85 @@ webpackJsonp([0,8],[
 	var session = (0, _utils.getItem)('session');
 	var device = '';
 	var baseURI = 'http://app.holichat.com/';
-	var imgBaseUrl = 'http://img.holichat.com/uploads/';
-	var api = new _api2.default({
-		baseURI: baseURI,
-		headers: { 'Accept': 'application/json' }
+	var imgPathUrl = 'http://img.holichat.com/uploads/';
+
+	var fetch = new _api2.default({
+		baseURI: baseURI
 	});
 
-	exports.default = {
-		//系统
-		get_sts_auth: api.get('sys/api/sts_auth', { 'type': 'app_image', 'session': session, 'uid': uid }), //name: 获取STS授权
-		//获取图片
-		getImg: function getImg(url) {
-			return imgBaseUrl + url;
-		},
-		//登录
-		login: function login(formData) {
-			return api.post('login/api/login', formData);
-		},
-		check_session: api.get('login/api/check_session', { 'target_uid': uid, 'save_session': session, 'device': device }),
+	/**
+	 * url 请求接口
+	 * params 参数json格式
+	 * method 默认get
+	 */
+	var httpRequest = exports.httpRequest = function httpRequest(url, params) {
+		if (!_httpConfig2.default.hasOwnProperty(url)) return console.log('配制表时没有这个接口');
+		var setUrl = _httpConfig2.default[url].action;
+		var method = _httpConfig2.default[url].method;
+		var param = params || {};
+		if (typeof url !== 'string') {
+			alert('接口写类型错误');
+		}
+		// resolve ，reject，分别表示异步操作执行成功后的回调函数和异步操作执行失败后的回调函数。
+		return new Promise(function (resolve, reject) {
+			//做一些异步操作
+			if (method == 'get') {
+				if (!param["session"]) {
+					param["session"] = session;
+				}
+				if (!param["uid"]) {
+					param["uid"] = uid;
+				}
+				//console.log(param)
+				fetch.get(setUrl, param).then(function (data) {
+					httpCallback(data);
+				}, function (err) {
+					httpCallback(err);
+				});
+			} else if (method == 'post') {
+				fetch.post(setUrl, param).then(function (data) {
+					httpCallback(data);
+				}, function (err) {
+					httpCallback(err);
+				});
+			}
+			//检查查接口返回
+			function httpCallback(data) {
+				if (data && data["status"]) {
+					_antd.message.warning(setUrl + ',网络接口异常');
+					return reject(new Error(data["status"]));
+				} else if (data == 'fail') {
+					_antd.message.warning('网络异常');
+					return reject(setUrl + '网络异常');
+				} else if (typeof data == "number") {
+					return reject(data);
+				} else if (data['ret'] != 0) {
+					var code_num = data['ret'];
+					_antd.message.warning(_httpErrorCodeConfig2.default[code_num].tips);
+					return resolve(data['ret']);
+				}
+				return resolve(data['data'] || "");
+			}
+		});
+	};
 
-		//广告
-		get_community_banner: api.get('ad/api/ad_community_banner', { 'community_cid': 1 }), //name: 社团首页广告位
-		get_holichat_banner: api.get('ad/api/ad_holichat_banner'), //name: 活力圈首页广告位
+	//返回图片地址
+	var getImageUrlPath = exports.getImageUrlPath = function getImageUrlPath(src) {
+		return src.length > 1 ? imgPathUrl + src : imgPathUrl + 'm/df/icon_256.png';
+		// const imgObj = new Image()
+		// imgObj.src = imgPathUrl + imageStr
+		// if(imgObj.width > 0 && imgObj.height > 0){
+		// 	return imgPathUrl + imageStr
+		// }else{
+		// 	return imgPathUrl + 'm/df/icon_256.png'
+		// }
+	};
 
-		//赛事
-		get_competition_list: function get_competition_list(parameter) {
-			return api.get('event/view/event_list', { parameter: parameter });
-		},
-		//"get_competition_list"         :this.urlBase + "event/view/event_list?",     //name: 获取赛事列表       type: Get  Params: community_cid=0 category_id=0 city_id=0 status= official=0 cost=0 page_size=10 page=1 event_type=0
-
-		//专题
-		get_topic_list: api.get('topic/view/topic_list') };
+	//返回项目详情信息
+	var getItemInfo = exports.getItemInfo = function getItemInfo(type, id) {
+		console.log(type);
+		console.log(id);
+	};
 
 /***/ },
 /* 281 */
@@ -81674,7 +81843,7 @@ webpackJsonp([0,8],[
 	        return new Promise(function (resolve, reject) {
 	            fetch(opts.baseURI + url, {
 	                method: 'GET',
-	                headers: opts.headers
+	                headers: { 'Accept': 'application/json' }
 	            }).then(function (response) {
 	                if (response.ok) {
 	                    return response.json();
@@ -81684,18 +81853,18 @@ webpackJsonp([0,8],[
 	            }).then(function (response) {
 	                resolve(response);
 	            }).catch(function (err) {
-	                reject({ status: -1 });
+	                reject('fail');
 	            });
 	        });
 	    };
 	    /**
 	     * 基于 fetch 封装的 POST请求  FormData 表单数据
 	     * @param url
-	     * @param formData
+	     * @param params
 	     * @param headers
 	     * @returns {Promise}
 	     */
-	    this.post = function (url, formData) {
+	    this.post = function (url, params) {
 	        return new Promise(function (resolve, reject) {
 	            fetch(opts.baseURI + url, {
 	                method: 'POST',
@@ -81703,7 +81872,7 @@ webpackJsonp([0,8],[
 	                    'Accept': 'application/json',
 	                    "Content-Type": "application/x-www-form-urlencoded"
 	                },
-	                body: formData
+	                body: params
 	            }).then(function (response) {
 	                if (response.ok) {
 	                    return response.json();
@@ -81713,7 +81882,7 @@ webpackJsonp([0,8],[
 	            }).then(function (response) {
 	                resolve(response);
 	            }).catch(function (err) {
-	                reject({ status: -1 });
+	                reject('fail');
 	            });
 	        });
 	    };
@@ -82163,6 +82332,979 @@ webpackJsonp([0,8],[
 
 /***/ },
 /* 283 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	var data = {
+	    "get_phone_check_code": {
+	        "action": "sys/phone/get_phone_check_code",
+	        "method": "get"
+	    },
+	    "confirm_code": {
+	        "action": "sys/phone/confirm_code",
+	        "method": "get"
+	    },
+	    "get_sts_auth": {
+	        "action": "sys/api/sts_auth",
+	        "method": "get"
+	    },
+	    "sys_info": {
+	        "action": "sys/api/info",
+	        "method": "get"
+	    },
+	    "get_pubkey": {
+	        "action": "login/api/get_pubkey",
+	        "method": "get"
+	    },
+	    "rsa_login": {
+	        "action": "login/api/rsa_login",
+	        "method": "post"
+	    },
+	    "re_session": {
+	        "action": "login/api/re_session",
+	        "method": "get"
+	    },
+	    "check_session": {
+	        "action": "login/api/check_session",
+	        "method": "get"
+	    },
+	    "login": {
+	        "action": "login/api/login",
+	        "method": "post"
+	    },
+	    "other_login": {
+	        "action": "login/sdk/other_login",
+	        "method": "post"
+	    },
+	    "wx_access_token": {
+	        "action": "login/sdk/wx_access_token",
+	        "method": "get"
+	    },
+	    "phone_exists": {
+	        "action": "user/api/phone_exists",
+	        "method": "get"
+	    },
+	    "reg": {
+	        "action": "user/api/reg",
+	        "method": "post"
+	    },
+	    "reset_pwd": {
+	        "action": "user/api/reset_pwd",
+	        "method": "post"
+	    },
+	    "get_user_info": {
+	        "action": "user/api/user_info",
+	        "method": "get"
+	    },
+	    "get_target_user_info": {
+	        "action": "user/api/target_user_info",
+	        "method": "get"
+	    },
+	    "set_bind_phone": {
+	        "action": "user/api/bind_phone",
+	        "method": "get"
+	    },
+	    "edit_user_info": {
+	        "action": "user/api/user_edit",
+	        "method": "post"
+	    },
+	    "change_pwd": {
+	        "action": "user/api/change_pwd",
+	        "method": "post"
+	    },
+	    "user_sign_in": {
+	        "action": "user/api/user_sign_in",
+	        "method": "get"
+	    },
+	    "is_user_sign": {
+	        "action": "user/api/is_user_sign",
+	        "method": "get"
+	    },
+	    "bind_community_id": {
+	        "action": "user/api/invite_code",
+	        "method": "get"
+	    },
+	    "get_competition_category": {
+	        "action": "event/view/category",
+	        "method": "get"
+	    },
+	    "get_competition_region": {
+	        "action": "event/view/region",
+	        "method": "get"
+	    },
+	    "get_competition_list": {
+	        "action": "event/view/event_list",
+	        "method": "get"
+	    },
+	    "get_competition_details": {
+	        "action": "event/view/get_info",
+	        "method": "get"
+	    },
+	    "get_competition_introduction": {
+	        "action": "event/view/get_brief",
+	        "method": "get"
+	    },
+	    "get_competition_address": {
+	        "action": "event/view/get_address",
+	        "method": "get"
+	    },
+	    "get_competition_enroll_info": {
+	        "action": "event/view/get_enroll_info",
+	        "method": "get"
+	    },
+	    "get_enroll_pro_group_info": {
+	        "action": "event/view/event_pro_group_info",
+	        "method": "get"
+	    },
+	    "search_competition_list": {
+	        "action": "event/view/event_search",
+	        "method": "get"
+	    },
+	    "get_competition_result": {
+	        "action": "event/view/event_result",
+	        "method": "get"
+	    },
+	    "get_event_brief_array": {
+	        "action": "event/view/get_brief_array",
+	        "method": "get"
+	    },
+	    "edit_competitors_info": {
+	        "action": "event/interface/event_enroll_edit",
+	        "method": "post"
+	    },
+	    "competition_pay_confirm": {
+	        "action": "event/interface/event_pay_confirm",
+	        "method": "get"
+	    },
+	    "select_competition_enroll": {
+	        "action": "event/interface/event_enroll_select",
+	        "method": "post"
+	    },
+	    "get_eroll_order_info": {
+	        "action": "event/interface/event_order_info",
+	        "method": "get"
+	    },
+	    "event_project_check": {
+	        "action": "event/interface/event_project_check",
+	        "method": "get"
+	    },
+	    "event_can_enroll_check": {
+	        "action": "event/interface/event_can_enroll_check",
+	        "method": "get"
+	    },
+	    "check_competition_enroll": {
+	        "action": "event/interface/event_enroll_check",
+	        "method": "get"
+	    },
+	    "check_competition_sign": {
+	        "action": "event/interface/event_sign_check",
+	        "method": "get"
+	    },
+	    "competition_enroll": {
+	        "action": "event/interface/event_enroll",
+	        "method": "post"
+	    },
+	    "event_pay_check": {
+	        "action": "event/interface/event_pay_check",
+	        "method": "post"
+	    },
+	    "send_moment": {
+	        "action": "event/theme/add",
+	        "method": "post"
+	    },
+	    "get_moment_list": {
+	        "action": "event/theme/theme_list",
+	        "method": "get"
+	    },
+	    "like_moment": {
+	        "action": "event/theme/praise",
+	        "method": "get"
+	    },
+	    "unlike_moment": {
+	        "action": "event/theme/cancel_praise",
+	        "method": "get"
+	    },
+	    "coment_moment": {
+	        "action": "event/theme/reply",
+	        "method": "post"
+	    },
+	    "follow_competition": {
+	        "action": "event/attention/event_attention",
+	        "method": "get"
+	    },
+	    "unfollow_competition": {
+	        "action": "event/attention/cancel_attention",
+	        "method": "get"
+	    },
+	    "check_competition_follow": {
+	        "action": "event/attention/check_attention",
+	        "method": "get"
+	    },
+	    "get_team_info": {
+	        "action": "event/team/event_team_info",
+	        "method": "get"
+	    },
+	    "edit_team_name": {
+	        "action": "event/team/event_edit_team_name",
+	        "method": "get"
+	    },
+	    "get_venue_category": {
+	        "action": "venue/view/category",
+	        "method": "get"
+	    },
+	    "get_venue_region": {
+	        "action": "venue/view/region",
+	        "method": "get"
+	    },
+	    "get_venue_list": {
+	        "action": "venue/view/venue_list",
+	        "method": "get"
+	    },
+	    "get_venue_info": {
+	        "action": "venue/view/info",
+	        "method": "get"
+	    },
+	    "get_club_category": {
+	        "action": "community/view/category",
+	        "method": "get"
+	    },
+	    "get_club_region": {
+	        "action": "community/view/region",
+	        "method": "get"
+	    },
+	    "get_club_list": {
+	        "action": "community/view/community_list",
+	        "method": "get"
+	    },
+	    "get_club_info": {
+	        "action": "community/view/community_info",
+	        "method": "get"
+	    },
+	    "get_commuity_bulletion": {
+	        "action": "community/view/community_bulletion",
+	        "method": "get"
+	    },
+	    "get_club_recommend": {
+	        "action": "community/view/community_recommend",
+	        "method": "get"
+	    },
+	    "get_follow_clubs": {
+	        "action": "community/attention/user_attention",
+	        "method": "get"
+	    },
+	    "follow_club": {
+	        "action": "community/attention/attention",
+	        "method": "get"
+	    },
+	    "unfollow_club": {
+	        "action": "community/attention/cancel_attention",
+	        "method": "get"
+	    },
+	    "get_club_fans_list": {
+	        "action": "community/attention/fans_attention",
+	        "method": "get"
+	    },
+	    "check_club_follow": {
+	        "action": "community/attention/check_attention",
+	        "method": "get"
+	    },
+	    "get_club_bind_venue": {
+	        "action": "community/view/community_bind_venue",
+	        "method": "get"
+	    },
+	    "get_community_relay_act": {
+	        "action": "community/view/community_relay_act",
+	        "method": "get"
+	    },
+	    "get_community_album_list": {
+	        "action": "community/album/community_album_list",
+	        "method": "get"
+	    },
+	    "get_community_album_photo_list": {
+	        "action": "community/album/community_album_photo_list",
+	        "method": "get"
+	    },
+	    "regeocode": {
+	        "action": "other/api/get_geocoding",
+	        "method": "post"
+	    },
+	    "un_bind_community": {
+	        "action": "admin/manage/un_bind_community",
+	        "method": "get"
+	    },
+	    "alipay_callback_url": {
+	        "action": "pay/api/alipay",
+	        "method": "post"
+	    },
+	    "wx_unifiedorder": {
+	        "action": "pay/api/weixin_unifiedorder",
+	        "method": "post"
+	    },
+	    "get_community_home_ad": {
+	        "action": "ad/api/ad_home",
+	        "method": "get"
+	    },
+	    "get_community_banner": {
+	        "action": "ad/api/ad_community_banner",
+	        "method": "get"
+	    },
+	    "get_holichat_banner": {
+	        "action": "ad/api/ad_holichat_banner",
+	        "method": "get"
+	    },
+	    "get_live_banner": {
+	        "action": "ad/api/ad_live_banner",
+	        "method": "get"
+	    },
+	    "get_holichat_custom_ad": {
+	        "action": "ad/home/custom",
+	        "method": "get"
+	    },
+	    "get_holichat_recommended_ad": {
+	        "action": "ad/home/recommend",
+	        "method": "get"
+	    },
+	    "get_flash_sale_banner": {
+	        "action": "ad/api/ad_flash_sale_banner",
+	        "method": "get"
+	    },
+	    "get_sys_message": {
+	        "action": "message/api/get_sys_message",
+	        "method": "get"
+	    },
+	    "get_new_sys_message_cnt": {
+	        "action": "message/api/get_new_sys_message_cnt",
+	        "method": "get"
+	    },
+	    "add_receipt_info": {
+	        "action": "lottery/user/add_receipt_info",
+	        "method": "get"
+	    },
+	    "user_receipt_info": {
+	        "action": "lottery/user/user_receipt_info",
+	        "method": "get"
+	    },
+	    "edit_receipt_info": {
+	        "action": "lottery/user/edit_receipt_info",
+	        "method": "get"
+	    },
+	    "get_lottery_score": {
+	        "action": "lottery/view/get_lottery_score",
+	        "method": "get"
+	    },
+	    "get_lottery_count": {
+	        "action": "lottery/view/get_lottery_count",
+	        "method": "get"
+	    },
+	    "get_lottery_list": {
+	        "action": "lottery/view/get_lottery_list",
+	        "method": "get"
+	    },
+	    "get_lottery_info": {
+	        "action": "lottery/view/get_lottery_info",
+	        "method": "get"
+	    },
+	    "get_lottery_item_list": {
+	        "action": "lottery/view/get_lottery_item_list",
+	        "method": "get"
+	    },
+	    "get_lottery_item_info": {
+	        "action": "lottery/view/get_lottery_item_info",
+	        "method": "get"
+	    },
+	    "get_lottery_record": {
+	        "action": "lottery/view/get_lottery_record",
+	        "method": "get"
+	    },
+	    "lottery": {
+	        "action": "lottery/interface/lottery",
+	        "method": "get"
+	    },
+	    "get_lotterysite_region": {
+	        "action": "lotterysite/view/region",
+	        "method": "get"
+	    },
+	    "get_lotterysite_list": {
+	        "action": "lotterysite/view/site_list",
+	        "method": "get"
+	    },
+	    "get_lotterysite_info": {
+	        "action": "lotterysite/view/info",
+	        "method": "get"
+	    },
+	    "get_rc_token": {
+	        "action": "im/rc/token",
+	        "method": "get"
+	    },
+	    "join_rc_group": {
+	        "action": "im/rc/group_join",
+	        "method": "get"
+	    },
+	    "group_user_query": {
+	        "action": "im/rc/group_user_query",
+	        "method": "get"
+	    },
+	    "group_user_list": {
+	        "action": "im/rc/group_user_list",
+	        "method": "get"
+	    },
+	    "group_quit": {
+	        "action": "im/rc/group_quit",
+	        "method": "get"
+	    },
+	    "get_star_list": {
+	        "action": "news/star/lists",
+	        "method": "get"
+	    },
+	    "get_star_info": {
+	        "action": "news/star/info",
+	        "method": "get"
+	    },
+	    "get_holichat_news_list": {
+	        "action": "news/pf/lists",
+	        "method": "get"
+	    },
+	    "get_holichat_news_info": {
+	        "action": "news/pf/info",
+	        "method": "get"
+	    },
+	    "get_community_news_list": {
+	        "action": "news/community/lists",
+	        "method": "get"
+	    },
+	    "get_community_news_info": {
+	        "action": "news/community/info",
+	        "method": "get"
+	    },
+	    "get_lbs_competition_list": {
+	        "action": "lbs/lbs/list_lbs",
+	        "method": "get"
+	    },
+	    "get_lotterysite_lbs_list": {
+	        "action": "lbs/lbs/site_list_lbs",
+	        "method": "get"
+	    },
+	    "get_lbs_venue_list": {
+	        "action": "lbs/lbs/venue_list_lbs",
+	        "method": "get"
+	    },
+	    "get_activity_category": {
+	        "action": "activity/view/category",
+	        "method": "get"
+	    },
+	    "get_activity_region": {
+	        "action": "activity/view/region",
+	        "method": "get"
+	    },
+	    "get_activity_list": {
+	        "action": "activity/view/activity_list",
+	        "method": "get"
+	    },
+	    "get_activity_details": {
+	        "action": "activity/view/get_info",
+	        "method": "get"
+	    },
+	    "get_activity_introduction": {
+	        "action": "activity/view/get_brief",
+	        "method": "get"
+	    },
+	    "get_activity_enroll_info": {
+	        "action": "activity/view/get_enroll_info",
+	        "method": "get"
+	    },
+	    "get_activity_enroll_pro_group_info": {
+	        "action": "activity/view/activity_pro_group_info",
+	        "method": "get"
+	    },
+	    "search_activity_list": {
+	        "action": "activity/view/activity_search",
+	        "method": "get"
+	    },
+	    "get_activity_result": {
+	        "action": "activity/view/activity_result",
+	        "method": "get"
+	    },
+	    "get_activity_address": {
+	        "action": "activity/view/get_address",
+	        "method": "get"
+	    },
+	    "get_activity_brief_array": {
+	        "action": "activity/view/get_brief_array",
+	        "method": "get"
+	    },
+	    "edit_activity_enroll_info": {
+	        "action": "activity/interface/activity_enroll_edit",
+	        "method": "post"
+	    },
+	    "activity_pay_confirm": {
+	        "action": "activity/interface/activity_pay_confirm",
+	        "method": "get"
+	    },
+	    "select_activity_enroll": {
+	        "action": "activity/interface/activity_enroll_select",
+	        "method": "post"
+	    },
+	    "get_activity_eroll_order_info": {
+	        "action": "activity/interface/activity_order_info",
+	        "method": "get"
+	    },
+	    "activity_project_check": {
+	        "action": "activity/interface/activity_project_check",
+	        "method": "get"
+	    },
+	    "activity_can_enroll_check": {
+	        "action": "activity/interface/activity_can_enroll_check",
+	        "method": "get"
+	    },
+	    "check_activity_enroll": {
+	        "action": "activity/interface/activity_enroll_check",
+	        "method": "get"
+	    },
+	    "check_activity_sign": {
+	        "action": "activity/interface/activity_sign_check",
+	        "method": "get"
+	    },
+	    "activity_enroll": {
+	        "action": "activity/interface/activity_enroll",
+	        "method": "post"
+	    },
+	    "activity_pay_check": {
+	        "action": "activity/interface/activity_pay_check",
+	        "method": "post"
+	    },
+	    "send_activity_moment": {
+	        "action": "activity/theme/add",
+	        "method": "post"
+	    },
+	    "get_activity_moment_list": {
+	        "action": "activity/theme/theme_list",
+	        "method": "get"
+	    },
+	    "like_activity_moment": {
+	        "action": "activity/theme/praise",
+	        "method": "get"
+	    },
+	    "unlike_activity_moment": {
+	        "action": "activity/theme/cancel_praise",
+	        "method": "get"
+	    },
+	    "coment_activity_moment": {
+	        "action": "activity/theme/reply",
+	        "method": "post"
+	    },
+	    "follow_activity": {
+	        "action": "activity/attention/activity_attention",
+	        "method": "get"
+	    },
+	    "unfollow_activity": {
+	        "action": "activity/attention/cancel_attention",
+	        "method": "get"
+	    },
+	    "check_activity_follow": {
+	        "action": "activity/attention/check_attention",
+	        "method": "get"
+	    },
+	    "get_activity_team_info": {
+	        "action": "activity/team/activity_team_info",
+	        "method": "get"
+	    },
+	    "edit_activity_team_name": {
+	        "action": "activity/team/activity_edit_team_name",
+	        "method": "get"
+	    },
+	    "get_training_category": {
+	        "action": "training/view/category",
+	        "method": "get"
+	    },
+	    "get_training_region": {
+	        "action": "training/view/region",
+	        "method": "get"
+	    },
+	    "get_training_list": {
+	        "action": "training/view/training_list",
+	        "method": "get"
+	    },
+	    "get_training_details": {
+	        "action": "training/view/get_info",
+	        "method": "get"
+	    },
+	    "get_training_introduction": {
+	        "action": "training/view/get_brief",
+	        "method": "get"
+	    },
+	    "get_training_enroll_info": {
+	        "action": "training/view/get_enroll_info",
+	        "method": "get"
+	    },
+	    "get_training_enroll_pro_group_info": {
+	        "action": "training/view/training_pro_group_info",
+	        "method": "get"
+	    },
+	    "search_training_list": {
+	        "action": "training/view/training_search",
+	        "method": "get"
+	    },
+	    "get_training_result": {
+	        "action": "training/view/training_result",
+	        "method": "get"
+	    },
+	    "get_training_address": {
+	        "action": "training/view/get_address",
+	        "method": "get"
+	    },
+	    "edit_training_enroll_info": {
+	        "action": "training/interface/training_enroll_edit",
+	        "method": "post"
+	    },
+	    "training_pay_confirm": {
+	        "action": "training/interface/training_pay_confirm",
+	        "method": "get"
+	    },
+	    "select_training_enroll": {
+	        "action": "training/interface/training_enroll_select",
+	        "method": "post"
+	    },
+	    "get_training_eroll_order_info": {
+	        "action": "training/interface/training_order_info",
+	        "method": "get"
+	    },
+	    "training_project_check": {
+	        "action": "training/interface/training_project_check",
+	        "method": "get"
+	    },
+	    "training_can_enroll_check": {
+	        "action": "training/interface/training_can_enroll_check",
+	        "method": "get"
+	    },
+	    "check_training_enroll": {
+	        "action": "training/interface/training_enroll_check",
+	        "method": "get"
+	    },
+	    "check_training_sign": {
+	        "action": "training/interface/training_sign_check",
+	        "method": "get"
+	    },
+	    "training_enroll": {
+	        "action": "training/interface/training_enroll",
+	        "method": "post"
+	    },
+	    "training_pay_check": {
+	        "action": "training/interface/training_pay_check",
+	        "method": "post"
+	    },
+	    "get_training_brief_array": {
+	        "action": "training/view/get_brief_array",
+	        "method": "get"
+	    },
+	    "send_training_moment": {
+	        "action": "training/theme/add",
+	        "method": "post"
+	    },
+	    "get_training_moment_list": {
+	        "action": "training/theme/theme_list",
+	        "method": "get"
+	    },
+	    "like_training_moment": {
+	        "action": "training/theme/praise",
+	        "method": "get"
+	    },
+	    "unlike_training_moment": {
+	        "action": "training/theme/cancel_praise",
+	        "method": "get"
+	    },
+	    "coment_training_moment": {
+	        "action": "training/theme/reply",
+	        "method": "post"
+	    },
+	    "follow_training": {
+	        "action": "training/attention/training_attention",
+	        "method": "get"
+	    },
+	    "unfollow_training": {
+	        "action": "training/attention/cancel_attention",
+	        "method": "get"
+	    },
+	    "check_training_follow": {
+	        "action": "training/attention/check_attention",
+	        "method": "get"
+	    },
+	    "get_training_team_info": {
+	        "action": "training/team/training_team_info",
+	        "method": "get"
+	    },
+	    "edit_training_team_name": {
+	        "action": "training/team/training_edit_team_name",
+	        "method": "get"
+	    },
+	    "get_enroll_template": {
+	        "action": "mine/user/user_event_template",
+	        "method": "get"
+	    },
+	    "get_enroller_info": {
+	        "action": "mine/user/user_event_content",
+	        "method": "get"
+	    },
+	    "get_user_nopay_competition": {
+	        "action": "mine/user/user_no_pay_event",
+	        "method": "get"
+	    },
+	    "get_activity_enroll_template": {
+	        "action": "mine/user/user_activity_template",
+	        "method": "get"
+	    },
+	    "get_activity_enroller_info": {
+	        "action": "mine/user/user_activity_content",
+	        "method": "get"
+	    },
+	    "get_user_nopay_activity": {
+	        "action": "mine/user/user_no_pay_activity",
+	        "method": "get"
+	    },
+	    "get_trainning_enroll_template": {
+	        "action": "mine/user/user_training_template",
+	        "method": "get"
+	    },
+	    "get_training_enroller_info": {
+	        "action": "mine/user/user_training_content",
+	        "method": "get"
+	    },
+	    "get_user_nopay_training": {
+	        "action": "mine/user/user_no_pay_training",
+	        "method": "get"
+	    },
+	    "get_user_act_list": {
+	        "action": "mine/user/user_act_list",
+	        "method": "get"
+	    },
+	    "get_user_no_pay_act_list": {
+	        "action": "mine/user/user_no_pay_act_list",
+	        "method": "get"
+	    },
+	    "get_user_act_attention_list": {
+	        "action": "mine/user/user_act_attention_list",
+	        "method": "get"
+	    },
+	    "get_user_no_pay_cnt": {
+	        "action": "mine/interface/user_act_no_pay_cnt",
+	        "method": "get"
+	    },
+	    "is_user_no_pay_cnt": {
+	        "action": "mine/interface/is_user_act_no_pay",
+	        "method": "get"
+	    },
+	    "user_delete_act_list": {
+	        "action": "mine/user/user_delete_act_list",
+	        "method": "post"
+	    },
+	    "user_linkman_list": {
+	        "action": "mine/linkman/user_linkman_list",
+	        "method": "get"
+	    },
+	    "user_linkman_add": {
+	        "action": "mine/linkman/user_linkman_add",
+	        "method": "get"
+	    },
+	    "user_linkman_edit": {
+	        "action": "mine/linkman/user_linkman_edit",
+	        "method": "get"
+	    },
+	    "user_linkman_delete": {
+	        "action": "mine/linkman/user_linkman_delete",
+	        "method": "get"
+	    },
+	    "get_event_insurance_list": {
+	        "action": "insurance/view/user_insurance_event_list",
+	        "method": "get"
+	    },
+	    "get_activity_insurance_list": {
+	        "action": "insurance/view/user_insurance_activity_list",
+	        "method": "get"
+	    },
+	    "get_training_insurance_list": {
+	        "action": "insurance/view/user_insurance_training_list",
+	        "method": "get"
+	    },
+	    "get_enroll_insurance_info": {
+	        "action": "insurance/view/user_enroll_insurance_info",
+	        "method": "get"
+	    },
+	    "get_insurance_info": {
+	        "action": "insurance/view/user_insurance_info",
+	        "method": "get"
+	    },
+	    "set_user_interests": {
+	        "action": "user/api/user_interests",
+	        "method": "post"
+	    },
+	    "get_flashsale_start_time_list": {
+	        "action": "flashsale/view/sale_start_time_bucket",
+	        "method": "get"
+	    },
+	    "get_flashsale_more_time_list": {
+	        "action": "flashsale/view/sale_roll_time_bucket",
+	        "method": "get"
+	    },
+	    "get_flashsale_list": {
+	        "action": "flashsale/view/sale_list",
+	        "method": "get"
+	    },
+	    "get_flashsale_detail": {
+	        "action": "flashsale/view/sale_detail",
+	        "method": "get"
+	    },
+	    "get_flashsale_imgs": {
+	        "action": "flashsale/view/sale_pub_image_list",
+	        "method": "get"
+	    },
+	    "get_flashsale_qty": {
+	        "action": "flashsale/view/sale_qty_detail",
+	        "method": "get"
+	    },
+	    "add_sale_data": {
+	        "action": "flashsale/interface/add_sale_data",
+	        "method": "get"
+	    },
+	    "check_can_sale": {
+	        "action": "flashsale/interface/check_can_sale",
+	        "method": "get"
+	    },
+	    "get_sale_order_list": {
+	        "action": "flashsale/view/sale_order_list",
+	        "method": "get"
+	    },
+	    "get_sale_order_info": {
+	        "action": "flashsale/view/sale_order_info",
+	        "method": "get"
+	    },
+	    "get_sale_child_order_list": {
+	        "action": "flashsale/view/sale_child_order_list",
+	        "method": "get"
+	    },
+	    "get_module_switch_info": {
+	        "action": "config/config/module_sw_info",
+	        "method": "get"
+	    },
+	    "set_home_community": {
+	        "action": "user/user/set_home_community",
+	        "method": "get"
+	    },
+	    "get_home_community": {
+	        "action": "user/user/get_home_community",
+	        "method": "get"
+	    },
+	    "is_event_coupon": {
+	        "action": "event/coupon/is_event_coupon",
+	        "method": "get"
+	    },
+	    "is_activity_coupon": {
+	        "action": "activity/coupon/is_activity_coupon",
+	        "method": "get"
+	    },
+	    "is_training_coupon": {
+	        "action": "training/coupon/is_training_coupon",
+	        "method": "get"
+	    },
+	    "get_activity_coupon_info": {
+	        "action": "activity/coupon/activity_coupon_info",
+	        "method": "get"
+	    },
+	    "get_activity_group_coupon_info": {
+	        "action": "activity/coupon/activity_group_coupon_info",
+	        "method": "get"
+	    },
+	    "get_club_customer": {
+	        "action": "community/view/community_customer",
+	        "method": "get"
+	    },
+	    "get_event_coupon_info": {
+	        "action": "event/coupon/event_coupon_info",
+	        "method": "get"
+	    },
+	    "get_event_group_coupon_info": {
+	        "action": "event/coupon/event_group_coupon_info",
+	        "method": "get"
+	    },
+	    "get_training_coupon_info": {
+	        "action": "training/coupon/training_coupon_info",
+	        "method": "get"
+	    },
+	    "get_training_group_coupon_info": {
+	        "action": "training/coupon/training_group_coupon_info",
+	        "method": "get"
+	    },
+	    "check_im_user_online": {
+	        "action": "im/rc/check_user_online",
+	        "method": "get"
+	    },
+	    "get_customer_info": {
+	        "action": "community/view/community_customer_info",
+	        "method": "get"
+	    },
+	    "get_insurance_list": {
+	        "action": "insurance/view/insurance_list",
+	        "method": "get"
+	    },
+	    "get_insurance_info_by_id": {
+	        "action": "insurance/view/insurance_info",
+	        "method": "get"
+	    },
+	    "add_insurance_data": {
+	        "action": "insurance/interface/add_insurance_data",
+	        "method": "post"
+	    },
+	    "get_user_insurance_list": {
+	        "action": "mine/user/user_insurance_list",
+	        "method": "get"
+	    },
+	    "get_user_insurance_info": {
+	        "action": "mine/user/user_insurance_info",
+	        "method": "get"
+	    },
+	    "edit_event_enroll_common_info": {
+	        "action": "event/enroll/event_enroll_common_edit",
+	        "method": "post"
+	    },
+	    "edit_event_enroll_personal_info": {
+	        "action": "event/enroll/event_enroll_personal_edit",
+	        "method": "post"
+	    },
+	    "edit_activity_enroll_common_info": {
+	        "action": "activity/enroll/activity_enroll_common_edit",
+	        "method": "post"
+	    },
+	    "edit_activity_enroll_personal_info": {
+	        "action": "activity/enroll/activity_enroll_personal_edit",
+	        "method": "post"
+	    },
+	    "edit_training_enroll_common_info": {
+	        "action": "training/enroll/training_enroll_common_edit",
+	        "method": "post"
+	    },
+	    "edit_training_enroll_personal_info": {
+	        "action": "training/enroll/training_enroll_personal_edit",
+	        "method": "post"
+	    }
+	};
+	exports.default = data;
+
+/***/ },
+/* 284 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var data = { "7001": { "id": "7001", "tips": "", "type": "3" }, "7002": { "id": "7002", "tips": "已达到群上限", "type": "1" }, "7003": { "id": "7003", "tips": "获取当前用户信息失败，uid有误", "type": "3" }, "7004": { "id": "7004", "tips": "调用融云获取token接口失败", "type": "3" }, "7005": { "id": "7005", "tips": "调用融云加入群组接口失败", "type": "3" }, "7006": { "id": "7006", "tips": "调用融云退出群组接口失败", "type": "3" }, "7007": { "id": "7007", "tips": "调用融云群组成员查询接口失败", "type": "3" }, "7008": { "id": "7008", "tips": "群组id没有传或值为空", "type": "3" }, "7009": { "id": "7009", "tips": "当前页没有数据", "type": "3" }, "7010": { "id": "7010", "tips": "调用融云用户是否在线接口失败", "type": "3" }, "7011": { "id": "7011", "tips": "", "type": "3" }, "7012": { "id": "7012", "tips": "", "type": "3" }, "7013": { "id": "7013", "tips": "", "type": "3" }, "6701": { "id": "6701", "tips": "报名失败", "type": "3" }, "6702": { "id": "6702", "tips": "活动报名失败", "type": "3" }, "6704": { "id": "6704", "tips": "该活动已报名", "type": "1" }, "6705": { "id": "6705", "tips": "赛名报名失败", "type": "1" }, "6706": { "id": "6706", "tips": "关注失败", "type": "1" }, "6707": { "id": "6707", "tips": "活动已关注", "type": "1" }, "6708": { "id": "6708", "tips": "活动关注失败", "type": "1" }, "6709": { "id": "6709", "tips": "活动获取失败", "type": "1" }, "6710": { "id": "6710", "tips": "活动获取失败", "type": "1" }, "6711": { "id": "6711", "tips": "活动订单错误", "type": "1" }, "6712": { "id": "6712", "tips": "", "type": "1" }, "6713": { "id": "6713", "tips": "取消关注活动失败", "type": "1" }, "6714": { "id": "6714", "tips": "订单错误", "type": "1" }, "6715": { "id": "6715", "tips": "订单错误", "type": "1" }, "6716": { "id": "6716", "tips": "无效的活动报名id", "type": "1" }, "6717": { "id": "6717", "tips": "无效的活动报名id", "type": "1" }, "6718": { "id": "6718", "tips": "报名失败", "type": "3" }, "6719": { "id": "6719", "tips": "报名失败", "type": "3" }, "6720": { "id": "6720", "tips": "报名失败", "type": "3" }, "6721": { "id": "6721", "tips": "报名失败", "type": "3" }, "6722": { "id": "6722", "tips": "报名失败", "type": "3" }, "6723": { "id": "6723", "tips": "报名失败", "type": "3" }, "6724": { "id": "6724", "tips": "报名失败", "type": "3" }, "6730": { "id": "6730", "tips": "报名失败", "type": "3" }, "6731": { "id": "6731", "tips": "订单未支付", "type": "1" }, "6732": { "id": "6732", "tips": "", "type": "" }, "6733": { "id": "6733", "tips": "", "type": "" }, "6750": { "id": "6750", "tips": "发表失败", "type": "1" }, "6751": { "id": "6751", "tips": "发表失败", "type": "3" }, "6752": { "id": "6752", "tips": "点赞失败", "type": "1" }, "6753": { "id": "6753", "tips": "已点赞", "type": "1" }, "6754": { "id": "6754", "tips": "点赞失败", "type": "3" }, "6755": { "id": "6755", "tips": "取消点赞失败", "type": "1" }, "6756": { "id": "6756", "tips": "取消点赞失败", "type": "3" }, "6757": { "id": "6757", "tips": "评论失败", "type": "1" }, "6758": { "id": "6758", "tips": "评论失败", "type": "3" }, "6759": { "id": "6759", "tips": "该组别报名人数已满", "type": "1" }, "6760": { "id": "6760", "tips": "报名失败", "type": "3" }, "6767": { "id": "6767", "tips": "队伍队名己存在", "type": "1" }, "6762": { "id": "6762", "tips": "编辑活动报名信息失败", "type": "3" }, "6763": { "id": "6763", "tips": "队伍队名己存在", "type": "1" }, "6764": { "id": "6764", "tips": "编辑活动报名信息失败", "type": "1" }, "6765": { "id": "6765", "tips": "增加队伍名字失败", "type": "3" }, "6766": { "id": "6766", "tips": "获取活动报名单费用失败", "type": "1" }, "6761": { "id": "6761", "tips": "队伍队名己存在", "type": "1" }, "6768": { "id": "6768", "tips": "增加活动报名信息失败", "type": "1" }, "6769": { "id": "6769", "tips": "增加活动报名信息失败", "type": "1" }, "6770": { "id": "6770", "tips": "多组支付活动失败", "type": "1" }, "6771": { "id": "6771", "tips": "多组支付活动失败", "type": "3" }, "6772": { "id": "6772", "tips": "多组支付活动失败", "type": "3" }, "6773": { "id": "6773", "tips": "删除未支付活动失败", "type": "1" }, "6774": { "id": "6774", "tips": "删除未支付活动失败", "type": "3" }, "6775": { "id": "6775", "tips": "删除未支付活动失败", "type": "3" }, "6776": { "id": "6776", "tips": "增加活动报名信息失败", "type": "3" }, "6777": { "id": "6777", "tips": "支付活动确认失败", "type": "3" }, "6778": { "id": "6778", "tips": "支付活动确认失败", "type": "3" }, "6779": { "id": "6779", "tips": "支付活动确认失败", "type": "3" }, "6780": { "id": "6780", "tips": "支付活动确认失败", "type": "3" }, "6781": { "id": "6781", "tips": "删除未支付活动失败", "type": "1" }, "6782": { "id": "6782", "tips": "删除未支付活动失败", "type": "1" }, "6783": { "id": "6783", "tips": "删除未支付组织活动失败", "type": "1" }, "6784": { "id": "6784", "tips": "报名失败，该活动已限制报名人群", "type": "1" }, "6785": { "id": "6785", "tips": "活动已结束", "type": "1" }, "6786": { "id": "6786", "tips": "报名失败，该活动已限制报名人群", "type": "1" }, "6787": { "id": "6787", "tips": "获取保险内容出错", "type": "3" }, "6788": { "id": "6788", "tips": "获取保险内容出错", "type": "3" }, "6789": { "id": "6789", "tips": "报名信息错误", "type": "3" }, "6790": { "id": "6790", "tips": "获取保险内容出错", "type": "3" }, "6791": { "id": "6791", "tips": "获取活动信息失败", "type": "3" }, "6792": { "id": "6792", "tips": "优惠码不存在", "type": "1" }, "6793": { "id": "6793", "tips": "当前优惠码不适用于此活动", "type": "1" }, "6794": { "id": "6794", "tips": "当前优惠码的使用己达上限", "type": "1" }, "6799": { "id": "6799", "tips": "", "type": "" }, "6801": { "id": "6801", "tips": "培训报名失败", "type": "3" }, "6802": { "id": "6802", "tips": "培训报名失败", "type": "3" }, "6804": { "id": "6804", "tips": "该培训已报名", "type": "1" }, "6805": { "id": "6805", "tips": "赛名报名失败", "type": "1" }, "6806": { "id": "6806", "tips": "关注失败", "type": "1" }, "6807": { "id": "6807", "tips": "培训已关注", "type": "1" }, "6808": { "id": "6808", "tips": "培训关注失败", "type": "1" }, "6809": { "id": "6809", "tips": "培训获取失败", "type": "1" }, "6810": { "id": "6810", "tips": "培训获取失败", "type": "1" }, "6811": { "id": "6811", "tips": "培训订单错误", "type": "1" }, "6812": { "id": "6812", "tips": "", "type": "1" }, "6813": { "id": "6813", "tips": "取消关注培训失败", "type": "1" }, "6814": { "id": "6814", "tips": "订单错误", "type": "1" }, "6815": { "id": "6815", "tips": "订单错误", "type": "1" }, "6816": { "id": "6816", "tips": "无效的培训报名id", "type": "1" }, "6817": { "id": "6817", "tips": "无效的培训报名id", "type": "1" }, "6818": { "id": "6818", "tips": "报名失败", "type": "3" }, "6819": { "id": "6819", "tips": "报名失败", "type": "3" }, "6820": { "id": "6820", "tips": "报名失败", "type": "3" }, "6821": { "id": "6821", "tips": "报名失败", "type": "3" }, "6822": { "id": "6822", "tips": "报名失败", "type": "3" }, "6823": { "id": "6823", "tips": "报名失败", "type": "3" }, "6824": { "id": "6824", "tips": "报名失败", "type": "3" }, "6830": { "id": "6830", "tips": "报名失败", "type": "3" }, "6831": { "id": "6831", "tips": "订单未支付", "type": "1" }, "6832": { "id": "6832", "tips": "", "type": "" }, "6833": { "id": "6833", "tips": "", "type": "" }, "6850": { "id": "6850", "tips": "发表失败", "type": "1" }, "6851": { "id": "6851", "tips": "发表失败", "type": "3" }, "6852": { "id": "6852", "tips": "点赞失败", "type": "1" }, "6853": { "id": "6853", "tips": "已点赞", "type": "1" }, "6854": { "id": "6854", "tips": "点赞失败", "type": "3" }, "6855": { "id": "6855", "tips": "取消点赞失败", "type": "1" }, "6856": { "id": "6856", "tips": "取消点赞失败", "type": "3" }, "6857": { "id": "6857", "tips": "评论失败", "type": "1" }, "6858": { "id": "6858", "tips": "评论失败", "type": "3" }, "6859": { "id": "6859", "tips": "该组别报名人数已满", "type": "1" }, "6860": { "id": "6860", "tips": "报名失败", "type": "3" }, "6867": { "id": "6867", "tips": "队伍队名己存在", "type": "1" }, "6862": { "id": "6862", "tips": "编辑培训报名信息失败", "type": "3" }, "6863": { "id": "6863", "tips": "队伍队名己存在", "type": "1" }, "6864": { "id": "6864", "tips": "编辑培训报名信息失败", "type": "1" }, "6865": { "id": "6865", "tips": "增加队伍名字失败", "type": "3" }, "6866": { "id": "6866", "tips": "获取培训报名单费用失败", "type": "1" }, "6861": { "id": "6861", "tips": "队伍队名己存在", "type": "1" }, "6868": { "id": "6868", "tips": "报名信息错误", "type": "1" }, "6869": { "id": "6869", "tips": "增加培训报名信息失败", "type": "1" }, "6870": { "id": "6870", "tips": "多组支付培训失败", "type": "1" }, "6871": { "id": "6871", "tips": "多组支付培训失败", "type": "3" }, "6872": { "id": "6872", "tips": "多组支付培训失败", "type": "3" }, "6873": { "id": "6873", "tips": "删除未支付培训失败", "type": "1" }, "6874": { "id": "6874", "tips": "删除未支付培训失败", "type": "3" }, "6875": { "id": "6875", "tips": "删除未支付培训失败", "type": "3" }, "6876": { "id": "6876", "tips": "增加培训报名信息失败", "type": "3" }, "6877": { "id": "6877", "tips": "支付培训确认失败", "type": "3" }, "6878": { "id": "6878", "tips": "支付培训确认失败", "type": "3" }, "6879": { "id": "6879", "tips": "支付培训确认失败", "type": "3" }, "6880": { "id": "6880", "tips": "支付培训确认失败", "type": "3" }, "6881": { "id": "6881", "tips": "删除未支付培训失败", "type": "1" }, "6882": { "id": "6882", "tips": "删除未支付培训失败", "type": "1" }, "6883": { "id": "6883", "tips": "报名失败，该培训已限制报名人群", "type": "1" }, "6884": { "id": "6884", "tips": "培训已结束", "type": "1" }, "6885": { "id": "6885", "tips": "报名失败，该培训已限制报名人群", "type": "1" }, "6886": { "id": "6886", "tips": "获取保险内容出错", "type": "3" }, "6887": { "id": "6887", "tips": "获取保险内容出错", "type": "3" }, "6888": { "id": "6888", "tips": "获取保险内容出错", "type": "3" }, "6889": { "id": "6889", "tips": "获取保险内容出错", "type": "3" }, "6890": { "id": "6890", "tips": "获取培训信息失败", "type": "3" }, "6891": { "id": "6891", "tips": "优惠码不存在", "type": "1" }, "6892": { "id": "6892", "tips": "当前优惠码不适用于此活动", "type": "1" }, "6893": { "id": "6893", "tips": "当前优惠码的使用己达上限", "type": "1" }, "6899": { "id": "6899", "tips": "", "type": "" }, "5001": { "id": "5001", "tips": "", "type": "" }, "5002": { "id": "5002", "tips": "", "type": "" }, "5003": { "id": "5003", "tips": "", "type": "" }, "5004": { "id": "5004", "tips": "", "type": "" }, "5005": { "id": "5005", "tips": "", "type": "" }, "5006": { "id": "5006", "tips": "", "type": "" }, "5007": { "id": "5007", "tips": "", "type": "" }, "5008": { "id": "5008", "tips": "", "type": "" }, "5009": { "id": "5009", "tips": "", "type": "" }, "5010": { "id": "5010", "tips": "", "type": "" }, "5011": { "id": "5011", "tips": "", "type": "" }, "5099": { "id": "5099", "tips": "", "type": "" }, "7101": { "id": "7101", "tips": "获取商品信息失败", "type": "3" }, "7102": { "id": "7102", "tips": "获取商品信息失败", "type": "3" }, "7103": { "id": "7103", "tips": "获取商品信息失败", "type": "3" }, "7104": { "id": "7104", "tips": "剩余数量不足", "type": "1" }, "7105": { "id": "7105", "tips": "获取订单信息失败", "type": "3" }, "7106": { "id": "7106", "tips": "获取订单信息失败", "type": "3" }, "7107": { "id": "7107", "tips": "获取订单信息失败", "type": "3" }, "7108": { "id": "7108", "tips": "支付失败", "type": "3" }, "7109": { "id": "7109", "tips": "支付失败", "type": "3" }, "7110": { "id": "7110", "tips": "获取商品信息失败", "type": "3" }, "7111": { "id": "7111", "tips": "获取商品信息失败", "type": "3" }, "7112": { "id": "7112", "tips": "支付失败", "type": "3" }, "7113": { "id": "7113", "tips": "支付失败", "type": "3" }, "7114": { "id": "7114", "tips": "支付失败", "type": "3" }, "7115": { "id": "7115", "tips": "剩余数量不足", "type": "1" }, "7116": { "id": "7116", "tips": "剩余数量不足", "type": "1" }, "7117": { "id": "7117", "tips": "支付失败", "type": "3" }, "7118": { "id": "7118", "tips": "支付失败", "type": "3" }, "7119": { "id": "7119", "tips": "支付失败", "type": "3" }, "7120": { "id": "7120", "tips": "支付失败", "type": "3" }, "7121": { "id": "7121", "tips": "支付失败", "type": "3" }, "7122": { "id": "7122", "tips": "支付失败", "type": "3" }, "7123": { "id": "7123", "tips": "获取订单信息失败", "type": "3" }, "7199": { "id": "7199", "tips": "", "type": "" }, "6101": { "id": "6101", "tips": "报名失败", "type": "3" }, "6103": { "id": "6103", "tips": "赛名报名失败", "type": "3" }, "6104": { "id": "6104", "tips": "该赛事已报名", "type": "1" }, "6105": { "id": "6105", "tips": "赛名报名失败", "type": "1" }, "6106": { "id": "6106", "tips": "关注失败", "type": "1" }, "6107": { "id": "6107", "tips": "赛事已关注", "type": "1" }, "6108": { "id": "6108", "tips": "赛事关注失败", "type": "1" }, "6109": { "id": "6109", "tips": "赛事获取失败", "type": "1" }, "6110": { "id": "6110", "tips": "赛事获取失败", "type": "1" }, "6111": { "id": "6111", "tips": "赛事订单错误", "type": "1" }, "6112": { "id": "6112", "tips": "", "type": "1" }, "6113": { "id": "6113", "tips": "取消关注赛事失败", "type": "1" }, "6114": { "id": "6114", "tips": "订单错误", "type": "1" }, "6115": { "id": "6115", "tips": "订单错误", "type": "1" }, "6116": { "id": "6116", "tips": "无效的赛事报名id", "type": "1" }, "6117": { "id": "6117", "tips": "无效的赛事报名id", "type": "1" }, "6118": { "id": "6118", "tips": "报名失败", "type": "3" }, "6119": { "id": "6119", "tips": "报名失败", "type": "3" }, "6120": { "id": "6120", "tips": "报名失败", "type": "3" }, "6121": { "id": "6121", "tips": "报名失败", "type": "3" }, "6122": { "id": "6122", "tips": "报名失败", "type": "3" }, "6123": { "id": "6123", "tips": "报名失败", "type": "3" }, "6124": { "id": "6124", "tips": "报名失败", "type": "3" }, "6130": { "id": "6130", "tips": "报名失败", "type": "3" }, "6131": { "id": "6131", "tips": "订单未支付", "type": "1" }, "6132": { "id": "6132", "tips": "", "type": "" }, "6133": { "id": "6133", "tips": "", "type": "" }, "6150": { "id": "6150", "tips": "发表失败", "type": "1" }, "6151": { "id": "6151", "tips": "发表失败", "type": "3" }, "6152": { "id": "6152", "tips": "点赞失败", "type": "1" }, "6153": { "id": "6153", "tips": "已点赞", "type": "1" }, "6154": { "id": "6154", "tips": "点赞失败", "type": "3" }, "6155": { "id": "6155", "tips": "取消点赞失败", "type": "1" }, "6156": { "id": "6156", "tips": "取消点赞失败", "type": "3" }, "6157": { "id": "6157", "tips": "评论失败", "type": "1" }, "6158": { "id": "6158", "tips": "评论失败", "type": "3" }, "6159": { "id": "6159", "tips": "该组别报名人数已满", "type": "1" }, "6160": { "id": "6160", "tips": "报名失败", "type": "3" }, "6161": { "id": "6161", "tips": "队伍队名己存在", "type": "1" }, "6162": { "id": "6162", "tips": "编辑赛事报名信息失败", "type": "3" }, "6163": { "id": "6163", "tips": "队伍队名己存在", "type": "1" }, "6164": { "id": "6164", "tips": "编辑赛事报名信息失败", "type": "1" }, "6165": { "id": "6165", "tips": "增加队伍名字失败", "type": "3" }, "6166": { "id": "6166", "tips": "获取赛事报名单费用失败", "type": "1" }, "6167": { "id": "6167", "tips": "获取赛事报名单费用失败", "type": "1" }, "6168": { "id": "6168", "tips": "报名信息错误", "type": "1" }, "6169": { "id": "6169", "tips": "增加赛事报名信息失败", "type": "1" }, "6170": { "id": "6170", "tips": "多组支付赛事失败", "type": "1" }, "6171": { "id": "6171", "tips": "多组支付赛事失败", "type": "3" }, "6172": { "id": "6172", "tips": "多组支付赛事失败", "type": "3" }, "6173": { "id": "6173", "tips": "删除未支付赛事失败", "type": "1" }, "6174": { "id": "6174", "tips": "删除未支付赛事失败", "type": "3" }, "6175": { "id": "6175", "tips": "删除未支付赛事失败", "type": "3" }, "6176": { "id": "6176", "tips": "增加赛事报名信息失败", "type": "3" }, "6177": { "id": "6177", "tips": "支付赛事确认失败", "type": "3" }, "6178": { "id": "6178", "tips": "支付赛事确认失败", "type": "3" }, "6179": { "id": "6179", "tips": "支付赛事确认失败", "type": "3" }, "6180": { "id": "6180", "tips": "支付赛事确认失败", "type": "3" }, "6181": { "id": "6181", "tips": "删除未支付赛事失败", "type": "1" }, "6182": { "id": "6182", "tips": "删除未支付赛事失败", "type": "1" }, "6183": { "id": "6183", "tips": "报名失败，该比赛已限制报名人群", "type": "1" }, "6184": { "id": "6184", "tips": "赛事已结束", "type": "1" }, "6185": { "id": "6185", "tips": "报名失败，该比赛已限制报名人群", "type": "1" }, "6186": { "id": "6186", "tips": "获取保险内容出错", "type": "3" }, "6187": { "id": "6187", "tips": "获取保险内容出错", "type": "3" }, "6188": { "id": "6188", "tips": "获取保险内容出错", "type": "3" }, "6189": { "id": "6189", "tips": "获取保险内容出错", "type": "3" }, "6190": { "id": "6190", "tips": "赛事获取失败", "type": "3" }, "6191": { "id": "6191", "tips": "优惠码不存在", "type": "1" }, "6192": { "id": "6192", "tips": "当前优惠码不适用于此活动", "type": "1" }, "6193": { "id": "6193", "tips": "当前优惠码的使用己达上限", "type": "1" }, "6199": { "id": "6199", "tips": "", "type": "" }, "6501": { "id": "6501", "tips": "运动类型传输有误444", "type": "1" }, "6502": { "id": "6502", "tips": "地区id有误", "type": "1" }, "6503": { "id": "6503", "tips": "该用户已经创建过社团　", "type": "1" }, "6504": { "id": "6504", "tips": "没有该用户资料", "type": "1" }, "6505": { "id": "6505", "tips": "用户没有绑定手机号码", "type": "1" }, "6506": { "id": "6506", "tips": "添加社团数据失败", "type": "1" }, "6507": { "id": "6507", "tips": "添加社团类型失败", "type": "1" }, "6508": { "id": "6508", "tips": "添加创建者社团绑定失败", "type": "1" }, "6560": { "id": "6560", "tips": "增加社团logo失败", "type": "1" }, "6510": { "id": "6510", "tips": "没有该社团id", "type": "1" }, "6511": { "id": "6511", "tips": "更新社团数据失败", "type": "1" }, "6512": { "id": "6512", "tips": "移除社团类型", "type": "1" }, "6513": { "id": "6513", "tips": "添加社团类型", "type": "1" }, "6520": { "id": "6520", "tips": "没有上传文件", "type": "1" }, "6521": { "id": "6521", "tips": "上传失败", "type": "1" }, "6530": { "id": "6530", "tips": "添加社团公告失败", "type": "1" }, "6531": { "id": "6531", "tips": "编辑社团公告失败", "type": "1" }, "6532": { "id": "6532", "tips": "删除社团公告失败", "type": "1" }, "6540": { "id": "6540", "tips": "社团不存在", "type": "1" }, "6541": { "id": "6541", "tips": "用户已经绑定过该社团", "type": "1" }, "6542": { "id": "6542", "tips": "插入绑定社团数据失败", "type": "1" }, "6550": { "id": "6550", "tips": "社团不存在", "type": "1" }, "6551": { "id": "6551", "tips": "社团不存在", "type": "1" }, "6552": { "id": "6552", "tips": "社团不存在", "type": "1" }, "6553": { "id": "6553", "tips": "", "type": "" }, "6554": { "id": "6554", "tips": "", "type": "1" }, "6555": { "id": "6555", "tips": "社团id数据不存在", "type": "1" }, "6556": { "id": "6556", "tips": "", "type": "1" }, "6557": { "id": "6557", "tips": "不是管理员权限", "type": "3" }, "6558": { "id": "6558", "tips": "设置管理员失败", "type": "3" }, "6559": { "id": "6559", "tips": "社团邀请码输入有误", "type": "1" }, "6561": { "id": "6561", "tips": "社团不存在", "type": "1" }, "6562": { "id": "6562", "tips": "取消社团关注失败", "type": "1" }, "6563": { "id": "6563", "tips": "社团己关注", "type": "1" }, "6564": { "id": "6564", "tips": "社团关注失败", "type": "1" }, "6565": { "id": "6565", "tips": "社团关注失败", "type": "1" }, "6599": { "id": "6599", "tips": "", "type": "" }, "6301": { "id": "6301", "tips": "", "type": "3" }, "6302": { "id": "6302", "tips": "", "type": "3" }, "6303": { "id": "6303", "tips": "", "type": "3" }, "6304": { "id": "6304", "tips": "", "type": "3" }, "6305": { "id": "6305", "tips": "", "type": "3" }, "6306": { "id": "6306", "tips": "", "type": "3" }, "6307": { "id": "6307", "tips": "", "type": "3" }, "6331": { "id": "6331", "tips": "短信发送失败", "type": "3" }, "6332": { "id": "6332", "tips": "短信发送失败", "type": "3" }, "6333": { "id": "6333", "tips": "短信发送失败", "type": "3" }, "6375": { "id": "6375", "tips": "登录失败", "type": "3" }, "6376": { "id": "6376", "tips": "登录失败", "type": "3" }, "6380": { "id": "6380", "tips": "登录失败", "type": "3" }, "6381": { "id": "6381", "tips": "登录失败", "type": "3" }, "6382": { "id": "6382", "tips": "登录失败", "type": "3" }, "6383": { "id": "6383", "tips": "登录失败", "type": "3" }, "6384": { "id": "6384", "tips": "地图获取失败", "type": "3" }, "6385": { "id": "6385", "tips": "地图获取失败", "type": "3" }, "6386": { "id": "6386", "tips": "地图获取失败", "type": "3" }, "6387": { "id": "6387", "tips": "保存图片失败", "type": "3" }, "6388": { "id": "6388", "tips": "无效的手机号码", "type": "1" }, "6389": { "id": "6389", "tips": "无效的身份证号码", "type": "1" }, "6390": { "id": "6390", "tips": "图片加载失败", "type": "3" }, "6391": { "id": "6391", "tips": "图片加载失败", "type": "3" }, "6392": { "id": "6392", "tips": "图片加载失败", "type": "3" }, "6393": { "id": "6393", "tips": "消息内容信息为空", "type": "3" }, "6394": { "id": "6394", "tips": "赛事发送系统信息内容失败", "type": "3" }, "6395": { "id": "6395", "tips": "赛事发送系统信息内容失败", "type": "3" }, "6396": { "id": "6396", "tips": "赛事发送系统信息内容失败", "type": "3" }, "6397": { "id": "6397", "tips": "赛事发送系统信息内容失败", "type": "3" }, "6398": { "id": "6398", "tips": "赛事发送系统信息内容失败", "type": "3" }, "6399": { "id": "6399", "tips": "赛事发送系统信息内容失败", "type": "3" }, "6401": { "id": "6401", "tips": "储存操作标记失败", "type": "2" }, "6402": { "id": "6402", "tips": "微信app登录失败", "type": "2" }, "6403": { "id": "6403", "tips": "微信app登录失败", "type": "2" }, "6404": { "id": "6404", "tips": "微信app登录失败", "type": "2" }, "6405": { "id": "6405", "tips": "登录失败", "type": "2" }, "6406": { "id": "6406", "tips": "登录失败", "type": "2" }, "6407": { "id": "6407", "tips": "微信app下单失败", "type": "2" }, "6408": { "id": "6408", "tips": "发送系统信息内容失败", "type": "2" }, "6409": { "id": "6409", "tips": "赛事发送系统信息内容失败", "type": "2" }, "6410": { "id": "6410", "tips": "赛事发送系统信息内容失败", "type": "2" }, "6411": { "id": "6411", "tips": "短信发送失败", "type": "2" }, "6412": { "id": "6412", "tips": "短信发送失败", "type": "2" }, "6413": { "id": "6413", "tips": "赛事发送系统信息内容失败", "type": "2" }, "6414": { "id": "6414", "tips": "赛事发送系统信息内容失败", "type": "2" }, "6415": { "id": "6415", "tips": "赛事渠道分成计算失败", "type": "2" }, "6416": { "id": "6416", "tips": "赛事渠道分成计算失败", "type": "2" }, "6417": { "id": "6417", "tips": "赛事渠道分成计算失败", "type": "2" }, "6418": { "id": "6418", "tips": "赛事渠道分成计算失败", "type": "2" }, "6419": { "id": "6419", "tips": "赛事渠道分成计算失败", "type": "2" }, "6420": { "id": "6420", "tips": "赛事渠道分成计算失败", "type": "2" }, "6421": { "id": "6421", "tips": "赛事渠道分成计算失败", "type": "2" }, "6422": { "id": "6422", "tips": "赛事渠道分成计算失败", "type": "2" }, "6423": { "id": "6423", "tips": "赛事渠道分成计算失败", "type": "2" }, "6424": { "id": "6424", "tips": "赛事渠道分成计算失败", "type": "2" }, "6425": { "id": "6425", "tips": "赛事渠道分成计算失败", "type": "2" }, "6426": { "id": "6426", "tips": "赛事短信发送失败", "type": "2" }, "6427": { "id": "6427", "tips": "赛事短信发送失败", "type": "2" }, "6428": { "id": "6428", "tips": "活动发送系统信息内容失败", "type": "2" }, "6429": { "id": "6429", "tips": "活动发送系统信息内容失败", "type": "2" }, "6430": { "id": "6430", "tips": "活动渠道分成计算失败", "type": "2" }, "6431": { "id": "6431", "tips": "活动渠道分成计算失败", "type": "2" }, "6432": { "id": "6432", "tips": "活动渠道分成计算失败", "type": "2" }, "6433": { "id": "6433", "tips": "活动渠道分成计算失败", "type": "2" }, "6434": { "id": "6434", "tips": "活动渠道分成计算失败", "type": "2" }, "6435": { "id": "6435", "tips": "活动渠道分成计算失败", "type": "2" }, "6436": { "id": "6436", "tips": "活动渠道分成计算失败", "type": "2" }, "6437": { "id": "6437", "tips": "活动渠道分成计算失败", "type": "2" }, "6438": { "id": "6438", "tips": "活动渠道分成计算失败", "type": "2" }, "6439": { "id": "6439", "tips": "活动渠道分成计算失败", "type": "2" }, "6440": { "id": "6440", "tips": "活动渠道分成计算失败", "type": "2" }, "6441": { "id": "6441", "tips": "活动短信发送失败", "type": "2" }, "6442": { "id": "6442", "tips": "活动短信发送失败", "type": "2" }, "6443": { "id": "6443", "tips": "培训发送系统信息内容失败", "type": "2" }, "6444": { "id": "6444", "tips": "培训发送系统信息内容失败", "type": "2" }, "6445": { "id": "6445", "tips": "培训渠道分成计算失败", "type": "2" }, "6446": { "id": "6446", "tips": "培训渠道分成计算失败", "type": "2" }, "6447": { "id": "6447", "tips": "培训渠道分成计算失败", "type": "2" }, "6448": { "id": "6448", "tips": "培训渠道分成计算失败", "type": "2" }, "6449": { "id": "6449", "tips": "培训渠道分成计算失败", "type": "2" }, "6450": { "id": "6450", "tips": "培训渠道分成计算失败", "type": "2" }, "6451": { "id": "6451", "tips": "培训渠道分成计算失败", "type": "2" }, "6452": { "id": "6452", "tips": "培训渠道分成计算失败", "type": "2" }, "6453": { "id": "6453", "tips": "培训渠道分成计算失败", "type": "2" }, "6454": { "id": "6454", "tips": "培训渠道分成计算失败", "type": "2" }, "6455": { "id": "6455", "tips": "培训渠道分成计算失败", "type": "2" }, "6456": { "id": "6456", "tips": "培训短信发送失败", "type": "2" }, "6457": { "id": "6457", "tips": "培训短信发送失败", "type": "2" }, "6458": { "id": "6458", "tips": "活动发送系统信息内容失败", "type": "2" }, "6459": { "id": "6459", "tips": "培训发送系统信息内容失败", "type": "2" }, "6460": { "id": "6460", "tips": "活动发送系统信息内容失败", "type": "2" }, "6461": { "id": "6461", "tips": "培训发送系统信息内容失败", "type": "2" }, "6462": { "id": "6462", "tips": "微信公众号订阅检查访问失败", "type": "2" }, "6463": { "id": "6463", "tips": "微信公众号订阅检查返回失败", "type": "2" }, "6464": { "id": "6464", "tips": "获取公众号jsapi访问失败", "type": "2" }, "6465": { "id": "6465", "tips": "获取微信公众号jsapi返回失败", "type": "2" }, "6466": { "id": "6466", "tips": "非正式环境下，不能够调这个接口", "type": "2" }, "6467": { "id": "6467", "tips": "获取微信服务器access_token访问失败", "type": "2" }, "6468": { "id": "6468", "tips": "获取微信服务器access_token返回失败", "type": "2" }, "6469": { "id": "6469", "tips": "活动发送系统信息内容失败", "type": "2" }, "6470": { "id": "6470", "tips": "培训发送系统信息内容失败", "type": "2" }, "6471": { "id": "6471", "tips": "活动发送系统信息内容失败", "type": "3" }, "6472": { "id": "6472", "tips": "培训发送系统信息内容失败", "type": "3" }, "6473": { "id": "6473", "tips": "活动发送系统信息内容失败", "type": "3" }, "6474": { "id": "6474", "tips": "活动发送系统信息内容失败", "type": "3" }, "6475": { "id": "6475", "tips": "活动发送系统信息内容失败", "type": "3" }, "6476": { "id": "6476", "tips": "活动发送系统信息内容失败", "type": "3" }, "6477": { "id": "6477", "tips": "培训发送系统信息内容失败", "type": "3" }, "6478": { "id": "6478", "tips": "培训发送系统信息内容失败", "type": "3" }, "6479": { "id": "6479", "tips": "培训发送系统信息内容失败", "type": "3" }, "6480": { "id": "6480", "tips": "培训发送系统信息内容失败", "type": "3" }, "6481": { "id": "6481", "tips": "获取系统信息数量失败", "type": "1" }, "6499": { "id": "6499", "tips": "", "type": "" }, "6001": { "id": "6001", "tips": "手机号码错误", "type": "1" }, "6002": { "id": "6002", "tips": "验证码已使用", "type": "1" }, "6003": { "id": "6003", "tips": "验证码错误", "type": "3" }, "6004": { "id": "6004", "tips": "验证码失效", "type": "1" }, "6005": { "id": "6005", "tips": "验证码错误", "type": "3" }, "6006": { "id": "6006", "tips": "验证码错误", "type": "1" }, "6007": { "id": "6007", "tips": "验证码已超时", "type": "1" }, "6008": { "id": "6008", "tips": "手机号码错误", "type": "1" }, "6009": { "id": "6009", "tips": "验证码错误", "type": "1" }, "6010": { "id": "6010", "tips": "未输入验证码", "type": "1" }, "6011": { "id": "6011", "tips": "两次申请验证码时间小于60秒", "type": "1" }, "6013": { "id": "6013", "tips": "密码错误", "type": "3" }, "6014": { "id": "6014", "tips": "该手机号码已注册", "type": "1" }, "6015": { "id": "6015", "tips": "创建用户失败", "type": "3" }, "6016": { "id": "6016", "tips": "该手机号码未注册", "type": "3" }, "6017": { "id": "6017", "tips": "密码错误", "type": "1" }, "6019": { "id": "6019", "tips": "该用户不存在", "type": "3" }, "6020": { "id": "6020", "tips": "存储新密码错误", "type": "3" }, "6021": { "id": "6021", "tips": "密码规则错误", "type": "1" }, "6022": { "id": "6022", "tips": "手机号码错误", "type": "1" }, "6023": { "id": "6023", "tips": "手机号码错误", "type": "1" }, "6024": { "id": "6024", "tips": "密码规则有误", "type": "1" }, "6025": { "id": "6025", "tips": "手机号码错误", "type": "1" }, "6027": { "id": "6027", "tips": "插入手机号码失败", "type": "3" }, "6028": { "id": "6028", "tips": "手机号码错误", "type": "1" }, "6029": { "id": "6029", "tips": "用户不存在", "type": "3" }, "6031": { "id": "6031", "tips": "信息存储失败", "type": "3" }, "6032": { "id": "6032", "tips": "信息存储失败", "type": "3" }, "6033": { "id": "6033", "tips": "获取密码失败", "type": "3" }, "6034": { "id": "6034", "tips": "获取用户信息失败", "type": "3" }, "6035": { "id": "6035", "tips": "旧密码错误", "type": "1" }, "6036": { "id": "6036", "tips": "修改密码失败", "type": "3" }, "6037": { "id": "6037", "tips": "注册\/登录失败", "type": "3" }, "6038": { "id": "6038", "tips": "注册\/登录失败", "type": "3" }, "6048": { "id": "6048", "tips": "授权过期", "type": "3" }, "6049": { "id": "6049", "tips": "授权错误", "type": "3" }, "6050": { "id": "6050", "tips": "用户没有授权", "type": "1" }, "6051": { "id": "6051", "tips": "手机号码错误", "type": "1" }, "6052": { "id": "6052", "tips": "登录失败", "type": "3" }, "6054": { "id": "6054", "tips": "授权失败", "type": "3" }, "6055": { "id": "6055", "tips": "授权失败", "type": "3" }, "6056": { "id": "6056", "tips": "授权失败", "type": "3" }, "6057": { "id": "6057", "tips": "授权失败", "type": "3" }, "6058": { "id": "6058", "tips": "授权失败", "type": "3" }, "6066": { "id": "6066", "tips": "", "type": "" }, "6067": { "id": "6067", "tips": "创建手机用户信息失败", "type": "3" }, "6068": { "id": "6068", "tips": "创建平台用户信息失败", "type": "3" }, "6069": { "id": "6069", "tips": "增加奖品收款信息失败", "type": "1" }, "6070": { "id": "6070", "tips": "增加奖品收款信息失败", "type": "1" }, "6071": { "id": "6071", "tips": "编辑奖品收款信息失败", "type": "1" }, "6072": { "id": "6072", "tips": "圈子签到失败", "type": "1" }, "6073": { "id": "6073", "tips": "圈子签到失败", "type": "1" }, "6074": { "id": "6074", "tips": "圈子签到失败", "type": "1" }, "6075": { "id": "6075", "tips": "圈子签到失败", "type": "1" }, "6076": { "id": "6076", "tips": "今天抽奖次数己达上限", "type": "1" }, "6077": { "id": "6077", "tips": "抽奖失败", "type": "1" }, "6078": { "id": "6078", "tips": "抽奖失败", "type": "1" }, "6079": { "id": "6079", "tips": "积分不够", "type": "1" }, "6080": { "id": "6080", "tips": "抽奖失败", "type": "3" }, "6081": { "id": "6081", "tips": "抽奖失败", "type": "3" }, "6082": { "id": "6082", "tips": "抽奖失败", "type": "1" }, "6083": { "id": "6083", "tips": "抽奖失败", "type": "3" }, "6084": { "id": "6084", "tips": "抽奖失败", "type": "3" }, "6085": { "id": "6085", "tips": "获取积分失败", "type": "3" }, "6086": { "id": "6086", "tips": "用户id不存在", "type": "3" }, "6087": { "id": "6087", "tips": "减增抽奖次数失败", "type": "1" }, "6088": { "id": "6088", "tips": "设置个人兴趣失败", "type": "" }, "6089": { "id": "6089", "tips": "设置圈子首页失败", "type": "" }, "6099": { "id": "6099", "tips": "", "type": "" }, "6201": { "id": "6201", "tips": "订单错误", "type": "3" }, "6202": { "id": "6202", "tips": "赛事订单错误", "type": "3" }, "6203": { "id": "6203", "tips": "赛事订单金额错误", "type": "3" }, "6204": { "id": "6204", "tips": "订单错误", "type": "3" }, "6205": { "id": "6205", "tips": "订单错误", "type": "3" }, "6206": { "id": "6206", "tips": "订单号不存在", "type": "3" }, "6207": { "id": "6207", "tips": "下单失败", "type": "3" }, "6220": { "id": "6220", "tips": "支付失败", "type": "3" }, "6221": { "id": "6221", "tips": "支付失败", "type": "3" }, "6222": { "id": "6222", "tips": "赛事支付失败", "type": "3" }, "6223": { "id": "6223", "tips": "赛事支付失败", "type": "3" }, "6224": { "id": "6224", "tips": "赛事支付失败", "type": "3" }, "6225": { "id": "6225", "tips": "赛事支付失败", "type": "3" }, "6226": { "id": "6226", "tips": "活动订单错误", "type": "3" }, "6227": { "id": "6227", "tips": "活动订单金额错误", "type": "3" }, "6228": { "id": "6228", "tips": "活动支付失败", "type": "3" }, "6229": { "id": "6229", "tips": "活动支付失败", "type": "3" }, "6230": { "id": "6230", "tips": "活动支付失败", "type": "3" }, "6231": { "id": "6231", "tips": "活动支付失败", "type": "3" }, "6232": { "id": "6232", "tips": "培训订单错误", "type": "3" }, "6233": { "id": "6233", "tips": "培训订单金额错误", "type": "3" }, "6234": { "id": "6234", "tips": "培训支付失败", "type": "3" }, "6235": { "id": "6235", "tips": "培训支付失败", "type": "3" }, "6236": { "id": "6236", "tips": "培训支付失败", "type": "3" }, "6237": { "id": "6237", "tips": "培训支付失败", "type": "3" }, "6238": { "id": "6238", "tips": "赛事支付失败", "type": "" }, "6239": { "id": "6239", "tips": "赛事支付失败", "type": "" }, "6240": { "id": "6240", "tips": "赛事支付失败", "type": "" }, "6241": { "id": "6241", "tips": "活动支付失败", "type": "" }, "6242": { "id": "6242", "tips": "活动支付失败", "type": "" }, "6243": { "id": "6243", "tips": "活动支付失败", "type": "" }, "6244": { "id": "6244", "tips": "培训支付失败", "type": "" }, "6245": { "id": "6245", "tips": "培训支付失败", "type": "" }, "6246": { "id": "6246", "tips": "培训支付失败", "type": "" }, "6247": { "id": "6247", "tips": "活动支付失败", "type": "" }, "6248": { "id": "6248", "tips": "赛事支付失败", "type": "" }, "6249": { "id": "6249", "tips": "培训支付失败", "type": "" }, "6299": { "id": "6299", "tips": "", "type": "" }, "6795": { "id": "6795", "tips": "审核通过操作失败", "type": "1" }, "6796": { "id": "6796", "tips": "审核通过操作失败", "type": "1" }, "6798": { "id": "6798", "tips": "审核拒绝操作失败", "type": "1" }, "67000": { "id": "67000", "tips": "审核拒绝操作失败", "type": "1" }, "67999": { "id": "67999", "tips": "", "type": "1" }, "67001": { "id": "67001", "tips": "审核拒绝操作失败", "type": "1" }, "6194": { "id": "6194", "tips": "审核通过操作失败", "type": "1" }, "6195": { "id": "6195", "tips": "审核通过操作失败", "type": "1" }, "6196": { "id": "6196", "tips": "审核拒绝操作失败", "type": "1" }, "6197": { "id": "6197", "tips": "审核拒绝操作失败", "type": "1" }, "6198": { "id": "6198", "tips": "审核拒绝操作失败", "type": "1" }, "6894": { "id": "6894", "tips": "审核通过操作失败", "type": "1" }, "6895": { "id": "6895", "tips": "审核通过操作失败", "type": "1" }, "6896": { "id": "6896", "tips": "审核拒绝操作失败", "type": "1" }, "6897": { "id": "6897", "tips": "审核拒绝操作失败", "type": "1" }, "6898": { "id": "6898", "tips": "审核拒绝操作失败", "type": "1" }, "67002": { "id": "67002", "tips": "发送活动手机提示消息失败", "type": "1" }, "67003": { "id": "67003", "tips": "发送手机活动退款消息失败", "type": "1" }, "67004": { "id": "67004", "tips": "发送手机活动退款消息失败", "type": "1" }, "61000": { "id": "61000", "tips": "发送赛事手机提示消息失败", "type": "1" }, "61001": { "id": "61001", "tips": "发送赛事手机退款消息失败", "type": "1" }, "61002": { "id": "61002", "tips": "发送赛事手机退款消息失败", "type": "1" }, "68000": { "id": "68000", "tips": "发送培训手机提示消息失败", "type": "1" }, "68001": { "id": "68001", "tips": "发送培训手机退款消息失败", "type": "1" }, "68002": { "id": "68002", "tips": "发送培训手机退款消息失败", "type": "1" }, "67005": { "id": "67005", "tips": "活动支付失败", "type": "1" }, "61003": { "id": "61003", "tips": "赛事支付失败", "type": "1" }, "68003": { "id": "68003", "tips": "培训支付失败", "type": "1" }, "6250": { "id": "6250", "tips": "", "type": "1" }, "6251": { "id": "6251", "tips": "", "type": "1" }, "6252": { "id": "6252", "tips": "", "type": "1" }, "6253": { "id": "6253", "tips": "", "type": "1" }, "6254": { "id": "6254", "tips": "", "type": "1" }, "6255": { "id": "6255", "tips": "", "type": "1" }, "6256": { "id": "6256", "tips": "", "type": "1" }, "6257": { "id": "6257", "tips": "", "type": "1" }, "6258": { "id": "6258", "tips": "", "type": "1" }, "6260": { "id": "6260", "tips": "", "type": "1" }, "6262": { "id": "6262", "tips": "", "type": "1" }, "6263": { "id": "6263", "tips": "", "type": "1" }, "6264": { "id": "6264", "tips": "", "type": "1" }, "61004": { "id": "61004", "tips": "优惠码数量不足", "type": "1" }, "67006": { "id": "67006", "tips": "优惠码数量不足", "type": "1" }, "68004": { "id": "68004", "tips": "优惠码数量不足", "type": "1" }, "61005": { "id": "61005", "tips": "优惠码不存在", "type": "1" }, "61006": { "id": "61006", "tips": "优惠码不存在", "type": "1" }, "67007": { "id": "67007", "tips": "优惠码不存在", "type": "1" }, "67008": { "id": "67008", "tips": "优惠码不存在", "type": "1" }, "68005": { "id": "68005", "tips": "优惠码不存在", "type": "1" }, "68006": { "id": "68006", "tips": "优惠码不存在", "type": "1" }, "7200": { "id": "7200", "tips": "topic_id为空", "type": "1" }, "7201": { "id": "7201", "tips": "赛况内容或者图片为空", "type": "1" }, "7202": { "id": "7202", "tips": "添加赛况失败", "type": "1" }, "7203": { "id": "7203", "tips": "发布摄影作品图片不能为空", "type": "1" }, "7204": { "id": "7204", "tips": "发布摄影作品失败", "type": "1" }, "7205": { "id": "7205", "tips": "发布摄影作品一天不能超过3次", "type": "1" }, "7206": { "id": "7206", "tips": "添加发布人信息姓名不能为空", "type": "1" }, "7207": { "id": "7207", "tips": "添加发布人信息联系方式不能为空", "type": "1" }, "7208": { "id": "7208", "tips": "添加发布人信息联系地址不能为空", "type": "1" }, "7209": { "id": "7209", "tips": "添加发布人信息失败", "type": "1" }, "7210": { "id": "7210", "tips": "id不能为空", "type": "1" }, "7211": { "id": "7211", "tips": "更新表中投票数失败", "type": "1" }, "7212": { "id": "7212", "tips": "数据写入Redis失败", "type": "1" }, "7213": { "id": "7213", "tips": "一天超过3次投票", "type": "1" }, "7214": { "id": "7214", "tips": "已经存在发布人信息", "type": "1" }, "7215": { "id": "7215", "tips": "未添加发布人信息", "type": "1" }, "7216": { "id": "7216", "tips": "发布摄影作品不在设定的时间范围内", "type": "1" }, "7217": { "id": "7217", "tips": "当前时间不允许投票", "type": "1" }, "67009": { "id": "67009", "tips": "报名失败", "type": "1" }, "61007": { "id": "61007", "tips": "报名失败", "type": "1" }, "68007": { "id": "68007", "tips": "报名失败", "type": "1" }, "61008": { "id": "61008", "tips": "审核通过操作失败", "type": "1" }, "68008": { "id": "68008", "tips": "审核通过操作失败", "type": "1" }, "67011": { "id": "67011", "tips": "审核通过操作失败", "type": "1" }, "61009": { "id": "61009", "tips": "审核通过操作失败", "type": "1" }, "68009": { "id": "68009", "tips": "审核通过操作失败", "type": "1" }, "67012": { "id": "67012", "tips": "审核拒绝操作失败", "type": "1" }, "61010": { "id": "61010", "tips": "审核拒绝操作失败", "type": "1" }, "68010": { "id": "68010", "tips": "审核拒绝操作失败", "type": "1" }, "67013": { "id": "67013", "tips": "审核拒绝操作失败", "type": "1" }, "61011": { "id": "61011", "tips": "审核拒绝操作失败", "type": "1" }, "68011": { "id": "68011", "tips": "审核拒绝操作失败", "type": "1" }, "6267": { "id": "6267", "tips": "培训支付失败", "type": "1" }, "6265": { "id": "6265", "tips": "活动支付失败", "type": "1" }, "6266": { "id": "6266", "tips": "赛事支付失败", "type": "1" }, "7300": { "id": "7300", "tips": "提交保单信息失败", "type": "1" }, "7301": { "id": "7301", "tips": "提交保单信息失败", "type": "1" }, "7302": { "id": "7302", "tips": "提交保单信息失败", "type": "1" }, "7303": { "id": "7303", "tips": "提交保单信息失败", "type": "1" }, "7304": { "id": "7304", "tips": "提交保单信息失败", "type": "1" }, "7305": { "id": "7305", "tips": "提交保单信息失败", "type": "1" }, "7306": { "id": "7306", "tips": "提交保单信息失败", "type": "1" }, "7307": { "id": "7307", "tips": "提交保单信息失败", "type": "1" }, "7308": { "id": "7308", "tips": "提交保单信息失败", "type": "1" }, "7309": { "id": "7309", "tips": "提交保单信息失败", "type": "1" }, "6268": { "id": "6268", "tips": "保险支付失败", "type": "1" }, "6269": { "id": "6269", "tips": "保险支付失败", "type": "1" }, "6270": { "id": "6270", "tips": "保险支付失败", "type": "1" }, "6271": { "id": "6271", "tips": "保险支付失败", "type": "1" }, "6482": { "id": "6482", "tips": "无效的港澳通行证号码", "type": "1" }, "6483": { "id": "6483", "tips": "无效的台湾通行证号码", "type": "1" }, "7400": { "id": "7400", "tips": "报名失败", "type": "1" }, "7401": { "id": "7401", "tips": "报名信息已存在", "type": "1" }, "7403": { "id": "7403", "tips": "报名失败", "type": "1" }, "7404": { "id": "7404", "tips": "报名失败", "type": "1" }, "7405": { "id": "7405", "tips": "报名失败", "type": "1" }, "67014": { "id": "67014", "tips": "审核通过操作失败", "type": "1" }, "61014": { "id": "61014", "tips": "审核通过操作失败", "type": "1" }, "68014": { "id": "68014", "tips": "审核通过操作失败", "type": "1" }, "67015": { "id": "67015", "tips": "报名失败", "type": "1" }, "61015": { "id": "61015", "tips": "报名失败", "type": "1" }, "68015": { "id": "68015", "tips": "报名失败", "type": "1" }, "61016": { "id": "61016", "tips": "报名公共信息编辑失败", "type": "1" }, "67016": { "id": "67016", "tips": "报名公共信息编辑失败", "type": "1" }, "68016": { "id": "68016", "tips": "报名信息编辑失败", "type": "1" }, "61017": { "id": "61017", "tips": "报名公共信息编辑失败", "type": "1" }, "67017": { "id": "67017", "tips": "报名公共信息编辑失败", "type": "1" }, "68017": { "id": "68017", "tips": "报名信息编辑失败", "type": "1" }, "61018": { "id": "61018", "tips": "报名公共信息编辑失败", "type": "1" }, "67018": { "id": "67018", "tips": "报名公共信息编辑失败", "type": "1" }, "68018": { "id": "68018", "tips": "报名信息编辑失败", "type": "1" }, "61019": { "id": "61019", "tips": "报名公共信息编辑失败", "type": "1" }, "67019": { "id": "67019", "tips": "报名公共信息编辑失败", "type": "1" }, "68019": { "id": "68019", "tips": "报名信息编辑失败", "type": "1" }, "61020": { "id": "61020", "tips": "报名公共信息编辑失败", "type": "1" }, "67020": { "id": "67020", "tips": "报名公共信息编辑失败", "type": "1" }, "68020": { "id": "68020", "tips": "报名信息编辑失败", "type": "1" }, "61021": { "id": "61021", "tips": "报名公共信息编辑失败", "type": "1" }, "67021": { "id": "67021", "tips": "报名公共信息编辑失败", "type": "1" }, "68021": { "id": "68021", "tips": "报名信息编辑失败", "type": "1" }, "61022": { "id": "61022", "tips": "报名用户信息编辑失败", "type": "1" }, "67022": { "id": "67022", "tips": "报名用户信息编辑失败", "type": "1" }, "68022": { "id": "68022", "tips": "报名用户信息编辑失败", "type": "1" }, "61023": { "id": "61023", "tips": "报名用户信息编辑失败", "type": "1" }, "67023": { "id": "67023", "tips": "报名用户信息编辑失败", "type": "1" }, "68023": { "id": "68023", "tips": "报名用户信息编辑失败", "type": "1" }, "6484": { "id": "6484", "tips": "无效的session参数", "type": "1" }, "6485": { "id": "6485", "tips": "模板消息发送失败", "type": "1" }, "6486": { "id": "6486", "tips": "模板消息发送失败", "type": "1" }, "6566": { "id": "6566", "tips": "获取资讯信息失败", "type": "1" }, "67024": { "id": "67024", "tips": "报名失败", "type": "1" }, "68024": { "id": "68024", "tips": "报名失败", "type": "1" }, "61024": { "id": "61024", "tips": "报名失败", "type": "1" }, "6487": { "id": "6487", "tips": "参数错误", "type": "1" } };
+	exports.default = data;
+
+/***/ },
+/* 285 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -82172,7 +83314,7 @@ webpackJsonp([0,8],[
 	});
 	exports.jsonParam = exports.formatTime = exports.getCurrentStatus = exports.removeItem = exports.getItem = exports.setItem = exports.getCategory = exports.devLog = undefined;
 
-	var _category = __webpack_require__(284);
+	var _category = __webpack_require__(286);
 
 	var _category2 = _interopRequireDefault(_category);
 
@@ -82282,19 +83424,19 @@ webpackJsonp([0,8],[
 	};
 
 	/*
-	json参数转为url参数
+	json参数转为url参数   以删除
 	*/
 	var jsonParam = exports.jsonParam = function jsonParam(param) {
-		var mergeUrl = "?";
+		var mergeUrl = "";
 		for (var key in param) {
 			mergeUrl += key + "=" + param[key] + "&";
 		}
-		return mergeUrl.substring(0, mergeUrl.length - 1);
+		return mergeUrl;
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
 
 /***/ },
-/* 284 */
+/* 286 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -82661,23 +83803,23 @@ webpackJsonp([0,8],[
 	//export default (id) => categoryData[id].name
 
 /***/ },
-/* 285 */
+/* 287 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(286);
+	var content = __webpack_require__(288);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(292)(content, {});
+	var update = __webpack_require__(290)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(true) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept(286, function() {
-				var newContent = __webpack_require__(286);
+			module.hot.accept(288, function() {
+				var newContent = __webpack_require__(288);
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -82687,21 +83829,21 @@ webpackJsonp([0,8],[
 	}
 
 /***/ },
-/* 286 */
+/* 288 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(287)();
+	exports = module.exports = __webpack_require__(289)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "@font-face {\n  font-family: \"anticon\";\n  src: url(" + __webpack_require__(288) + ");\n  /* IE9*/\n  src: url(" + __webpack_require__(288) + "#iefix) format('embedded-opentype'),  url(" + __webpack_require__(289) + ") format('woff'),  url(" + __webpack_require__(290) + ") format('truetype'),  url(" + __webpack_require__(291) + "#iconfont) format('svg');\n  /* iOS 4.1- */\n}\n", ""]);
+	exports.push([module.id, ".ant-message {\n  font-size: 12px;\n  position: fixed;\n  z-index: 1010;\n  width: 100%;\n  top: 16px;\n  left: 0;\n}\n.ant-message-notice {\n  width: auto;\n  vertical-align: middle;\n  position: absolute;\n  left: 50%;\n}\n.ant-message-notice-content {\n  position: relative;\n  right: 50%;\n  padding: 8px 16px;\n  border-radius: 6px;\n  border: 1px solid #d9d9d9;\n  box-shadow: 0 1px 8px rgba(100, 100, 100, 0.2);\n  background: #fff;\n  display: block;\n}\n.ant-message-success .anticon {\n  color: #87d068;\n}\n.ant-message-error .anticon {\n  color: #f50;\n}\n.ant-message-warning .anticon {\n  color: #fa0;\n}\n.ant-message-info .anticon,\n.ant-message-loading .anticon {\n  color: #2db7f5;\n}\n.ant-message .anticon {\n  margin-right: 8px;\n  font-size: 14px;\n  top: 1px;\n  position: relative;\n}\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 287 */
+/* 289 */
 /***/ function(module, exports) {
 
 	/*
@@ -82757,31 +83899,7 @@ webpackJsonp([0,8],[
 
 
 /***/ },
-/* 288 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__.p + "cae736108db2b1c4594bd2a2ab62aced.eot";
-
-/***/ },
-/* 289 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__.p + "65034af05eab6c38e61dd9de2ca567ac.woff";
-
-/***/ },
 /* 290 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__.p + "54f09b7b1bac84e5ff0504ea675ad445.ttf";
-
-/***/ },
-/* 291 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__.p + "864f536ffea703bdd089875c954bf5c0.svg";
-
-/***/ },
-/* 292 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -83033,23 +84151,23 @@ webpackJsonp([0,8],[
 
 
 /***/ },
-/* 293 */
+/* 291 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(294);
+	var content = __webpack_require__(292);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(292)(content, {});
+	var update = __webpack_require__(290)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(true) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept(294, function() {
-				var newContent = __webpack_require__(294);
+			module.hot.accept(292, function() {
+				var newContent = __webpack_require__(292);
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -83059,20 +84177,22 @@ webpackJsonp([0,8],[
 	}
 
 /***/ },
-/* 294 */
+/* 292 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(287)();
+	exports = module.exports = __webpack_require__(289)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "body {\n  font-size: 14px;\n  color: #999;\n}\nul,\nli {\n  list-style: none;\n}\na {\n  color: #333;\n}\nimg {\n  max-width: 100%;\n  height: auto;\n}\n.wx_app {\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  box-sizing: border-box;\n  height: 100%;\n  padding-top: 42px;\n  overflow: auto;\n  -webkit-overflow-scrolling: touch;\n}\n.wx_app .weui-tabbar {\n  position: fixed;\n}\n.img_rounded {\n  border-radius: 6px;\n}\n.gary_bj {\n  background-color: #eee;\n}\n.white_bj {\n  background-color: #fff;\n}\n.orange {\n  color: #dc5a0c;\n}\n.green {\n  color: green;\n}\n.red {\n  color: #d44950;\n}\n.warning {\n  color: #f0ad4e;\n}\n.gary {\n  color: #666;\n}\n.pull-left {\n  float: left!important;\n}\n.pull-right {\n  float: right!important;\n}\n#app .iscroll-pull-down > i,\n#app .iscroll-pull-up > i {\n  width: 20px;\n  height: 20px;\n  -webkit-background-size: 40px 80px;\n  background-size: 20px 40px;\n}\n.mh {\n  -webkit-backface-visibility: hidden;\n  opacity: 0.9;\n  -webkit-animation: nvfadeInDown 1s .1s ease both;\n  -moz-animation: nvfadeInDown .3s .1s ease both;\n}\n@-webkit-keyframes nvfadeInDown {\n  0% {\n    opacity: .2;\n  }\n  0% 100% {\n    opacity: 1;\n  }\n  100% {\n    opacity: 1;\n  }\n}\n@-moz-keyframes nvfadeInDown {\n  0% {\n    opacity: .2;\n  }\n  100% {\n    opacity: 1;\n  }\n}\n", ""]);
+	exports.push([module.id, "body,\nhtml {\n  margin: 0;\n  padding: 0;\n  height: 100%;\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n}\nbody {\n  font-size: 14px;\n  color: #999;\n}\nul,\nli {\n  list-style: none;\n}\nbody a {\n  color: #333;\n}\nimg {\n  max-width: 100%;\n  height: auto;\n}\n#app,\n.wx_index,\n.wx_home,\n.wx_messages,\n.wx_user {\n  height: 100%;\n}\n.wx_app {\n  box-sizing: border-box;\n  height: 100%;\n  padding-top: 42px;\n  overflow-y: auto;\n  -webkit-overflow-scrolling: touch;\n}\n.wx_app .m0 {\n  margin: 0;\n}\n.wx_app .p0 {\n  padding: 0;\n}\n.wx_app .line2 {\n  line-height: 1.2;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 2;\n}\n.wx_app .weui-tabbar {\n  position: fixed;\n}\n.img_rounded {\n  border-radius: 6px;\n}\n.gary_bj {\n  background-color: #eee;\n}\n.white_bj {\n  background-color: #fff;\n}\n.orange {\n  color: #dc5a0c;\n}\n.green {\n  color: green;\n}\n.red {\n  color: #d44950;\n}\n.warning {\n  color: #f0ad4e;\n}\n.gary {\n  color: #666;\n}\n.pull-left {\n  float: left!important;\n}\n.pull-right {\n  float: right!important;\n}\n.mt0 {\n  margin-top: 0!important;\n}\n.weui-footer_fixed-bottom {\n  bottom: 0;\n}\n.weui-footer_fixed-bottom .weui-btn {\n  border-radius: 0;\n  line-height: 2.2;\n}\n#app .iscroll-pull-down > i,\n#app .iscroll-pull-up > i {\n  width: 20px;\n  height: 20px;\n  -webkit-background-size: 40px 80px;\n  background-size: 20px 40px;\n}\n.mh {\n  -webkit-backface-visibility: hidden;\n  opacity: 0.9;\n  -webkit-animation: nvfadeInDown 1s .1s ease both;\n  -moz-animation: nvfadeInDown .3s .1s ease both;\n}\n@-webkit-keyframes nvfadeInDown {\n  0% {\n    opacity: .2;\n  }\n  0% 100% {\n    opacity: 1;\n  }\n  100% {\n    opacity: 1;\n  }\n}\n@-moz-keyframes nvfadeInDown {\n  0% {\n    opacity: .2;\n  }\n  100% {\n    opacity: 1;\n  }\n}\n", ""]);
 
 	// exports
 
 
 /***/ },
+/* 293 */,
+/* 294 */,
 /* 295 */,
 /* 296 */,
 /* 297 */,
@@ -83130,7 +84250,39 @@ webpackJsonp([0,8],[
 /* 349 */,
 /* 350 */,
 /* 351 */,
-/* 352 */
+/* 352 */,
+/* 353 */,
+/* 354 */,
+/* 355 */,
+/* 356 */,
+/* 357 */,
+/* 358 */,
+/* 359 */,
+/* 360 */,
+/* 361 */,
+/* 362 */,
+/* 363 */,
+/* 364 */,
+/* 365 */,
+/* 366 */,
+/* 367 */,
+/* 368 */,
+/* 369 */,
+/* 370 */,
+/* 371 */,
+/* 372 */,
+/* 373 */,
+/* 374 */,
+/* 375 */,
+/* 376 */,
+/* 377 */,
+/* 378 */,
+/* 379 */,
+/* 380 */,
+/* 381 */,
+/* 382 */,
+/* 383 */,
+/* 384 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -83142,11 +84294,11 @@ webpackJsonp([0,8],[
 
 	var _redux = __webpack_require__(254);
 
-	var _reduxThunk = __webpack_require__(353);
+	var _reduxThunk = __webpack_require__(385);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-	var _reducers = __webpack_require__(354);
+	var _reducers = __webpack_require__(386);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -83168,8 +84320,8 @@ webpackJsonp([0,8],[
 	  //热替换选项
 	  if (true) {
 	    // Enable Webpack hot module replacement for reducers
-	    module.hot.accept(354, function () {
-	      var nextReducer = __webpack_require__(354);
+	    module.hot.accept(386, function () {
+	      var nextReducer = __webpack_require__(386);
 	      store.replaceReducer(nextReducer);
 	    });
 	  }
@@ -83191,7 +84343,7 @@ webpackJsonp([0,8],[
 	*/
 
 /***/ },
-/* 353 */
+/* 385 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -83219,7 +84371,7 @@ webpackJsonp([0,8],[
 	exports['default'] = thunk;
 
 /***/ },
-/* 354 */
+/* 386 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -83230,19 +84382,23 @@ webpackJsonp([0,8],[
 
 	var _redux = __webpack_require__(254);
 
-	var _reduxRouter = __webpack_require__(355);
+	var _reduxRouter = __webpack_require__(387);
 
-	var _reducer = __webpack_require__(368);
+	var _reducer = __webpack_require__(400);
 
 	var _reducer2 = _interopRequireDefault(_reducer);
 
-	var _reducer3 = __webpack_require__(369);
+	var _reducer3 = __webpack_require__(401);
 
 	var _reducer4 = _interopRequireDefault(_reducer3);
 
-	var _reducer5 = __webpack_require__(370);
+	var _reducer5 = __webpack_require__(402);
 
 	var _reducer6 = _interopRequireDefault(_reducer5);
+
+	var _reducer7 = __webpack_require__(403);
+
+	var _reducer8 = _interopRequireDefault(_reducer7);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -83250,12 +84406,13 @@ webpackJsonp([0,8],[
 	    user: _reducer2.default,
 	    quanzi: _reducer4.default,
 	    home: _reducer6.default,
+	    item: _reducer8.default,
 	    router: _reduxRouter.routerStateReducer
 	});
 	exports.default = rootReducer;
 
 /***/ },
-/* 355 */
+/* 387 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -83264,31 +84421,31 @@ webpackJsonp([0,8],[
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _routerStateReducer2 = __webpack_require__(356);
+	var _routerStateReducer2 = __webpack_require__(388);
 
 	var _routerStateReducer3 = _interopRequireDefault(_routerStateReducer2);
 
 	exports.routerStateReducer = _routerStateReducer3['default'];
 
-	var _ReduxRouter2 = __webpack_require__(358);
+	var _ReduxRouter2 = __webpack_require__(390);
 
 	var _ReduxRouter3 = _interopRequireDefault(_ReduxRouter2);
 
 	exports.ReduxRouter = _ReduxRouter3['default'];
 
-	var _client = __webpack_require__(361);
+	var _client = __webpack_require__(393);
 
 	var _client2 = _interopRequireDefault(_client);
 
 	exports.reduxReactRouter = _client2['default'];
 
-	var _isActive2 = __webpack_require__(367);
+	var _isActive2 = __webpack_require__(399);
 
 	var _isActive3 = _interopRequireDefault(_isActive2);
 
 	exports.isActive = _isActive3['default'];
 
-	var _actionCreators = __webpack_require__(360);
+	var _actionCreators = __webpack_require__(392);
 
 	exports.historyAPI = _actionCreators.historyAPI;
 	exports.push = _actionCreators.push;
@@ -83299,7 +84456,7 @@ webpackJsonp([0,8],[
 	exports.goForward = _actionCreators.goForward;
 
 /***/ },
-/* 356 */
+/* 388 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -83310,7 +84467,7 @@ webpackJsonp([0,8],[
 
 	exports['default'] = routerStateReducer;
 
-	var _constants = __webpack_require__(357);
+	var _constants = __webpack_require__(389);
 
 	/**
 	 * Reducer of ROUTER_DID_CHANGE actions. Returns a state object
@@ -83339,7 +84496,7 @@ webpackJsonp([0,8],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 357 */
+/* 389 */
 /***/ function(module, exports) {
 
 	// Signals that the router's state has changed. It should
@@ -83367,7 +84524,7 @@ webpackJsonp([0,8],[
 	exports.DOES_NEED_REFRESH = DOES_NEED_REFRESH;
 
 /***/ },
-/* 358 */
+/* 390 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -83394,13 +84551,13 @@ webpackJsonp([0,8],[
 
 	var _reactRouterLibRouterUtils = __webpack_require__(223);
 
-	var _routerStateEquals = __webpack_require__(359);
+	var _routerStateEquals = __webpack_require__(391);
 
 	var _routerStateEquals2 = _interopRequireDefault(_routerStateEquals);
 
-	var _constants = __webpack_require__(357);
+	var _constants = __webpack_require__(389);
 
-	var _actionCreators = __webpack_require__(360);
+	var _actionCreators = __webpack_require__(392);
 
 	function memoizeRouterStateSelector(selector) {
 	  var previousRouterState = null;
@@ -83525,7 +84682,7 @@ webpackJsonp([0,8],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 359 */
+/* 391 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -83539,7 +84696,7 @@ webpackJsonp([0,8],[
 
 	var _deepEqual2 = _interopRequireDefault(_deepEqual);
 
-	var _constants = __webpack_require__(357);
+	var _constants = __webpack_require__(389);
 
 	/**
 	 * Check if two router states are equal. Ignores `location.key`.
@@ -83557,7 +84714,7 @@ webpackJsonp([0,8],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 360 */
+/* 392 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -83568,7 +84725,7 @@ webpackJsonp([0,8],[
 	exports.replaceRoutes = replaceRoutes;
 	exports.historyAPI = historyAPI;
 
-	var _constants = __webpack_require__(357);
+	var _constants = __webpack_require__(389);
 
 	/**
 	 * Action creator for signaling that the router has changed.
@@ -83647,7 +84804,7 @@ webpackJsonp([0,8],[
 	exports.goForward = goForward;
 
 /***/ },
-/* 361 */
+/* 393 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -83658,21 +84815,21 @@ webpackJsonp([0,8],[
 
 	var _redux = __webpack_require__(254);
 
-	var _actionCreators = __webpack_require__(360);
+	var _actionCreators = __webpack_require__(392);
 
-	var _routerStateEquals = __webpack_require__(359);
+	var _routerStateEquals = __webpack_require__(391);
 
 	var _routerStateEquals2 = _interopRequireDefault(_routerStateEquals);
 
-	var _reduxReactRouter = __webpack_require__(362);
+	var _reduxReactRouter = __webpack_require__(394);
 
 	var _reduxReactRouter2 = _interopRequireDefault(_reduxReactRouter);
 
-	var _useDefaults = __webpack_require__(364);
+	var _useDefaults = __webpack_require__(396);
 
 	var _useDefaults2 = _interopRequireDefault(_useDefaults);
 
-	var _routeReplacement = __webpack_require__(365);
+	var _routeReplacement = __webpack_require__(397);
 
 	var _routeReplacement2 = _interopRequireDefault(_routeReplacement);
 
@@ -83727,7 +84884,7 @@ webpackJsonp([0,8],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 362 */
+/* 394 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -83745,11 +84902,11 @@ webpackJsonp([0,8],[
 
 	var _reactRouterLibCreateTransitionManager2 = _interopRequireDefault(_reactRouterLibCreateTransitionManager);
 
-	var _historyMiddleware = __webpack_require__(363);
+	var _historyMiddleware = __webpack_require__(395);
 
 	var _historyMiddleware2 = _interopRequireDefault(_historyMiddleware);
 
-	var _constants = __webpack_require__(357);
+	var _constants = __webpack_require__(389);
 
 	function reduxReactRouter(_ref) {
 	  var routes = _ref.routes;
@@ -83793,7 +84950,7 @@ webpackJsonp([0,8],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 363 */
+/* 395 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -83801,7 +84958,7 @@ webpackJsonp([0,8],[
 	exports.__esModule = true;
 	exports['default'] = historyMiddleware;
 
-	var _constants = __webpack_require__(357);
+	var _constants = __webpack_require__(389);
 
 	/**
 	 * Middleware for interacting with the history API
@@ -83828,7 +84985,7 @@ webpackJsonp([0,8],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 364 */
+/* 396 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -83878,7 +85035,7 @@ webpackJsonp([0,8],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 365 */
+/* 397 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -83895,7 +85052,7 @@ webpackJsonp([0,8],[
 
 	var _reactRouter = __webpack_require__(184);
 
-	var _replaceRoutesMiddleware = __webpack_require__(366);
+	var _replaceRoutesMiddleware = __webpack_require__(398);
 
 	var _replaceRoutesMiddleware2 = _interopRequireDefault(_replaceRoutesMiddleware);
 
@@ -83972,7 +85129,7 @@ webpackJsonp([0,8],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 366 */
+/* 398 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -83980,7 +85137,7 @@ webpackJsonp([0,8],[
 	exports.__esModule = true;
 	exports['default'] = replaceRoutesMiddleware;
 
-	var _constants = __webpack_require__(357);
+	var _constants = __webpack_require__(389);
 
 	function replaceRoutesMiddleware(replaceRoutes) {
 	  return function () {
@@ -83999,7 +85156,7 @@ webpackJsonp([0,8],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 367 */
+/* 399 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84038,7 +85195,7 @@ webpackJsonp([0,8],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 368 */
+/* 400 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84079,7 +85236,6 @@ webpackJsonp([0,8],[
 	  }
 	}
 	*/
-
 	var userInfo = {
 	  loginState: false
 	};
@@ -84089,7 +85245,7 @@ webpackJsonp([0,8],[
 
 	  switch (action.type) {
 	    case types.LOGIN_USER_SUCCESS:
-	      return _extends({}, state, { loginState: true }, action.payload);
+	      return _extends({}, state, action.payload);
 	    case types.LOGIN_USER_ERROR:
 	      return _extends({}, state, action.payload);
 	    default:
@@ -84098,7 +85254,7 @@ webpackJsonp([0,8],[
 	}
 
 /***/ },
-/* 369 */
+/* 401 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84138,7 +85294,7 @@ webpackJsonp([0,8],[
 	}
 
 /***/ },
-/* 370 */
+/* 402 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84162,6 +85318,10 @@ webpackJsonp([0,8],[
 	    banner: {
 	        is_banner: false,
 	        list: []
+	    },
+	    recommend: {
+	        loading: false,
+	        list: []
 	    }
 	};
 
@@ -84171,24 +85331,136 @@ webpackJsonp([0,8],[
 
 	    switch (action.type) {
 	        case types.GET_HOLICHAT_BANNER:
-	            return _extends({}, state, { banner: action.banner });
+	            return _extends({}, state, { banner: action.payload });
+	        case types.GET_RECOMMENDED:
+	            return _extends({}, state, { recommend: action.payload });
 	        default:
 	            return state;
 	    }
 	}
 
 /***/ },
-/* 371 */
+/* 403 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	exports.default = item;
+
+	var _types = __webpack_require__(279);
+
+	var types = _interopRequireWildcard(_types);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	var userInfo = {
+	    loading: true,
+	    type: '',
+	    brief: '',
+	    enroll: { loading: true }, //组别选择
+	    result: '',
+	    theme: ''
+	};
+	function item() {
+	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : userInfo;
+	    var action = arguments[1];
+
+	    switch (action.type) {
+	        case types.GET_BRIEF:
+	            //getBrief
+	            return _extends({}, state, action.payload);
+	        case types.GET_RESULT:
+	            return _extends({}, state, action.payload);
+	        case types.GET_ENROLL:
+	            return _extends({}, state, action.payload);
+	        default:
+	            return state;
+	    }
+	}
+
+/***/ },
+/* 404 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 372 */,
-/* 373 */
+/* 405 */,
+/* 406 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 407 */,
+/* 408 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(409);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(290)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(true) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept(409, function() {
+				var newContent = __webpack_require__(409);
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 409 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(289)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "@font-face {\n  font-family: \"anticon\";\n  src: url(" + __webpack_require__(410) + ");\n  /* IE9*/\n  src: url(" + __webpack_require__(410) + "#iefix) format('embedded-opentype'),  url(" + __webpack_require__(411) + ") format('woff'),  url(" + __webpack_require__(412) + ") format('truetype'),  url(" + __webpack_require__(413) + "#iconfont) format('svg');\n  /* iOS 4.1- */\n}\n.anticon:before {\n  display: block;\n  font-family: anticon!important;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 410 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "cae736108db2b1c4594bd2a2ab62aced.eot";
+
+/***/ },
+/* 411 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "65034af05eab6c38e61dd9de2ca567ac.woff";
+
+/***/ },
+/* 412 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "54f09b7b1bac84e5ff0504ea675ad445.ttf";
+
+/***/ },
+/* 413 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "864f536ffea703bdd089875c954bf5c0.svg";
 
 /***/ }
 ]);

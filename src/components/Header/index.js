@@ -2,6 +2,10 @@ import React, {Component, PropTypes} from 'react'
 import {Link} from 'react-router';
 import './index.less'
 class Header extends Component {
+	static propTypes = {
+        title: PropTypes.string.isRequired,
+        title: PropTypes.string
+    }
 	render() {
 		const { title , leftTo } = this.props;
 		let left = null;

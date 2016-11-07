@@ -38,8 +38,7 @@ export const httpRequest = (url,params) => {
 			if(!param["uid"]){
 				param["uid"] = uid
 			}
-			console.log(param)
-
+			//console.log(param)
 			fetch.get(setUrl,param).then(
 				(data) => {httpCallback(data)},
           		(err) => {httpCallback(err)}
@@ -52,7 +51,6 @@ export const httpRequest = (url,params) => {
 		}
 		//检查查接口返回
 		function httpCallback(data){
-			//console.log(param)
 			if(data && data["status"]){
 				message.warning( setUrl + ',网络接口异常')
 				return reject(new Error(data["status"]))
@@ -66,13 +64,20 @@ export const httpRequest = (url,params) => {
 				message.warning( errorCode[code_num].tips )
 				return resolve(data['ret'])
 			}
-			return resolve(data['data'])
+			return resolve(data['data'] ||"")
 		}
 
 	});
 }
 
-
-export const getImageUrlPath = (imageStr) =>{
-    return imgPathUrl + imageStr
+//返回图片地址
+export const getImageUrlPath = (src) =>{
+	return src.length > 1 ? imgPathUrl + src : imgPathUrl + 'm/df/icon_256.png'
+	// const imgObj = new Image()
+	// imgObj.src = imgPathUrl + imageStr
+	// if(imgObj.width > 0 && imgObj.height > 0){
+	// 	return imgPathUrl + imageStr
+	// }else{
+	// 	return imgPathUrl + 'm/df/icon_256.png'
+	// }
 }

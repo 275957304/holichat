@@ -21,7 +21,7 @@ class TypeSelect extends Component {
 	*/
 
 	render(){
-        console.log(React.Children)
+        //console.log(React.Children)
 		return(
 			<div className="type_tab">
                 <div className="type_tab_hd">
@@ -32,7 +32,7 @@ class TypeSelect extends Component {
                     </nav>
                     <div className="tab-content-items">
                         {React.Children.map(this.props.children, element => {
-                            return console.log(element)
+                            //return console.log(element)
                         })}
                     </div>
                 </div>

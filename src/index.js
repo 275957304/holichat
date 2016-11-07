@@ -10,7 +10,7 @@ const store = configureStore();
 import 'normalize.css' //重置浏览器默认样式
 //微信底层样式
 import 'weui/dist/style/weui.min.css';
-//import './font/iconfont.css'; //字体图标
+import './font/iconfont.less'
 
 
 render(

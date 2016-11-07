@@ -19,7 +19,8 @@ class Index extends Component {
     }
     componentWillMount(){
         const { quanziActions, dispatch } = this.props
-        quanziActions.get_community_banner()
+        quanziActions.get_community_banner();
+        quanziActions.set_home_community({home_cid:5});
 	}
 	groupChat(){
 		console.log('群聊')
@@ -43,8 +44,8 @@ class Index extends Component {
 
                 <div className="weui-panel__bd">
 					<div className="weui-media-box weui-media-box_appmsg">
-						<div className="weui-media__hd">
-							<img className="weui-media__thumb img_rounded" width="40" src="http://m.holichat.com/dist/img/icon_152.png" alt="" />
+						<div className="weui-media__hd index_logo">
+							<img className="weui-media__thumb" src="http://img.holichat.com/uploads/m/df/icon_256.png@150h_150w_1e_1c_10-2ci" alt="" />
 						</div>
 						<div className="weui-media__bd">
 							<h4 className="weui-media__title">活力圈</h4>

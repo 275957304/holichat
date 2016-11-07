@@ -19,20 +19,34 @@ const Home = {
 		}, 'home')
 	}
 }
-const HomeEvent = {
-	path: '/home/event',
+
+//赛事列表页
+const HomeList = {
+	path: '/home/list',
 	getComponent: (nextState, cb) => {
 		require.ensure([], (require) => {
-			cb(null, require('./containers/Event/').default)
+			cb(null, require('./containers/HomeList/').default)
 		},'event')
 	}
 }
-const HomeDetail = {
-	path: '/home/event/:id',
+
+//赛事-活动-培训 详情页
+const HomeDetails = {
+	path: '/home/details/:id',
 	getComponent: (nextState, cb) => {
 		require.ensure([], (require) => {
-			cb(null, require('./containers/EventDetail/').default)
+			cb(null, require('./containers/HomeDetails/').default)
 		},'eventDetail')
+	}
+}
+
+//级别选择
+const HomeEnroll = {
+	path: '/home/enroll/:id',
+	getComponent: (nextState, cb) => {
+		require.ensure([], (require) => {
+			cb(null, require('./containers/HomeEnroll/').default)
+		},'HomeEnroll')
 	}
 }
 
@@ -87,8 +101,9 @@ const routes = {
 	//onEnter: redirectToDashboard,
 	childRoutes :[
 		Home,
-		HomeEvent,
-		HomeDetail,
+		HomeList,
+		HomeDetails,
+		HomeEnroll,
 		Messages,
 		User,
 		Signin,

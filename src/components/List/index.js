@@ -2,8 +2,7 @@ import React, {Component, PropTypes} from 'react'
 import {Link} from 'react-router';
 import iScroll from '../../utils/iscroll/iscroll-probe'
 import ReactIScroll from 'reactjs-iscroll';
-import { httpRequest, getImageUrlPath } from '../../api/'
-import './list.css'
+import { httpRequest, getImageUrlPath, isExist } from '../../api/'
 import { getCategory, getCurrentStatus } from '../../utils/'
 
 class List extends Component {
@@ -12,7 +11,6 @@ class List extends Component {
         param: PropTypes.object.isRequired,
         type: PropTypes.string.isRequired
     }
-
 	constructor(props) {
 		super(props);
 		this.handleRefresh = this.handleRefresh.bind(this);
@@ -29,11 +27,11 @@ class List extends Component {
 	componentWillMount() {
 		//设置滚动区域的高度
 		this.setState({scrollHeight: window.screen.height - 126});
-		window.addEventListener('touchmove', function(e){e.preventDefault()})
+		//window.addEventListener('touchmove', function(e){e.preventDefault()})
 		this.loadData();
 	}
 	componentWillUnmount(){
-		window.addEventListener('touchmove', function(e){e.preventDefault()})
+		//window.addEventListener('touchmove', function(e){e.preventDefault()})
 	}
 	//调用 IScroll refresh 后回调函数
 	handleRefresh(downOrUp, callback) {
@@ -62,10 +60,8 @@ class List extends Component {
 	loadData(downOrUp, callback) {
 		const {currentPage} = this.state
 		const param = this.props.param
+		console.log(param)
 		param['page'] = currentPage;
-		//console.log(param)
-		//获取参数
-		//const param = `${this.props.param} + ${currentPage}`;
 		httpRequest(this.props.url,param).then(function(data){
 			const {list} = this.state;
 			this.setState({
@@ -86,7 +82,7 @@ class List extends Component {
 				<ReactIScroll iScroll={iScroll} pullUp={pullUp} pullDown={pullDown} handleRefresh={this.handleRefresh}>
 					<div className="weui-panel__bd panel_iscroll">
 						{list.map((item,index) =>
-							<Link key={index} to={`/home/${type}/${item[getid]}`} className="weui-media-box weui-media-box_appmsg">
+							<Link key={index} to={{ pathname: `/home/details/${item[getid]}`, query:{type: `${type}` } }}  className="weui-media-box weui-media-box_appmsg">
 								<div className="weui-media-box__hd">
 									<img className="weui-media-box__thumb" src={getImageUrlPath(item.logo_image) +'@150h_150w_1e_1c_10-2ci'} />
 								</div>

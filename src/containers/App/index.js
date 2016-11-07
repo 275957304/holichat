@@ -4,21 +4,19 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as userActions from '../../reducers/modules/user/action'
 import './app.less'
-
 class App extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            checkNum : true
-        }
+        this.state = {checkNum : true}
     }
     componentWillMount() {
+        //console.log(this.props)
 		//检查登录
 		this.checkAuth(this.props.user.loginState);
 	}
 
     componentWillReceiveProps(nextProps){
-        let redirectAfterLogin = this.props.location.pathname;
+        const redirectAfterLogin = this.props.location.pathname + this.props.location.search
         if(!nextProps.user.loginState && this.state.checkNum){
             this.setState({checkNum: false});
             this.context.router.push(`/signin?next=${redirectAfterLogin}`)

@@ -24,7 +24,11 @@ class Slider extends Component {
 				return(<div key={index}><img src={getImageUrlPath(item.image)} /></div>)
 			}else{
 				const action = JSON.parse(item.action);
-				return(<Link key={index} to={{pathname:`/home/${action.type}/${action.data.id ? action.data.id :''}`}} ><img src={getImageUrlPath(item.image)} /></Link>)
+				if(action.type == 'url'){
+					return(<a key={index} href={action.data.url} ><img src={getImageUrlPath(item.image)} /></a>)
+				}else{
+					return(<Link key={index} to={{pathname:`/home/details/${action.data.id ? action.data.id :''}`, query:{type: `${action.type}` } }} ><img src={getImageUrlPath(item.image)} /></Link>)
+				}
 			}
 		})
 		function onChange(a, b, c) {
