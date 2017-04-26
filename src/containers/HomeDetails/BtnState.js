@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import { Link } from 'react-router'
-import { message } from 'antd'
-import 'antd/lib/message/style/index.less'
+import { Button,Toast } from 'antd-mobile';
+import { lastTime } from '../../utils/'
 class BtnSate extends Component {
 	propTypes: {
 		type: PropTypes.string.isRequired,
@@ -12,11 +12,12 @@ class BtnSate extends Component {
 	}
 	constructor(props) {
         super(props)
-		this.handleClick = this.handleClick.bind(this);
     }
 	handleClick(txt){
-		message.config({top: 200,duration: 2,})
-		message.warning(txt)
+		Toast.info(txt,1.5);
+	}
+	signUp(){
+		this.props.isApply()
 	}
 	render(){
 		const {type, id , begin_date, deadline, end_date, signline} = this.props
@@ -29,17 +30,18 @@ class BtnSate extends Component {
 		deadlineDate = deadlineDate[1] + '/' + deadlineDate[2] + '/' + deadlineDate[0] + ' ' + deadline.substring(10, 19);
 		beginDate = beginDate[1] + '/' + beginDate[2] + '/' + beginDate[0] + ' ' + begin_date.substring(10, 19);
 		endDate = endDate[1] + '/' + endDate[2] + '/' + endDate[0] + ' ' + deadlineDate.substring(10, 19);
-
+		const differ = Date.parse(deadlineDate) - today;
 		if(today < Date.parse(signlineDate)){
-			return (<div onClick={()=>this.handleClick('预热中')} className="weui-btn weui-btn_disabled weui-btn_default">预热中</div>)
+			return (<Button data-seed="logId" className="btn_default" onClick={ () => this.handleClick('预热中')}>预热中</Button>)
 		}else if(today < Date.parse(deadlineDate)){
-			return (<Link to={{ pathname: `/home/enroll/${id}`, query:{type: `${type}` } }}  className="weui-btn weui-btn_warn">我要报名</Link>)
+			return (<Button onClick={this.signUp.bind(this)} className="am-button btn_warn">我要报名 <span style={{fontSize:13,marginLeft:5}}>{lastTime(differ)}</span></Button>)
+			//return (<Link to={{ pathname: `/home/enroll/${id}`, query:{type: `${type}` } }}  className="am-button btn_warn">我要报名 <span style={{fontSize:13,marginLeft:5}}>{lastTime(differ)}</span></Link>)
 		}else if(today < Date.parse(beginDate)){
-			return (<div onClick={()=>this.handleClick('即将开始')} className="weui-btn weui-btn_disabled weui-btn_default">即将开始</div>)
+			return (<Button data-seed="logId" onClick={ () => this.handleClick('即将开始')}>即将开始</Button>)
 		}else if(today < Date.parse(endDate)){
-			return (<div onClick={()=>this.handleClick('报名已结束')} className="weui-btn weui-btn_disabled weui-btn_default">报名已结束</div>)
+			return (<Button data-seed="logId" onClick={ () => this.handleClick('报名已结束')}>报名已结束</Button>)
 		}else{
-			return (<div onClick={()=>this.handleClick('报名已结束')} className="weui-btn weui-btn_disabled weui-btn_default">报名已结束</div>)
+			return (<Button data-seed="logId" onClick={ () => this.handleClick('报名已结束')}>报名已结束</Button>)
 		}
 
 	}

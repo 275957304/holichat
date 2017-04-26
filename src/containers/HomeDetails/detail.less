@@ -1,49 +1,47 @@
 .tabs_box{
+overflow: hidden;
+}
+.event_detail{
+    background-color: white;
+            height: 100%;
+}
+.brief_content{
+    background-color: white;
+}
+.brief_area{
+    overflow: hidden;
+    overflow-y: auto;
     position: relative;
-    .tabs{
-        border-bottom: 1px solid #eee;
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: flex;
-    }
-    .tabs a{
-        line-height: 36px;
-        height: 36px;
-        -webkit-box-flex: 1;
-        -webkit-flex: 1;
-        flex: 1;
-        text-align: center;
-    }
-    .tabs a.active{
-        color:#e64340;
-        border-bottom: 2px solid #e64340;
-    }
-
-
-    .weui-media-box_appmsg,.weui-media-box,.result{
-        padding: 10px
-    }
-    .tabs_box .weui-media-box__title{
-        font-size: 15px;
-    }
-    .weui_media_desc{
-        font-size: 13px;
-        margin-top: 5px;
-        color: #999;
-        line-height: 1.6;
-    }
-    .anticon{
-        color: #999;
-    }
-    .brief_area{
-        padding-bottom: 60px;
-    }
-    .brief_content{
-        padding: 10px;
-    }
-    .weui-media-box_text .weui-media-box__title{
-        color: #333;
-        margin: 0;
-    }
-
+}
+.intr_info{
+	font-size:26px;
+}
+.event_detail .am-tabs-bar{
+    top: 80px
+}
+.event_detail .am-tabs-bar .am-tabs-tab-active{
+    color: #e64340;
+}
+.event_detail .am-tabs-ink-bar{
+    background-color: #e64340;
+}
+.event_detail #detailsTxt{
+    padding: 20px;
+}
+.event_detail  .am-tabs-bar{
+    position: fixed;
+    top: 70px;
+    width: 100%;
+    z-index: 10;
+}
+.event_detail .am-tabs-content{
+    padding-top: 74px;
+    padding-bottom: 80px;
+    /*position: relative;*/
+}
+.event_detail .am-tabs{
+    min-height: 100%
+}
+.notes_detail{
+    padding: 15px 15px 100px;
 }

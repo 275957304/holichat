@@ -82,7 +82,7 @@ class EventDetails extends Component {
 						<div className="brief_area">
 						<div className="weui-cells weui-media-box weui-media-box_appmsg mt0">
 							<div className="weui-media-box__hd">
-								<img className="weui-media-box__thumb" src={`${getImageUrlPath(brief.logo_image)}@150h_150w_1e_1c_10-2ci`} alt=""/>
+								<img className="weui-media-box__thumb" src={`${getImageUrlPath(brief.logo_image)}`} alt=""/>
 							</div>
 							<div className="weui-media-box__bd">
 								<h4 className="weui-media-box__title">{brief.title}</h4>
@@ -115,7 +115,7 @@ class EventDetails extends Component {
 							</div>
 							<div className="weui-media-box weui-media-box_text">
 								<h4 className="weui-media-box__title host-icon"><Icon type="environment-o" /> 地点</h4>
-								<p className="weui_media_desc"> {getAddress(brief.region_id)} {brief.address}</p>
+								<p className="weui_media_desc"> {getAddress(brief.region_id).join('')} {brief.address}</p>
 							</div>
 							<div className="weui-media-box weui-media-box_text">
 								<h4 className="weui-media-box__title host-icon"><Icon type="phone" /> 联系方式</h4>

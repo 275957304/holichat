@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import './style.less'
+import './style.css'
 import RecItem from './item'
 
 class Recommend extends Component {
@@ -12,7 +12,7 @@ class Recommend extends Component {
 				return <RecItem key={index} title={item.title} image={item.image} type={action.type} id={parseInt(action.data.id,10)} />
         });
 		return(
-			<div className="recommend">
+			<div className="recommend_list">
 				{list}
 			</div>
 		)

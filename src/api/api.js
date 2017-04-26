@@ -11,7 +11,7 @@ class _Api {
          * @param params {}
          * @returns {Promise}
          */
-        this.get = function(url, params) {
+        this.get = function(url, params){
             if (params) {
                 let paramsArray = [];
                 //encodeURIComponent
@@ -43,7 +43,7 @@ class _Api {
             })
         }
         /**
-         * 基于 fetch 封装的 POST请求  FormData 表单数据
+         * 基于 fetch 封装的 POST请求  FormData 表单数据  'Content-Type': 'application/json'
          * @param url
          * @param params
          * @param headers

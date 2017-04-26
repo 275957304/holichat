@@ -20,13 +20,20 @@ function recommendedAd(data){
 	}
 }
 
-
 //活力圈首页广告位
 export function get_holichat_banner(){
 	return dispatch =>
 	httpRequest('get_holichat_banner').then(function(data){
+		let banner=[]
         if(typeof data !== 'number'){
-			dispatch(setBanner(data))
+			data.map(item=>{
+				const action = JSON.parse(item.action);
+				if(action.type != 'news'){
+					banner.push(item)
+				}
+			})
+			//dispatch(setBanner(data))
+			dispatch(setBanner(banner))
         }
     })
 }
@@ -41,3 +48,5 @@ export function get_holichat_recommended_ad(param){
     	dispatch(recommendedAd(data))
     })
 }
+
+//其它文件

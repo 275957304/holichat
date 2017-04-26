@@ -351,6 +351,14 @@
         "name":"其它",
 
     },
+	"89":{
+        "name":"徒步",
+
+    },
+	"90":{
+        "name":"户外",
+
+    },
 
 }
 export default category

@@ -1,63 +1,59 @@
 import React, {Component, PropTypes} from 'react'
-import Header from '../../components/Header/'
-import Alert from '../../components/Alert/'
-import TypeSelect from '../../components/TypeSelect/'
-import SearchBar from '../../components/SearchBar/'
+import { NavBar, SearchBar, Toast} from 'antd-mobile';
 import List from '../../components/List/'
+import { getItem } from '../../utils/'
 import './event.less'
-let setUrl = '' //设置列表URL
-let setType = '' //设置类型
-let title = '列表页';
+
 class Tab extends Component{
     render(){
         return <div>{this.props.children}</div>
     }
 }
-
-
-
 class Event extends Component {
+    static contextTypes = {
+         router: PropTypes.object.isRequired
+    }
     constructor(props){
         super(props)
-        // cost:0为全价格,1为收费,2为免费
-        // event_type:0为活力圈所有赛事列表,1为社团赛事和最新赛事列表,2社团推荐赛事列表,3为活力圈推荐赛事列表
-        // category_id:赛事类型
-        // official:0为全部,1为官方
-        // status:N为项目预告,R为报名中,E为报名结束,P为进行中,C为己结束,NR为项目预告+报名中
+        this.listHeight = document.body.clientHeight - 80;
+        this.listUrl = '';
+        this.searchUrl = '';
+        this.title = '列表页';
+        this.type = '';
         this.state = {
-            community_cid:0,
-            category_id:0,
-            location_id:0,
-            status :'',
-            official : 0,
-            cost : 0,
-            page_size :10
-        };
-        this.handleSearch = this.handleSearch.bind(this);
-    }
-
-    componentWillMount(){
-        const types = this.props.location.query.type
-        if(types == 'activity'){
-            this.setState(Object.assign({}, this.state , {activity_type:'0'}))
-            title = '活动'
-            setType = 'activity'
-            setUrl = 'get_activity_list'
-        }else if(types == 'event'){
-            this.setState(Object.assign({}, this.state , {event_type:'0'}))
-            setType = 'event'
-            title = '赛事'
-            setUrl = 'get_competition_list'
-        }else if(types == 'training'){
-            this.setState(Object.assign({}, this.state , {training_type:'0'}))
-            title = '培训'
-            setType = 'training'
-            setUrl = 'get_training_list'
+            searchValue : '',
+            is_search : false,
+            list:{
+                community_cid:0,
+                category_id:0,
+                location_id:0,
+                status :'',
+                official : 0,
+                cost : 0,
+                page_size :10
+            }
         }
     }
 
-    handleSearch(val){
-        console.log('获取搜索内容' + val)
+    componentWillMount(){
+        const cityid = getItem("city_id") || '000000';
+        this.type = this.props.location.query.type
+        if(this.type == 'activity'){
+            this.setState({list :  Object.assign({}, this.state.list, {activity_type:'0',location_id:cityid} ) })
+            this.title = '活动'
+            this.type = 'activity'
+            this.listUrl = 'get_activity_list'
+        }else if(this.type == 'event'){
+            this.setState({list :  Object.assign({}, this.state.list, {event_type:'0',location_id:cityid} ) })
+            this.type = 'event'
+            this.title = '赛事'
+            this.listUrl = 'get_competition_list'
+        }else if(this.type == 'training'){
+            this.setState({list :  Object.assign({}, this.state.list, {training_type:'0',location_id:cityid} ) })
+            this.title = '培训'
+            this.type = 'training'
+            this.listUrl = 'get_training_list'
+        }
     }
 
     // componentDidMount() {
@@ -70,30 +66,58 @@ class Event extends Component {
 	// handleScroll(e) {
 	// 	console.log(e);
 	// 	console.log('浏览器滚动事件');
-	// }
+	//}
 
+    onChange(value) {
+        this.setState({searchValue: value});
+    }
+
+    clear() {
+        this.setState({ searchValue: ''});
+    }
+
+    searchVal(val){
+        if(val == ''){
+            Toast.info('搜索内容不能为空',1);
+            return false;
+        }
+        if(this.type == 'activity'){
+            this.searchUrl = 'search_activity_list'
+        }else if(this.type == 'event'){
+            this.searchUrl = 'search_competition_list'
+        }else if(this.type == 'training'){
+            this.searchUrl = 'search_training_list'
+        }
+        this.setState({
+            list :  Object.assign({}, this.state.list, {content:val} ),
+            is_search : true,
+            searchValue : ''
+        })
+    }
+    backList(){
+        this.setState({is_search : false})
+    }
     render(){
+        console.log(this.searchUrl)
+        //搜索输出
+        if(this.state.is_search){
+            return(
+                <div className="wx_event search_list">
+                    <NavBar mode="light" onLeftClick={this.backList.bind(this)}>{this.title}</NavBar>
+                    <List url={this.searchUrl} type={this.type} param={this.state.list} />
+                </div>
+            )
+        }
         return(
             <div className="wx_event">
-                <Header title={title} leftTo="fanhui" />
-                <SearchBar search={this.handleSearch} />
-                <TypeSelect>
-                    <Tab name="全类型">
-                        <div className="red"/>
-                    </Tab>
-                    <Tab name="全赛事">
-                        <div className="blue"/>
-                    </Tab>
-                    <Tab name="全价格">
-                        <div className="yellow"/>
-                    </Tab>
-                    <Tab name="全状态">
-                        <div className="yellow"/>
-                    </Tab>
-                </TypeSelect>
-                <List url={setUrl} type={setType} param={this.state} />
+                <NavBar mode="light" onLeftClick={() => this.context.router.goBack()}>{this.title}</NavBar>
+                <SearchBar value={this.state.searchValue} placeholder="搜索" cancelText="搜索" showCancelButton={false}  onCancel={ (val) => this.searchVal(val.trim()) } onChange={this.onChange.bind(this)}/>
+                <List height={this.listHeight} url={this.listUrl} type={this.type} param={this.state.list} />
             </div>
         )
     }
 }
+// Event.contextTypes = {
+//     router: PropTypes.object.isRequired,
+// }
 export default Event

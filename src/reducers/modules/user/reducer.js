@@ -22,9 +22,13 @@ export default function news(state = InitState, action = {}) {
 }
 */
 const userInfo = {
-    loginState : false,
+    loginState : false,    
+    session : '',
+    uid : '',
+    device : '',
 }
 export default function user(state = userInfo, action ){
+    //console.log(state)
     switch(action.type){
         case types.LOGIN_USER_SUCCESS:
             return Object.assign({}, state, action.payload);

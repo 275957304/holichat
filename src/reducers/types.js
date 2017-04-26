@@ -16,3 +16,15 @@ export const GET_ENROLL = 'GET_ENROLL'
 
 //主页推荐广告
 export const GET_RECOMMENDED = 'GET_RECOMMENDED'
+
+//报名检查
+export const GET_CHECK_ENROLL = 'GET_CHECK_ENROLL'
+
+//报名需知
+export const GET_ENROLL_NOTES = 'GET_ENROLL_NOTES'
+
+//是否有优惠码
+export const GET_IS_COUPON = 'GET_IS_COUPON'
+
+//来源 微信或城市服务
+export const SET_SOURCE = 'SET_SOURCE'

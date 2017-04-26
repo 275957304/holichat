@@ -1,0 +1,44 @@
+
+.nav{
+	padding: 30px 0;
+	background: #fff;
+}
+.nav-link{
+	text-align: center;
+	display: block;
+	width: 100%;
+}
+.nav-img{
+	width: 70px;
+	margin: 0 auto;
+}
+.nav-txt{
+  font-size: 28px;
+}
+.am-flexbox .am-flexbox-item{
+	margin: 0;
+}
+.hot-topics{
+	margin-top: 20px;
+	background: #fff;
+}
+.hot-topics-titlt{
+	padding:15px 20px;
+	font-size: 26px;
+}
+.recommend{
+	/*padding-bottom:80px;*/
+}
+
+.rec_more{
+	float: right;
+}
+.rec_more_bottom{
+	background-color: #eee;
+	padding: 20px;
+	font-size:26px;
+	text-align: center;
+}
+.wx_home .am-navbar-left{
+	font-size:24px;
+}

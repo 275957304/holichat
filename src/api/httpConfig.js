@@ -15,10 +15,6 @@ const data = {
         "action": "sys/api/info",
         "method": "get"
     },
-    "get_pubkey": {
-        "action": "login/api/get_pubkey",
-        "method": "get"
-    },
     "rsa_login": {
         "action": "login/api/rsa_login",
         "method": "post"
@@ -38,10 +34,6 @@ const data = {
     "other_login": {
         "action": "login/sdk/other_login",
         "method": "post"
-    },
-    "wx_access_token": {
-        "action": "login/sdk/wx_access_token",
-        "method": "get"
     },
     "phone_exists": {
         "action": "user/api/phone_exists",
@@ -91,10 +83,6 @@ const data = {
         "action": "event/view/category",
         "method": "get"
     },
-    "get_competition_region": {
-        "action": "event/view/region",
-        "method": "get"
-    },
     "get_competition_list": {
         "action": "event/view/event_list",
         "method": "get"
@@ -129,10 +117,6 @@ const data = {
     },
     "get_event_brief_array": {
         "action": "event/view/get_brief_array",
-        "method": "get"
-    },
-    "edit_competitors_info": {
-        "action": "event/interface/event_enroll_edit",
         "method": "post"
     },
     "competition_pay_confirm": {
@@ -203,20 +187,8 @@ const data = {
         "action": "event/attention/check_attention",
         "method": "get"
     },
-    "get_team_info": {
-        "action": "event/team/event_team_info",
-        "method": "get"
-    },
-    "edit_team_name": {
-        "action": "event/team/event_edit_team_name",
-        "method": "get"
-    },
     "get_venue_category": {
         "action": "venue/view/category",
-        "method": "get"
-    },
-    "get_venue_region": {
-        "action": "venue/view/region",
         "method": "get"
     },
     "get_venue_list": {
@@ -229,10 +201,6 @@ const data = {
     },
     "get_club_category": {
         "action": "community/view/category",
-        "method": "get"
-    },
-    "get_club_region": {
-        "action": "community/view/region",
         "method": "get"
     },
     "get_club_list": {
@@ -290,6 +258,10 @@ const data = {
     "regeocode": {
         "action": "other/api/get_geocoding",
         "method": "post"
+    },
+    "wx_subscribe": {
+        "action": "other/api/wx_subscribe",
+        "method": "get"
     },
     "un_bind_community": {
         "action": "admin/manage/un_bind_community",
@@ -455,10 +427,6 @@ const data = {
         "action": "activity/view/category",
         "method": "get"
     },
-    "get_activity_region": {
-        "action": "activity/view/region",
-        "method": "get"
-    },
     "get_activity_list": {
         "action": "activity/view/activity_list",
         "method": "get"
@@ -493,10 +461,6 @@ const data = {
     },
     "get_activity_brief_array": {
         "action": "activity/view/get_brief_array",
-        "method": "get"
-    },
-    "edit_activity_enroll_info": {
-        "action": "activity/interface/activity_enroll_edit",
         "method": "post"
     },
     "activity_pay_confirm": {
@@ -567,20 +531,8 @@ const data = {
         "action": "activity/attention/check_attention",
         "method": "get"
     },
-    "get_activity_team_info": {
-        "action": "activity/team/activity_team_info",
-        "method": "get"
-    },
-    "edit_activity_team_name": {
-        "action": "activity/team/activity_edit_team_name",
-        "method": "get"
-    },
     "get_training_category": {
         "action": "training/view/category",
-        "method": "get"
-    },
-    "get_training_region": {
-        "action": "training/view/region",
         "method": "get"
     },
     "get_training_list": {
@@ -614,10 +566,6 @@ const data = {
     "get_training_address": {
         "action": "training/view/get_address",
         "method": "get"
-    },
-    "edit_training_enroll_info": {
-        "action": "training/interface/training_enroll_edit",
-        "method": "post"
     },
     "training_pay_confirm": {
         "action": "training/interface/training_pay_confirm",
@@ -657,7 +605,7 @@ const data = {
     },
     "get_training_brief_array": {
         "action": "training/view/get_brief_array",
-        "method": "get"
+        "method": "post"
     },
     "send_training_moment": {
         "action": "training/theme/add",
@@ -689,14 +637,6 @@ const data = {
     },
     "check_training_follow": {
         "action": "training/attention/check_attention",
-        "method": "get"
-    },
-    "get_training_team_info": {
-        "action": "training/team/training_team_info",
-        "method": "get"
-    },
-    "edit_training_team_name": {
-        "action": "training/team/training_edit_team_name",
         "method": "get"
     },
     "get_enroll_template": {
@@ -751,48 +691,12 @@ const data = {
         "action": "mine/interface/user_act_no_pay_cnt",
         "method": "get"
     },
-    "is_user_no_pay_cnt": {
-        "action": "mine/interface/is_user_act_no_pay",
-        "method": "get"
-    },
     "user_delete_act_list": {
         "action": "mine/user/user_delete_act_list",
         "method": "post"
     },
-    "user_linkman_list":{
-        "action": "mine/linkman/user_linkman_list",
-        "method": "get"
-    },
-    "user_linkman_add":{
-        "action": "mine/linkman/user_linkman_add",
-        "method": "get"
-    },
-    "user_linkman_edit":{
-        "action": "mine/linkman/user_linkman_edit",
-        "method": "get"
-    },
-    "user_linkman_delete":{
-        "action": "mine/linkman/user_linkman_delete",
-        "method": "get"
-    },
-    "get_event_insurance_list": {
-        "action": "insurance/view/user_insurance_event_list",
-        "method": "get"
-    },
-    "get_activity_insurance_list": {
-        "action": "insurance/view/user_insurance_activity_list",
-        "method": "get"
-    },
-    "get_training_insurance_list": {
-        "action": "insurance/view/user_insurance_training_list",
-        "method": "get"
-    },
-    "get_enroll_insurance_info": {
-        "action": "insurance/view/user_enroll_insurance_info",
-        "method": "get"
-    },
     "get_insurance_info": {
-        "action": "insurance/view/user_insurance_info",
+        "action": "insurance/view/insurance_info",
         "method": "get"
     },
     "set_user_interests": {
@@ -903,18 +807,6 @@ const data = {
         "action": "community/view/community_customer_info",
         "method": "get"
     },
-    "get_insurance_list": {
-        "action": "insurance/view/insurance_list",
-        "method": "get"
-    },
-    "get_insurance_info_by_id": {
-        "action": "insurance/view/insurance_info",
-        "method": "get"
-    },
-    "add_insurance_data": {
-        "action": "insurance/interface/add_insurance_data",
-        "method": "post"
-    },
     "get_user_insurance_list": {
         "action": "mine/user/user_insurance_list",
         "method": "get"
@@ -923,29 +815,125 @@ const data = {
         "action": "mine/user/user_insurance_info",
         "method": "get"
     },
-    "edit_event_enroll_common_info": {
-        "action": "event/enroll/event_enroll_common_edit",
+    "user_linkman_list": {
+        "action": "mine/linkman/user_linkman_list",
+        "method": "get"
+    },
+    "user_linkman_add": {
+        "action": "mine/linkman/user_linkman_add",
+        "method": "get"
+    },
+    "user_linkman_edit": {
+        "action": "mine/linkman/user_linkman_edit",
+        "method": "get"
+    },
+    "user_linkman_delete": {
+        "action": "mine/linkman/user_linkman_delete",
+        "method": "get"
+    },
+    "get_hot_search_fields": {
+        "action": "config/config/hot_search_fields",
+        "method": "get"
+    },
+    "get_global_search_result": {
+        "action": "business/view/search",
+        "method": "get"
+    },
+    "user_cash_coupon": {
+        "action": "mine/user/user_cash_coupon",
+        "method": "get"
+    },
+    "get_broadcast_info": {
+        "action": "business/view/broadcast",
+        "method": "get"
+    },
+    "get_coupon_info": {
+        "action": "coupon/view/cash_coupon_info",
+        "method": "get"
+    },
+    "user_cash_coupon_num": {
+        "action": "mine/user/user_cash_coupon_num",
+        "method": "get"
+    },
+    "get_coupon_List": {
+        "action": "coupon/view/new_cash_coupon_list",
+        "method": "get"
+    },
+    "orienteer_project_list": {
+        "action": "orienteering/view/project_list",
+        "method": "get"
+    },
+    "orienteer_route_list": {
+        "action": "orienteering/view/route_list",
+        "method": "get"
+    },
+    "orienteer_route_detail": {
+        "action": "orienteering/view/route_detail",
+        "method": "get"
+    },
+    "orienteer_sign_info": {
+        "action": "orienteering/view/sign_info",
+        "method": "get"
+    },
+    "orienteer_route_start": {
+        "action": "orienteering/api/route_start",
+        "method": "get"
+    },
+    "orienteer_route_point_sign": {
+        "action": "orienteering/api/route_point_sign",
+        "method": "get"
+    },
+    "orienteer_user_sign_info": {
+        "action": "orienteering/user/user_sign_info",
+        "method": "get"
+    },
+    "orienteer_user_sign_count": {
+        "action": "orienteering/user/user_sign_count",
+        "method": "get"
+    },
+    "orienteer_rank_list": {
+        "action": "orienteering/rank/rank_list",
+        "method": "get"
+    },
+    "orienteer_user_current_score": {
+        "action": "orienteering/rank/user_current_score",
+        "method": "get"
+    },
+    "orienteer_user_best_score": {
+        "action": "orienteering/rank/user_best_score",
+        "method": "get"
+    },
+    "edit_activity_enroll": {
+        "action": "activity/enroll/activity_enroll_edit",
         "method": "post"
     },
-    "edit_event_enroll_personal_info": {
-        "action": "event/enroll/event_enroll_personal_edit",
+    "edit_event_enroll": {
+        "action": "event/enroll/event_enroll_edit",
         "method": "post"
     },
-    "edit_activity_enroll_common_info": {
-        "action": "activity/enroll/activity_enroll_common_edit",
+    "edit_training_enroll": {
+        "action": "training/enroll/training_enroll_edit",
         "method": "post"
     },
-    "edit_activity_enroll_personal_info": {
-        "action": "activity/enroll/activity_enroll_personal_edit",
-        "method": "post"
+    "get_custom_button": {
+        "action": "config/config/get_custom_button",
+        "method": "get"
     },
-    "edit_training_enroll_common_info": {
-        "action": "training/enroll/training_enroll_common_edit",
-        "method": "post"
+    "cancel_activity_enroll": {
+        "action": "activity/interface/activity_cancel_enroll",
+        "method": "get"
     },
-    "edit_training_enroll_personal_info": {
-        "action": "training/enroll/training_enroll_personal_edit",
-        "method": "post"
+    "cancel_event_enroll": {
+        "action": "event/interface/event_cancel_enroll",
+        "method": "get"
+    },
+    "cancel_training_enroll": {
+        "action": "training/interface/training_cancel_enroll",
+        "method": "get"
+    },
+    "check_need_bind": {
+        "action": "mine/interface/check_need_bind",
+        "method": "get"
     }
 }
 export default data

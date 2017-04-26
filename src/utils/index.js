@@ -10,7 +10,7 @@ export const devLog = (...args) => {
 获取类项
 id:类项的ID
 */
-export const getCategory = (id) => category[id].name ;
+export const getCategory = (id) => category[id] ? category[id].name : '其它' ;
 
 /*
 设置localStorage
@@ -67,7 +67,7 @@ export const getCurrentStatus = (signline,deadline,begin_date,end_date) => {
 	}else if(today < Date.parse(deadlineDate)){
 		return '<span class="green bm">报名中</span>';
 	}else if(today < Date.parse(beginDate)){
-		return '<span class="green ks">即将开始</span>';
+		return '<span class="gary ks">即将开始</span>';
 	}else if(today < Date.parse(endDate)){
 		return '<span class="warning jx">进行中</span>';
 	}else{
@@ -108,4 +108,52 @@ export const jsonParam = (param) => {
         mergeUrl += key + "=" + param[key] + "&"
     }
     return mergeUrl
+}
+
+
+/*
+剩余时间
+*/
+export const lastTime = (t) => {
+    if( t < 864000000 && t > 86400000 ){
+		return '( 剩余' +  parseInt( t / 86400000,10) + '天 )'
+	}else if( t < 86400000 && t > 0){
+		t < 3600000 ? t = 3600000 : t
+		return '( 剩余' +  parseInt( t / 3600000,10) + '小时 )'
+	}else{
+		return ''
+	}
+}
+
+/*
+浮点类的精确相加
+*/
+export const accAdd = (arg1,arg2) => {
+    var r1,r2,m;
+    if(parseInt(arg1)==arg1){
+        r1=0;
+    }else{
+        r1=arg1.toString().split(".")[1].length;
+    }
+    if(parseInt(arg2)==arg2){
+        r2=0;
+    }else{
+    	r2=arg2.toString().split(".")[1].length
+    }
+    m=Math.pow(10,Math.max(r1,r2))
+    return (arg1*m+arg2*m)/m
+}
+
+
+/*
+数组里是否存在
+*/
+export const contains = (arr,obj) =>{
+    let i = arr.length;
+    while (i--) {
+        if (arr[i] === obj) {
+            return true;
+        }
+    }
+    return false;
 }

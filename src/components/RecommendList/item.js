@@ -1,11 +1,9 @@
 import React, {Component, PropTypes} from 'react'
 import {Link} from 'react-router';
-import './style.less'
+import { ActivityIndicator} from 'antd-mobile';
+import './style.css'
 import { getImageUrlPath, httpRequest } from '../../api/'
-import { getCategory } from '../../utils/'
-
-import { Spin } from 'antd';
-import 'antd/lib/spin/style/index.less';
+import { getCategory,getCurrentStatus } from '../../utils/'
 
 class RecItem extends Component {
 	static propTypes = {
@@ -16,12 +14,17 @@ class RecItem extends Component {
     }
 	constructor(props) {
         super(props);
+		this.isShow = true;
 		this.state = {
 			loading : true,
 			cost : 0.00,
+			state : '',
 			category_id: 0
 		}
     }
+	componentWillUnmount(){
+		this.isShow = false;
+	}
 	componentDidMount(){
 		const { type,id} =this.props
 		let url =''
@@ -33,21 +36,27 @@ class RecItem extends Component {
 		};
 		httpRequest(url,param).then(function(data){
 			const category_txt = getCategory(data.sports_category_id)
-			this.setState({
-				loading : false,
-				cost : data.cost,
-				category: category_txt
-			})
+			const currenState = getCurrentStatus(data.signline,data.deadline,data.begin_date,data.end_date)
+			if(this.isShow){
+				this.setState({
+					loading : false,
+					cost : data.cost,
+					state : currenState,
+					category: category_txt
+				})
+			}
 		}.bind(this));
 	}
 	render(){
 		if(this.state.loading){
-			return <div className="rec_loading"><Spin spinning={this.state.loading}></Spin></div>
+			return <div className="loading"><ActivityIndicator text="加载中..."/></div>
 		}
-		//{getCategory(this.satae.category_id)}
 		return(
 			<Link to={{pathname:`/home/details/${this.props.id}`, query:{type: `${this.props.type}`} }} >
-				<div className="rec_img"><img src={getImageUrlPath(this.props.image)} /></div>
+				<div className="rec_img">
+					<div className="rec_state" dangerouslySetInnerHTML={{__html: `${this.state.state}`}} />
+					<img src={`${getImageUrlPath(this.props.image)}`} />
+				</div>
 				<div className="rec_txt">
 					<div className="title line2">{this.props.title}</div>
 					<p><span className="tip">{this.state.category}</span> <span className="price">¥{this.state.cost}起</span></p>

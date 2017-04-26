@@ -1,8 +1,8 @@
 import React, {Component, PropTypes} from 'react'
 import {Link} from 'react-router';
 import './user.less'
-import Header from '../../components/Header/'
 import Menu from '../../components/Menu/'
+import {NavBar, Icon} from 'antd-mobile';
 import followedIcon from '../../images/user/icon_followed.png'
 import payedIcon from '../../images/user/icon_payed.png'
 import topayIcon from '../../images/user/icon_topay.png'
@@ -38,7 +38,7 @@ class User extends Component {
               <p>UserId</p>
             </div>
 
-            <Header title="我的"/>
+			<NavBar mode="light" onLeftClick={() => this.context.router.goBack()}>消息</NavBar>
 
             <div className="white_bj">
               <img className="backgroud_img" src={userBackgroud6} onClick={this.changeUserBackgroud}/>

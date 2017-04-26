@@ -2,14 +2,12 @@ import Api from './api';
 import httpConfig from './httpConfig'
 import errorCode from './httpErrorCodeConfig'
 import { getItem } from '../utils/'
-import {message} from 'antd'
-import 'antd/lib/message/style/index.less'
-
-const uid = getItem('uid');
-const session = getItem('session');
+import { Toast } from 'antd-mobile';
 const device = '';
-const baseURI = 'http://app.holichat.com/'
-const imgPathUrl = 'http://img.holichat.com/uploads/'
+// const baseURI = 'https://app.holichat.com/'
+// const imgPathUrl = 'https://img.holichat.com/uploads/'
+const baseURI = 'https://inside.holichat.com/'
+const imgPathUrl = 'http://holichat-res-inside.img-cn-hangzhou.aliyuncs.com/uploads/'
 
 const fetch = new Api({
 	baseURI: baseURI
@@ -18,12 +16,14 @@ const fetch = new Api({
 /**
  * url 请求接口
  * params 参数json格式
- * method 默认get
+ * method 请求类型
  */
 export const httpRequest = (url,params) => {
 	if(!httpConfig.hasOwnProperty(url)) return console.log('配制表时没有这个接口')
 	const setUrl = httpConfig[url].action;
 	const method = httpConfig[url].method;
+	const uid = getItem('uid') || '';
+	const session = getItem('session') || '';
 	let param = params || {};
 	if(typeof url !== 'string'){
 		alert('接口写类型错误')
@@ -44,25 +44,29 @@ export const httpRequest = (url,params) => {
           		(err) => {httpCallback(err)}
 			)
 		}else if(method == 'post'){
+			param += `&session=${session}&uid=${uid}`
+			console.log(param)
 			fetch.post(setUrl,param).then(
-				(data) => {httpCallback(data)},
-          		(err) => {httpCallback(err)}
+				(data) => { httpCallback(data) },
+          		(err) => { httpCallback(err) }
 			)
 		}
 		//检查查接口返回
 		function httpCallback(data){
+			//console.log(data)
 			if(data && data["status"]){
-				message.warning( setUrl + ',网络接口异常')
+				Toast.fail(setUrl + ',网络接口异常')
 				return reject(new Error(data["status"]))
 			}else if(data == 'fail'){
-				message.warning('网络异常')
+				Toast.offline('网络异常');
 				return reject( setUrl + '网络异常')
 			}else if(typeof(data) == "number"){
 				return reject(data);
 			}else if(data['ret']!=0){
+				console.log('ret----' + setUrl )
 				const code_num = data['ret']
-				message.warning( errorCode[code_num].tips )
-				return resolve(data['ret'])
+				Toast.info(errorCode[code_num].tips);
+				return resolve(data)
 			}
 			return resolve(data['data'] ||"")
 		}

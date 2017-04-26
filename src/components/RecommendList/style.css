@@ -1,0 +1,74 @@
+.recommend{
+	width: 100%;
+}
+a{
+	display: block;
+}
+.rec_img{
+	position: relative
+}
+.rec_img img{
+	display: block;
+	width: 100%;
+}
+.rec_txt{
+	padding:15px;
+	margin-bottom:10px;
+}
+
+.rec_loading{
+	text-align: center;
+	background: rgba(0,0,0,0.05);
+	border-radius:5px;
+	margin-bottom: 5px;
+	padding:5px 10px;
+}
+.title{
+	font-size: 26px;
+	margin-bottom: 10px;
+	line-height: 1.2;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+}
+.price{
+	color: #ff6060;
+	font-size: 0.3rem;
+}
+.tip{
+	float: right;
+	color: #ff6060;
+	font-size: 22px;
+	border: 1px solid #ff6060;
+	border-radius: 6px;
+	padding: 5px 10px;
+}
+
+.rec_state{
+	position: absolute;
+	top: 0;
+	right: 10px;
+	z-index: 10;
+}
+.recommend .bm,.recommend  .yr{
+	background-image: url('images/green.png');
+}
+.recommend .js{
+	background-image: url('images/gary.png');
+}
+.recommend .jx,.recommend_list .ks{
+	background-image: url('images/red.png');
+}
+.rec_state span{
+	font-size: 24px;
+	width: 100px;
+	height: 60px;
+	line-height: 50px;
+	display: block;
+	background-repeat: no-repeat;
+	background-size: 100px 60px;
+	color: #fff;
+	text-align: center;
+}

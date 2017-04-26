@@ -1,9 +1,10 @@
 import React, {Component, PropTypes} from 'react'
 import {Link} from 'react-router';
-import { Carousel} from 'antd';
-import 'antd/lib/carousel/style/index.less';
-import './slider.less'
+import './slider.css'
 import { getImageUrlPath } from '../../api/'
+
+import {Carousel, Flex} from 'antd-mobile';
+
 class Slider extends Component {
 	constructor (props) {
 		super(props)
@@ -19,15 +20,14 @@ class Slider extends Component {
 	render(){
 		const { items , autoplay } = this.props;
 		const list = items.map( (item,index) => {
-			//console.log(index)
 			if(item.action ==''){
 				return(<div key={index}><img src={getImageUrlPath(item.image)} /></div>)
 			}else{
 				const action = JSON.parse(item.action);
 				if(action.type == 'url'){
-					return(<a key={index} href={action.data.url} ><img src={getImageUrlPath(item.image)} /></a>)
+					return(<Flex key={index} justify="center" className="flex-container-justify"><a href={action.data.url} ><img src={`${getImageUrlPath(item.image)}`} /></a></Flex>)
 				}else{
-					return(<Link key={index} to={{pathname:`/home/details/${action.data.id ? action.data.id :''}`, query:{type: `${action.type}` } }} ><img src={getImageUrlPath(item.image)} /></Link>)
+					return(<Flex key={index}  justify="center" className="flex-container-justify"><Link to={{pathname:`/home/details/${action.data.id ? action.data.id :''}`, query:{type: `${action.type}` } }} ><img src={`${getImageUrlPath(item.image)}`} /></Link></Flex>)
 				}
 			}
 		})
@@ -35,11 +35,9 @@ class Slider extends Component {
 			console.log(a, b, c);
 		}
 		return(
-			<div className="slide_area">
-				<Carousel autoplay={autoplay} afterChange={onChange}>
-					{list}
-                </Carousel>
-			</div>
+			<Carousel autoplay={autoplay} afterChange={onChange}>
+				{list}
+            </Carousel>
 		)
 	}
 }

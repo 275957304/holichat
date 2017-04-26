@@ -1,4 +1,5 @@
 import * as types from '../../types'
+import { getItem } from '../../../utils/'
 const InitState = {
     loading : false,
     banner : {

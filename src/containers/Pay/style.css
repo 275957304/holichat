@@ -1,0 +1,6 @@
+.pay .am-button-ghost.am-button-active:after{
+    color: #fff;
+    background-color: #e64340;
+    border: none;
+}
+.pay .am-list-item .am-list-line .am-list-extra{color: #e64340;}

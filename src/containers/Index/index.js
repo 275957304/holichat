@@ -2,80 +2,56 @@ import React, {Component, PropTypes} from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as quanziActions from '../../reducers/modules/quanzi/action'
-import Header from '../../components/Header/'
 import Menu from '../../components/Menu/'
 import Slider from '../../components/Slider/'
 import './index.less'
-
-import { Tabs } from 'antd';
-import 'antd/lib/tabs/style/index.less';
+import {ActivityIndicator , Tabs, NavBar, Icon } from 'antd-mobile';
 const TabPane = Tabs.TabPane;
+
 class Index extends Component {
+    static contextTypes = {
+         router: PropTypes.object.isRequired
+    }
     constructor(props) {
         super(props)
-		this.groupChat = this.groupChat.bind(this);
-		this.attention = this.attention.bind(this);
-		this.checkIn   = this.checkIn.bind(this);
+		// this.groupChat = this.groupChat.bind(this);
+		// this.attention = this.attention.bind(this);
+		// this.checkIn   = this.checkIn.bind(this);
     }
     componentWillMount(){
         const { quanziActions, dispatch } = this.props
         quanziActions.get_community_banner();
         quanziActions.set_home_community({home_cid:5});
 	}
-	groupChat(){
-		console.log('群聊')
-	}
-	attention(){
-		console.log('已关注')
-	}
-	checkIn(){
-		console.log('签到')
-	}
-    callback(key){
-        console.log(key);
-    }
     render(){
         const { quanzi } = this.props;
         //console.log(this.props)
         return(
             <div className="wx_index">
-                <Header title="活力圈" leftTo="quanzi" />
-                {quanzi.banner.is_banner ? <Slider autoplay={false} items={quanzi.banner.list} /> : ""}
-
-                <div className="weui-panel__bd">
-					<div className="weui-media-box weui-media-box_appmsg">
-						<div className="weui-media__hd index_logo">
-							<img className="weui-media__thumb" src="http://img.holichat.com/uploads/m/df/icon_256.png@150h_150w_1e_1c_10-2ci" alt="" />
-						</div>
-						<div className="weui-media__bd">
-							<h4 className="weui-media__title">活力圈</h4>
-							<div className="wx_main_btn">
-								<button className="weui-btn weui-btn_mini green_btn" onClick={this.groupChat}>群聊</button>
-								<button className="weui-btn weui-btn_mini blue_btn" onClick={this.attention}>已关注</button>
-								<button className="weui-btn weui-btn_mini pink_btn" onClick={this.checkIn}>签到</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div className="weui-panel__ft">
-					<a href="javascript:void(0);" className="weui-cell weui-cell_access weui-cell_link">
-					<div className="weui-cell__hd"><span className="bulletin">公告：</span></div>
-					<div className="weui-cell__bd">欢迎加入活力圈</div>
-					<div className="weui-cell__ft f12">2016-09-22</div>
-					</a>
-				</div>
-                <div className="index_tabs">
-    				<Tabs defaultActiveKey="3" onChange={this.callback}>
-    					<TabPane tab="主页" key="1">主页 内容</TabPane>
-    					<TabPane tab="活动" key="2">活动 内容</TabPane>
-    					<TabPane tab="赛事" key="3">赛事 内容</TabPane>
-    					<TabPane tab="培训" key="4">培训 内容</TabPane>
-    					<TabPane tab="相册" key="5">相册 内容</TabPane>
-    					<TabPane tab="资讯" key="6">资讯 内容</TabPane>
-    					<TabPane tab="场馆" key="7">场馆 内容</TabPane>
-    				</Tabs>
+                <NavBar mode="light" onLeftClick={() => this.context.router.goBack()}>活力圈</NavBar>
+                {quanzi.banner.is_banner ? <Slider autoplay={false} items={quanzi.banner.list} /> : <ActivityIndicator text="加载中..." /> }
+                <div className="index-tabs">
+                    <Tabs swipeable="true" defaultActiveKey="1" >
+                        <TabPane tab="选项卡一" key="1">
+                            选项卡一内容
+                        </TabPane>
+                        <TabPane tab="选项卡二" key="2">
+                            选项卡二内容
+                        </TabPane>
+                        <TabPane tab="选项卡三" key="3">
+                            选项卡三内容
+                        </TabPane>
+                        <TabPane tab="选项卡四" key="4">
+                            选项卡一内容
+                        </TabPane>
+                        <TabPane tab="选项卡六" key="5">
+                            选项卡一内容
+                        </TabPane>
+                        <TabPane tab="选项卡d" key="6">
+                            选项卡一内容fdsfdsfds
+                        </TabPane>
+                    </Tabs>
     			</div>
-
                 <Menu tab="index" />
             </div>
         )
